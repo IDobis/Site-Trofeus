@@ -155,7 +155,7 @@ main.container {
 }
 
 .trophies-link {
-  color: rgb(12, 225, 233);
+  color: rgb(0, 0, 0);
   text-decoration: none;
 }
 
@@ -191,9 +191,14 @@ main.container {
   color: #e0e0e0;
 }
 
+.dark-mode .trophies-link {
+  color: rgb(2, 255, 255);
+  text-decoration: none;
+}
+
 /* Estilo para o footer estilo minha navbar */
 footer.footer {
-  margin-top: 40px;
+  margin-top: auto;
   width: 100%;
   text-align: center;
   padding: 20px;
@@ -218,3 +223,5 @@ footer.footer {
   background-color: #575757;
   transition: background-color 0.8s linear, color 0.8s linear;
 }
+
+/* Botão de Adicionar jogo */

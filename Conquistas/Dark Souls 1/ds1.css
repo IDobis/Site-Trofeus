@@ -149,3 +149,12 @@ footer.footer {
     background-color: #575757;
     transition: background-color 0.8s linear, color 0.8s linear;
   }
+
+/* INDICAR O JOGO */
+.indicarjg {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
