@@ -193,7 +193,7 @@ main.container {
 
 /* Estilo para o footer estilo minha navbar */
 footer.footer {
-  margin-top: 40px;
+  margin-top: auto;
   width: 100%;
   text-align: center;
   padding: 20px;
