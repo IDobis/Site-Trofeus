@@ -243,3 +243,32 @@ footer.footer {
   align-items: center;
 }
 /* Botão de Adicionar jogo */
+.addbtn {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #333;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para o botão no modo escuro */
+.dark-mode .addbtn {
+  background-color: #1c1c1c;
+  background: #1c1c1c; /* Cor de fundo no modo escuro */
+}
+
+/* Estilo para o botão em cima */
+.addbtn:hover {
+  background-color: #575757;
+  transition: background-color 0.8s linear, color 0.8s linear;
+}
+
+/* Estilo para o botão em cima no modo escuro */
+.dark-mode .addbtn:hover {
+  background-color: #575757;
+  transition: background-color 0.8s linear, color 0.8s linear;
+}
