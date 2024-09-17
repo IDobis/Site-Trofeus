@@ -224,4 +224,22 @@ footer.footer {
   transition: background-color 0.8s linear, color 0.8s linear;
 }
 
+
+/* Linkar Jogos0 */
+.ligar {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ligar.game-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ligar .progress-bar {
+  display: flex;
+  align-items: center;
+}
 /* Botão de Adicionar jogo */

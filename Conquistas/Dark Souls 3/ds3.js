@@ -25,4 +25,8 @@ addEventListener('DOMContentLoaded', () => {
         button.textContent = 'Modo Escuro'
       }
       button.addEventListener('click', toggleDarkMode);
+      // Botão Voltar
+      document.querySelector('.bottt').addEventListener('click', function() {
+        window.history.back();
+    });
   });

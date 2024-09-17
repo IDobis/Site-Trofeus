@@ -149,3 +149,61 @@ footer.footer {
     background-color: #575757;
     transition: background-color 0.8s linear, color 0.8s linear;
   }
+
+/* Indicar imagem do Jogo */
+.indicarimgjg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ftDS {
+  width: 160px;
+  height: 100px;
+  border-radius: 5px;
+}
+/* INDICAR O JOGO */
+.indicarjg {
+  margin-bottom: -40px;
+  margin-top: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.trofeustlou {
+  margin-top: 30px;
+  margin-bottom: -30px;
+}
+
+/* botão voltar */
+.bottt{
+  align-self:flex-start;
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  background-color: #333;
+  color: white;
+  font-size: 16px;
+  border: none;  
+  border-radius: 50%; 
+}
+/* Cursor sobre o botão no modo Claro */
+.bottt:hover {
+  background-color: #575757;
+  transition: background-color 0.8s linear, color 0.8s linear;
+}
+
+/* Enquanto está escuro, o botão */
+.dark-mode .bottt {
+  background-color: #1c1c1c;
+}
+
+/* Enquanto está escuro, cursor sobre o botão */
+.dark-mode .bottt:hover {
+  background-color: #575757;
+  transition: background-color 0.8s linear, color 0.8s linear;
+}
