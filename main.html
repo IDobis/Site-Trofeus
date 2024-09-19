@@ -6,6 +6,10 @@
     <title>Dobis Profile</title>
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
     <div id="top"></div>
@@ -127,11 +131,10 @@
     </main>
 
     <div class="center">
-      <button id="verpopup">+++++</button>
+      <button id="openModal"><i class="fas fa-plus"></i> Adicionar Jogo</button>
     </div>
-    <div class="popup">
-      <div class="fecharbtn">&times;</div>
-      <div class="form">
+    <dialog id="myModal">
+      <form method="dialog">
         <h2>Adicionar Jogo</h2>
         <div class="form-element">
           <label for="nomeaddjogo">Nome</label>
@@ -142,12 +145,17 @@
           />
         </div>
         <div class="form-element">
+          <label for="fileaddjogo">Carregar Imagem</label>
+          <input type="file" id="fileaddjogo" accept=".jpeg, .jpg, .png" />
+        </div>
+        <div class="form-element">
           <button class="addbtn" id="addbutton">
             <span>Adicionar Jogo</span>
           </button>
         </div>
-      </div>
-    </div>
+        <button id="closeModal">Fechar</button>
+      </form>
+    </dialog>
 
     <footer class="footer">
       <a href="#top" class="scroll-to-top">Voltar ao topo</a>

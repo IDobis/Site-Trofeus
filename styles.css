@@ -246,19 +246,18 @@ footer.footer {
 .addbtn {
   cursor: pointer;
   padding: 10px;
-  background-color: #333;
+  background-color: #4CAF50;
   border: none;
   color: white;
   border-radius: 5px;
   font-size: 16px;
   margin-top: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 /* Estilos para o botão no modo escuro */
 .dark-mode .addbtn {
   background-color: #1c1c1c;
-  background: #1c1c1c; /* Cor de fundo no modo escuro */
 }
 
 /* Estilo para o botão em cima */
@@ -271,4 +270,91 @@ footer.footer {
 .dark-mode .addbtn:hover {
   background-color: #575757;
   transition: background-color 0.8s linear, color 0.8s linear;
+}
+/* PopUp */
+dialog {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  font-size: 16px;
+  background-color: #1c1c1c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0; /* Começa invisível */
+  transform: scale(0.8); /* Começa reduzido */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: none; /* Esconde o dialog inicialmente */
+  text-align: center; /* Centraliza o texto dentro do dialog */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra opcional */
+}
+
+dialog[open] {
+  opacity: 1; /* Totalmente visível quando aberto */
+  transform: scale(1); /* Escala para o tamanho original */
+  display: block; /* Mostra o dialog quando aberto */
+}
+
+/* Botão */
+button {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 15px 30px;
+  font-size: 16px;
+  background-color: #1c1c1c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s linear;
+}
+
+button:hover {
+  background-color: #6b6a6d; /* Tom mais escuro ao passar o mouse */
+}
+
+.form-element {
+  margin-bottom: 20px; /* Espaço entre os campos */
+}
+
+input[type="text"],
+input[type="file"] {
+   color: #fafafa; /* Cor do Texto */
+  background-color: #424242;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+  border: 1px solid #4CAF50; /* Cor de foco */
+}
+
+button#closeModal {
+  background-color: #f44336; /* Cor do botão fechar */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+button#closeModal:hover {
+  background-color: #d32f2f; /* Tom mais escuro ao passar o mouse */
+}
+
+/* Ajustes responsivos */
+@media (max-width: 800px) {
+  dialog {
+    width: 95%; /* Ajusta a largura para telas menores */
+  }
 }
