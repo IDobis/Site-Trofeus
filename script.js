@@ -4,21 +4,21 @@ addEventListener('DOMContentLoaded', () => {
 
   butao.addEventListener("click", (event) => {
     event.preventDefault(); // Impede o envio do formulário
-    fnAddjg();
+    AdicionarJogo();
   });
 
-  function fnAddjg() {
+  function AdicionarJogo() {
     const nomejogo = document.getElementById('nomeaddjogodentro').value; // Obtém o valor do input
-    const file = document.getElementById('fileaddjogo').files[0]; // Obtém o arquivo selecionado
+    const imagem = document.getElementById('fileaddjogo').files[0]; // Obtém o arquivo da img selecionado
 
-    if (nomejogo && file) {
+    if (nomejogo && imagem) {
       const gameItem = document.createElement("div");
       gameItem.className = "game-item";
       gamecontainer.appendChild(gameItem);
 
       const imgElemento = document.createElement('img');
       imgElemento.className = "game-img";
-      imgElemento.src = URL.createObjectURL(file); // Usar a URL do objeto para a imagem
+      imgElemento.src = URL.createObjectURL(imagem); // Usar a URL do objeto para a imagem
       imgElemento.alt = nomejogo;
       gameItem.appendChild(imgElemento);
 
