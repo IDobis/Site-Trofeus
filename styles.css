@@ -358,3 +358,12 @@ button#closeModal:hover {
     width: 95%; /* Ajusta a largura para telas menores */
   }
 }
+
+/* páginas */
+.pagina {
+  display: none;
+}
+.pagina.ativa {
+  display: block;
+}
+

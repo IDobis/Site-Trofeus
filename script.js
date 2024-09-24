@@ -33,6 +33,24 @@ addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function mostrarPagina(paginaId) {
+    const paginas = document.querySelectorAll('.pagina');
+    paginas.forEach(pagina => {
+      pagina.classList.remove('ativa');
+    });
+    document.getElementById(paginaId).classList.add('ativa');
+  }
+
+  // Adiciona eventos para os botões das páginas
+  document.getElementById('buttonPagina1').addEventListener('click', () => {
+    mostrarPagina('pagina1');
+  });
+
+  document.getElementById('buttonPagina2').addEventListener('click', () => {
+    mostrarPagina('pagina2');
+  });
+
+  // botão modo claro
   const button = document.querySelector('.toggle-button');
 
   function toggleDarkMode() {
