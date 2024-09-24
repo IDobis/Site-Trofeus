@@ -246,9 +246,9 @@ footer.footer {
 .addbtn {
   cursor: pointer;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #00ff88;
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   border-radius: 5px;
   font-size: 16px;
   margin-top: 16px;
@@ -257,7 +257,7 @@ footer.footer {
 
 /* Estilos para o botão no modo escuro */
 .dark-mode .addbtn {
-  background-color: #1c1c1c;
+  background-color: #00ff88;
 }
 
 /* Estilo para o botão em cima */
@@ -333,7 +333,7 @@ input[type="file"] {
 
 input[type="text"]:focus,
 input[type="file"]:focus {
-  border: 1px solid #4CAF50; /* Cor de foco */
+  border: 1px solid #00ff88; /* Cor de foco */
 }
 
 button#closeModal {
@@ -367,3 +367,68 @@ button#closeModal:hover {
   display: block;
 }
 
+/* botão editar */
+.editarft{
+  padding: 5px 10px;
+  font-size: 12px;
+  width: auto;
+  border-radius: 50%;
+  transition: background-color 0.5s linear;
+}
+
+/* popup botão editar */
+.janela-editar {
+  display: none; /* Escondido por padrão */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.8); /* Começa reduzido */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro com opacidade */
+}
+
+.janela-editar.active {
+  opacity: 1; /* Totalmente visível quando aberto */
+  transform: scale(1); /* Escala para o tamanho original */
+  display: block; /* Mostra o dialog quando aberto */
+}
+
+.editar-janela-content {
+  transition: background-color 0.5s;
+  background-color: #3a3434;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.fechar {
+  color: #a82626;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  transition: 0.5s color;
+}
+
+.fechar:hover,
+.fechar:focus {
+  color: #ff0000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.5s linear
+}
+
+.salvar-alteracoes{
+  background-color: #39c483;
+  cursor: pointer;
+  transition: background-color 0.5s linear;
+}
+
+.salvar-alteracoes:hover{
+  background-color: #00ff88;
+  cursor: pointer;
+  transition: background-color 0.5s linear;
+}

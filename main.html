@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dobis Profile</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script defer src="script.js"></script>
     <link
       rel="stylesheet"
@@ -20,20 +21,24 @@
         Modo Escuro
       </button>
       <button id="buttonPagina1">Página 1</button>
-      <button id="buttonPagina2">Página 2</button>
+      <button id="buttonPagina2">Troféus</button>
     </header>
 
     <main class="container">
       <div id="pagina1" class="pagina ativa">
         <div class="profile-container">
-          <img
+          <img 
+            id="profileImage"
             src="images/gojo.jpg"
             alt="Dobis Profile image"
             class="profile-img"
           />
           <div class="profile-info">
-            <h1 class="name">Dobis</h1>
+            <h1 class="name" id="profileName">Dobis</h1>
           </div>
+          <button class="editarft" id="botão-editar">
+            <i class="bi bi-pencil"></i>
+            Editar</button>
         </div>
 
         <div class="games-container">
@@ -165,6 +170,18 @@
         <button id="closeModal">Fechar</button>
       </form>
     </dialog>
+
+    <div id="edit-janela" class="janela-editar" style="display: none;">
+        <div class="editar-janela-content">
+            <span class="fechar" id="fechar-janela-editar">&times;</span>
+            <h2>Editar Perfil</h2>
+            <label for="editar-nome">Alterar Nome:</label>
+            <input type="text" id="editar-nome" placeholder="Digite o Nome" />
+            <label for="editar-imagem">Nova Imagem:</label>
+            <input type="file" id="editar-imagem" accept=".jpg, .jpeg, .png" />
+            <button class="salvar-alteracoes" id="salvar-alteracoes">Salvar</button>
+        </div>
+    </div>
 
     <footer class="footer">
       <a href="#top" class="scroll-to-top">Voltar ao topo</a>
