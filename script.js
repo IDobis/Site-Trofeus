@@ -1,4 +1,24 @@
 addEventListener('DOMContentLoaded', () => {
+
+  //PAGINAS
+  function mostrarPagina(paginaId) {
+    const paginas = document.querySelectorAll('.pagina');
+    paginas.forEach(pagina => {
+      pagina.classList.remove('ativa');
+    });
+    document.getElementById(paginaId).classList.add('ativa');
+    // Add a timeout to allow the transition to complete
+    setTimeout(() => {
+      paginas.forEach(pagina => {
+        if (!pagina.classList.contains('ativa')) {
+          pagina.style.display = 'none';
+        } else {
+          pagina.style.display = 'block';
+        }
+      });
+    }, 300);
+  }
+
   const gamecontainer = document.querySelector('.games-container');
   const butao = document.getElementById("addbutton");
 
@@ -95,53 +115,13 @@ addEventListener('DOMContentLoaded', () => {
       modal.close();
     }, 300);
   });
-// Modal botão editar perfil
-const editarbotao = document.getElementById('botão-editar');
-const moduloedit = document.getElementById('edit-janela');
-const fecharmoduloedit = document.getElementById('fechar-janela-editar');
-const salvaralteracoes = document.getElementById('salvar-alteracoes');
-const profileName = document.getElementById('profileName');
-const profileImage = document.getElementById('profileImage');
 
-// Abre a janela de edição
-editarbotao.addEventListener('click', function() {
-    moduloedit.style.display = 'block';
-});
+  // MODAL EDIÇÃO
+  const botãoEditar = document.querySelector("#botão-editar")
+  const janelaEditar = document.querySelector("#Janela-Editar")
 
-// Fecha a janela de edição
-fecharmoduloedit.addEventListener('click', function() {
-    moduloedit.style.display = 'none';
-});
+  botãoEditar.onclick = function () {
+    janelaEditar.showModal()
+  }
 
-// Salva as alterações
-salvaralteracoes.addEventListener('click', function() {
-    const newName = document.getElementById('editar-nome').value;
-    const newImageInput = document.getElementById('editar-imagem');
-
-    // Atualiza o nome
-    if (newName) {
-        profileName.textContent = newName;
-    }
-
-    // Lida com a imagem
-    if (newImageInput.files.length > 0) {
-        const file = newImageInput.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(event) {
-            profileImage.src = event.target.result; // Define a imagem como a fonte do perfil
-        };
-
-        reader.readAsDataURL(file); // Lê o arquivo como URL de dados
-    }
-
-    moduloedit.style.display = 'none'; // Fecha a janela após salvar
-});
-
-// Fecha a janela ao clicar fora dela
-window.onclick = function(event) {
-    if (event.target === moduloedit) {
-        moduloedit.style.display = 'none';
-    }
-};
 });

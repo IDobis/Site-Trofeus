@@ -171,17 +171,18 @@
       </form>
     </dialog>
 
-    <div id="edit-janela" class="janela-editar" style="display: none;">
-        <div class="editar-janela-content">
-            <span class="fechar" id="fechar-janela-editar">&times;</span>
-            <h2>Editar Perfil</h2>
-            <label for="editar-nome">Alterar Nome:</label>
-            <input type="text" id="editar-nome" placeholder="Digite o Nome" />
-            <label for="editar-imagem">Nova Imagem:</label>
-            <input type="file" id="editar-imagem" accept=".jpg, .jpeg, .png" />
-            <button class="salvar-alteracoes" id="salvar-alteracoes">Salvar</button>
+    <dialog class="editar" id="Janela-Editar">
+      <form method="dialog">
+        <h2>Perfil</h2>
+        <div id="estilos-editar">
+          <input
+            type="text"
+            id="mudar-nome-dentro"
+            placeholder="Novo Nome"
+          />
         </div>
-    </div>
+
+    </dialog>
 
     <footer class="footer">
       <a href="#top" class="scroll-to-top">Voltar ao topo</a>

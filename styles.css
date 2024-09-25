@@ -19,6 +19,18 @@ body {
   margin: 0;
   transition: background-color 0.3s linear, color 0.3s linear;
 }
+input {
+  background-color: black; /* Fundo do input preto */
+  color: white; /* Cor do texto no input */
+  border: 0px;
+  padding: 10px; /* Espaçamento interno */
+  font-size: 16px; /* Tamanho da fonte */
+  border-radius: 4px; /* Bordas arredondadas */
+}
+
+input::placeholder {
+  color: #888; /* Cor do placeholder */
+}
 
 header.navbar {
   display: flex;
@@ -362,73 +374,57 @@ button#closeModal:hover {
 /* páginas */
 .pagina {
   display: none;
+  transition: opacity 0.3s linear;
 }
 .pagina.ativa {
   display: block;
+  opacity: 1;
+}
+.pagina:not(.ativa) {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* botão editar */
 .editarft{
+  background-color: #121212;
   padding: 5px 10px;
   font-size: 12px;
   width: auto;
-  border-radius: 50%;
+  border-radius: 12px;
   transition: background-color 0.5s linear;
 }
 
-/* popup botão editar */
-.janela-editar {
-  display: none; /* Escondido por padrão */
+/* Modal editar */
+
+#Janela-Editar {
   position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  transform: scale(0.8); /* Começa reduzido */
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro com opacidade */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 12px;
+  
+  background-color: #545355;
+  color: rgb(177, 119, 231);
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
 }
 
-.janela-editar.active {
-  opacity: 1; /* Totalmente visível quando aberto */
-  transform: scale(1); /* Escala para o tamanho original */
-  display: block; /* Mostra o dialog quando aberto */
+#Janela-Editar::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-.editar-janela-content {
-  transition: background-color 0.5s;
-  background-color: #3a3434;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+.dark-mode #Janela-Editar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 12px;
+  
+  background-color: #545355;
+  color: rgb(177, 119, 231);
+  box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
 }
 
-.fechar {
-  color: #a82626;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  transition: 0.5s color;
-}
-
-.fechar:hover,
-.fechar:focus {
-  color: #ff0000;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.5s linear
-}
-
-.salvar-alteracoes{
-  background-color: #39c483;
-  cursor: pointer;
-  transition: background-color 0.5s linear;
-}
-
-.salvar-alteracoes:hover{
-  background-color: #00ff88;
-  cursor: pointer;
-  transition: background-color 0.5s linear;
-}
+  /* background-color: #00ff88; */
