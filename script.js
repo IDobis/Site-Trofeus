@@ -85,6 +85,7 @@ addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Salvar modo de Tela
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
     document.body.classList.add('dark-mode');
@@ -118,10 +119,58 @@ addEventListener('DOMContentLoaded', () => {
 
   // MODAL EDIÇÃO
   const botãoEditar = document.querySelector("#botão-editar")
+  const BotãoEditarFechar = document.querySelector("#Fechar")
   const janelaEditar = document.querySelector("#Janela-Editar")
 
   botãoEditar.onclick = function () {
     janelaEditar.showModal()
   }
+  BotãoEditarFechar.onclick = function () {
+    janelaEditar.closeModal()
+  }
+  
+  // Botão modal salvar
+  const salvarperfil = document.querySelector("#botão-salvar-editar-perfil");
 
+// Carregar dados do localStorage ao iniciar
+window.onload = function() {
+    const nomePerfil = document.querySelector("#profileName");
+    const nomeSalvo = localStorage.getItem("nomePerfil");
+    const imagemPerfil = document.querySelector("#profileImage");
+    const imagemSalva = localStorage.getItem("imagemPerfil");
+
+    if (nomeSalvo) {
+        nomePerfil.textContent = nomeSalvo;
+    }
+
+    if (imagemSalva) {
+        imagemPerfil.src = imagemSalva;
+    }
+};
+
+// Evento para salvar o nome e a imagem
+salvarperfil.addEventListener("click", function() {
+    const nomePerfil = document.querySelector("#profileName");
+    const novoNome = document.querySelector("#mudar-nome-dentro").value;
+    const imagemPerfil = document.querySelector("#profileImage");
+    const novaFoto = document.querySelector("#mudar-imagem-dentro");
+
+    // Salvar nome
+    if (novoNome) {
+        nomePerfil.textContent = novoNome;
+        localStorage.setItem("nomePerfil", novoNome);
+    }
+
+    // Salvar imagem
+    if (novaFoto.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            imagemPerfil.src = e.target.result; // Carrega a nova imagem na tag <img>
+            localStorage.setItem("imagemPerfil", e.target.result); // Salva a imagem no localStorage
+        };
+
+        reader.readAsDataURL(novaFoto.files[0]); // Lê o arquivo
+    }
+});
 });

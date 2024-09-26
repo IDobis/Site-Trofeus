@@ -37,7 +37,7 @@
             <h1 class="name" id="profileName">Dobis</h1>
           </div>
           <button class="editarft" id="botão-editar">
-            <i class="bi bi-pencil"></i>
+            <h2><i class="bi bi-person-fill"></i></h2>
             Editar</button>
         </div>
 
@@ -55,7 +55,7 @@
                   <a
                     href="Conquistas/Dark Souls 1/DarkSouls1.html"
                     class="trophies-link"
-                    >Troféus</a
+                    ><i class="bi bi-trophy-fill"></i> Troféus</a
                   >
                   <div class="progress-bar">
                     <div class="progress" style="width: 100%"></div>
@@ -79,7 +79,7 @@
                   <a
                     href="Conquistas/Dark Souls 2/DarkSouls2.html"
                     class="trophies-link"
-                    >Troféus</a
+                    ><i class="bi bi-trophy-fill"></i> Troféus</a
                   >
                   <div class="progress-bar">
                     <div class="progress" style="width: 100%"></div>
@@ -103,7 +103,7 @@
                   <a
                     href="Conquistas/Dark Souls 3/DarkSouls3.html"
                     class="trophies-link"
-                    >Troféus</a
+                    ><i class="bi bi-trophy-fill"></i> Troféus</a
                   >
                   <div class="progress-bar">
                     <div class="progress" style="width: 100%"></div>
@@ -125,7 +125,7 @@
                 <h2 class="game-name">The Last Of Us REMASTERED</h2>
                 <div class="trophies-container">
                   <a href="Conquistas/Tlou/TLOU.html" class="trophies-link"
-                    >Troféus</a
+                    ><i class="bi bi-trophy-fill"></i> Troféus</a
                   >
                   <div class="progress-bar">
                     <div class="progress" style="width: 100%"></div>
@@ -173,13 +173,38 @@
 
     <dialog class="editar" id="Janela-Editar">
       <form method="dialog">
-        <h2>Perfil</h2>
+        
         <div id="estilos-editar">
-          <input
-            type="text"
-            id="mudar-nome-dentro"
-            placeholder="Novo Nome"
-          />
+          <button id="Fechar"><i id="botaofecharicone" class="bi bi-circle-fill"></i></button>
+          <h2>Perfil</h2>
+
+          <!-- NOME PERFIL -->
+          <div id="nome-editar-div">
+            <label id="nome-editar-label">
+            <h1><i class="bi bi-pencil"></i></h1>
+            <input id="nome-editar-campo"
+              type="text"
+              id="mudar-nome-dentro"
+              placeholder="Novo Nome"
+            />
+            </label>
+          </div>
+
+          <!-- IMAGEM PERFIL -->
+          <div id="imagem-editar-div">
+            <label id="imagem-editar-label">
+              <h1><i id="iconefoto" class="bi bi-card-image"></i></h1>
+              <input id="imagem-editar-campo"
+                type="file"
+                id="mudar-imagem-dentro"
+                placeholder="Novo Foto"
+                accept=".jpg,.jpeg,.png"
+              />
+            </label>
+          </div>
+
+          <!-- Botão Salvar Perfil -->
+          <button id="botão-salvar-editar-perfil">Salvar Alterações</button>
         </div>
 
     </dialog>

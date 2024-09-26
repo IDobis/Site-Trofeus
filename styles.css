@@ -295,7 +295,6 @@ dialog {
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   opacity: 0; /* Começa invisível */
   transform: scale(0.8); /* Começa reduzido */
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -386,13 +385,32 @@ button#closeModal:hover {
 }
 
 /* botão editar */
-.editarft{
-  background-color: #121212;
+.editarft {
+  background-color: #ffffff;
+  color: #121212;
   padding: 5px 10px;
   font-size: 12px;
   width: auto;
   border-radius: 12px;
-  transition: background-color 0.5s linear;
+  transition: background-color 0.3s linear;
+  }
+
+.editarft:hover {
+  background-color: #c4c4c4;
+}
+
+.dark-mode .editarft{
+  background-color: #121212;
+  color: #ffffff;
+  padding: 5px 10px;
+  font-size: 12px;
+  width: auto;
+  border-radius: 12px;
+  transition: background-color 0.3s linear;
+}
+
+.dark-mode .editarft:hover{
+  background-color: #414040;
 }
 
 /* Modal editar */
@@ -425,6 +443,35 @@ button#closeModal:hover {
   background-color: #545355;
   color: rgb(177, 119, 231);
   box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
+}
+
+/* imagem editare perfil */
+#imagem-editar-div {
+  margin: 10px 0; /* Espaçamento vertical */
+}
+
+#imagem-editar-label {
+  display: flex; /* Alinha itens em linha */
+  align-items: center; /* Centraliza verticalmente */
+}
+
+#imagem-editar-campo {
+  margin-left: 10px; /* Espaço entre ícone e input, se preferir */
+  flex: 1; /* Faz o input ocupar o espaço restante */
+}
+
+/* Nome editar perfil */
+#nome-editar-div {
+  margin: 10px 0; /* Espaçamento vertical */
+}
+
+#nome-editar-label {
+  display: flex; /* Alinha itens em linha */
+  align-items: center; /* Centraliza verticalmente */
+}
+#nome-editar-campo {
+  margin-left: 10px; /* Espaço entre ícone e input, se preferir */
+  flex: 1; /* Faz o input ocupar o espaço restante */
 }
 
   /* background-color: #00ff88; */
