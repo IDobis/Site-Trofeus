@@ -470,8 +470,40 @@ button#closeModal:hover {
   align-items: center; /* Centraliza verticalmente */
 }
 #nome-editar-campo {
+  margin-top: 20px;
   margin-left: 10px; /* Espaço entre ícone e input, se preferir */
   flex: 1; /* Faz o input ocupar o espaço restante */
+}
+
+/* Botões Dentro do PopUp */
+#botão-salvar-editar-perfil {
+  background-color: #00ff88;
+  color: #121212;
+}
+
+#Fechar {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+
+  transform: scale(1.5); 
+
+  background: none;
+  padding: 0px;
+}
+
+#Fechar:hover {
+  color: rgb(255, 0, 0);
+}
+
+#botaofecharicone {
+  margin-top: -30px;
+  margin-right: -20px;
+}
+#EditarNomeCima {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
   /* background-color: #00ff88; */
