@@ -19,12 +19,25 @@
     <div id="top"></div>
 
     <header class="navbar">
-      <a href="main.html">Início</a>
-      <button class="toggle-button" onclick="toggleDarkMode()">
-        Modo Escuro
-      </button>
-      <button id="buttonPagina1">Página 1</button>
-      <button id="buttonPagina2">Troféus</button>
+      <div id="DentroNavbar">
+        <div id="Itens-Dentro-Navbar">
+          <div id="Esquerda">
+            <a href="main.html">
+              <button id="Botao-Inicio">
+                <i id="Botao-Casa" class="bi bi-house"></i>
+              </button>
+            </a>
+
+            <button id="buttonPagina1">Página 1</button>
+            <button id="buttonPagina2">Troféus</button>
+          </div>
+          <div id="BotãoTema">
+            <button class="toggle-button" onclick="toggleDarkMode()">
+              Modo Escuro
+            </button>
+          </div>
+        </div>
+      </div>
     </header>
 
     <main class="container">
@@ -47,6 +60,7 @@
 
         <div class="games-container">
           <div class="game-item">
+            <button id="BotaoEditarJogo" class="editar-jogo">Editar</button>
             <a href="Conquistas/Dark Souls 1/DarkSouls1.html" class="ligar">
               <img
                 class="game-img"
@@ -93,7 +107,6 @@
               </div>
             </a>
           </div>
-
           <div class="game-item">
             <a href="Conquistas/Dark Souls 3/DarkSouls3.html" class="ligar">
               <img
@@ -215,6 +228,20 @@
         </div>
       </form>
     </dialog>
+
+    <dialog class="editarJogos" id="editarJogos">
+      <form method="dialog">
+        <div id="editarJogos">
+          <!-- Fechar -->
+          <button id="FecharModalEditarJogo">
+            <i id="botaofecharicone" class="bi bi-x"></i>
+          </button>
+
+          <h1 id="EditarNomeJogo">Adicionar Jogo</h1>
+        </div>
+      </form>
+    </dialog>
+
     <footer class="footer">
       <a href="#top" class="scroll-to-top">Voltar ao topo</a>
     </footer>

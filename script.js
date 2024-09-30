@@ -1,22 +1,11 @@
 addEventListener('DOMContentLoaded', () => {
-
-  //PAGINAS
+  // Função para mostrar a página
   function mostrarPagina(paginaId) {
     const paginas = document.querySelectorAll('.pagina');
     paginas.forEach(pagina => {
       pagina.classList.remove('ativa');
     });
     document.getElementById(paginaId).classList.add('ativa');
-    // Add a timeout to allow the transition to complete
-    setTimeout(() => {
-      paginas.forEach(pagina => {
-        if (!pagina.classList.contains('ativa')) {
-          pagina.style.display = 'none';
-        } else {
-          pagina.style.display = 'block';
-        }
-      });
-    }, 300);
   }
 
   const gamecontainer = document.querySelector('.games-container');
@@ -32,34 +21,60 @@ addEventListener('DOMContentLoaded', () => {
     const imagem = document.getElementById('fileaddjogo').files[0]; // Obtém o arquivo da img selecionado
 
     if (nomejogo && imagem) {
-      const gameItem = document.createElement("div");
-      gameItem.className = "game-item";
-      gamecontainer.appendChild(gameItem);
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const jogos = JSON.parse(localStorage.getItem('jogos')) || [];
+        jogos.push({ nome: nomejogo, imagem: e.target.result });
+        localStorage.setItem('jogos', JSON.stringify(jogos));
 
-      const imgElemento = document.createElement('img');
-      imgElemento.className = "game-img";
-      imgElemento.src = URL.createObjectURL(imagem); // Usar a URL do objeto para a imagem
-      imgElemento.alt = nomejogo;
-      gameItem.appendChild(imgElemento);
-
-      const nomejogoelemento = document.createElement('h2');
-      nomejogoelemento.className = "game-name";
-      nomejogoelemento.textContent = nomejogo;
-      gameItem.appendChild(nomejogoelemento);
-
-      // Limpa a entrada de arquivo
-      document.getElementById('fileaddjogo').value = '';
-      document.getElementById('nomeaddjogodentro').value = ''; // Limpa também o campo de nome
+        mostrarJogo(nomejogo, e.target.result);
+        
+        // Limpa a entrada de arquivo
+        document.getElementById('fileaddjogo').value = '';
+        document.getElementById('nomeaddjogodentro').value = ''; // Limpa também o campo de nome
+      };
+      reader.readAsDataURL(imagem); // Lê o arquivo
     }
   }
 
-  function mostrarPagina(paginaId) {
-    const paginas = document.querySelectorAll('.pagina');
-    paginas.forEach(pagina => {
-      pagina.classList.remove('ativa');
-    });
-    document.getElementById(paginaId).classList.add('ativa');
+  function mostrarJogo(nomejogo, imagemUrl) {
+    const gameItem = document.createElement("div");
+    gameItem.className = "game-item";
+    gamecontainer.appendChild(gameItem);
+
+    const imgElemento = document.createElement('img');
+    imgElemento.className = "game-img";
+    imgElemento.src = imagemUrl; // Usar a URL do objeto para a imagem
+    imgElemento.alt = nomejogo;
+    gameItem.appendChild(imgElemento);
+
+    const nomejogoelemento = document.createElement('h2');
+    nomejogoelemento.className = "game-name";
+    nomejogoelemento.textContent = nomejogo;
+    gameItem.appendChild(nomejogoelemento);
   }
+
+  // Carregar jogos do localStorage ao iniciar
+  window.onload = function() {
+    const jogos = JSON.parse(localStorage.getItem('jogos')) || [];
+    jogos.forEach(jogo => {
+      mostrarJogo(jogo.nome, jogo.imagem);
+    });
+
+    // Carregar dados do localStorage para o perfil
+    const nomePerfil = document.querySelector("#profileName");
+    const nomeSalvo = localStorage.getItem("nomePerfil");
+    const imagemPerfil = document.querySelector("#profileImage");
+    const imagemSalva = localStorage.getItem("imagemPerfil");
+
+    if (nomeSalvo) {
+      nomePerfil.textContent = nomeSalvo;
+    }
+
+    if (imagemSalva) {
+      imagemPerfil.src = imagemSalva;
+    }
+  };
 
   // Adiciona eventos para os botões das páginas
   document.getElementById('buttonPagina1').addEventListener('click', () => {
@@ -70,7 +85,7 @@ addEventListener('DOMContentLoaded', () => {
     mostrarPagina('pagina2');
   });
 
-  // botão modo claro
+  // Botão modo claro
   const button = document.querySelector('.toggle-button');
 
   function toggleDarkMode() {
@@ -131,46 +146,58 @@ addEventListener('DOMContentLoaded', () => {
   
   // Botão modal salvar
   const salvarperfil = document.querySelector("#botão-salvar-editar-perfil");
+  const formEditar = document.querySelector("#Janela-Editar form");
 
-// Carregar dados do localStorage ao iniciar
-window.onload = function() {
+  // Evento para salvar o nome e a imagem
+  formEditar.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
     const nomePerfil = document.querySelector("#profileName");
-    const nomeSalvo = localStorage.getItem("nomePerfil");
+    const novoNome = document.querySelector("#nome-editar-campo").value;
     const imagemPerfil = document.querySelector("#profileImage");
-    const imagemSalva = localStorage.getItem("imagemPerfil");
-
-    if (nomeSalvo) {
-        nomePerfil.textContent = nomeSalvo;
-    }
-
-    if (imagemSalva) {
-        imagemPerfil.src = imagemSalva;
-    }
-};
-
-// Evento para salvar o nome e a imagem
-salvarperfil.addEventListener("click", function() {
-    const nomePerfil = document.querySelector("#profileName");
-    const novoNome = document.querySelector("#mudar-nome-dentro").value;
-    const imagemPerfil = document.querySelector("#profileImage");
-    const novaFoto = document.querySelector("#mudar-imagem-dentro");
+    const novaFoto = document.querySelector("#imagem-editar-campo");
 
     // Salvar nome
     if (novoNome) {
-        nomePerfil.textContent = novoNome;
-        localStorage.setItem("nomePerfil", novoNome);
+      nomePerfil.textContent = novoNome;
+      localStorage.setItem("nomePerfil", novoNome);
     }
 
     // Salvar imagem
     if (novaFoto.files[0]) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = function(e) {
-            imagemPerfil.src = e.target.result; // Carrega a nova imagem na tag <img>
-            localStorage.setItem("imagemPerfil", e.target.result); // Salva a imagem no localStorage
-        };
+      reader.onload = function(e) {
+        imagemPerfil.src = e.target.result; // Carrega a nova imagem na tag <img>
+        localStorage.setItem("imagemPerfil", e.target.result); // Salva a imagem no localStorage
+      };
 
-        reader.readAsDataURL(novaFoto.files[0]); // Lê o arquivo
+      reader.readAsDataURL(novaFoto.files[0]); // Lê o arquivo
     }
-});
+
+    // Close the modal after saving the changes
+    janelaEditar.close();
+  });
+
+// Adicionar evento de clique ao botão "Editar Jogo"
+document.querySelectorAll("#BotaoEditarJogo").forEach(button => {
+  button.addEventListener("click", () => {
+    // Abre o modal de edição de jogo
+    ModalEditarJogo.showModal()
+  })
+})
+
+// Modal Editar Jogo
+const BottaoEditar = document.querySelector("#BotaoEditarJogo");
+const ModalEditarJogo = document.querySelector("#editarJogos")
+const FecharModalEditarJogo = document.querySelector("#FecharModalEditarJogo")
+
+BottaoEditar.onclick = function () {
+  ModalEditarJogo.showModal()
+}
+
+FecharModalEditarJogo.onclick = function () {
+  ModalEditarJogo.close()
+}
+
 });
