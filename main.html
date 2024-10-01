@@ -63,12 +63,15 @@
             <button id="BotaoEditarJogo" class="editar-jogo">Editar</button>
             <a href="Conquistas/Dark Souls 1/DarkSouls1.html" class="ligar">
               <img
+                id="imagemJogo"
                 class="game-img"
                 src="images/ds1.jpg"
                 alt="Dark Souls Remastered"
               />
               <div class="game-info">
-                <h2 class="game-name">Dark Souls Prepare To Die Edition</h2>
+                <h2 id="nomeJogo" class="game-name">
+                  Dark Souls Prepare To Die Edition
+                </h2>
                 <div class="trophies-container">
                   <a
                     href="Conquistas/Dark Souls 1/DarkSouls1.html"
@@ -229,15 +232,41 @@
       </form>
     </dialog>
 
-    <dialog class="editarJogos" id="editarJogos">
+    <dialog id="Janela-Editar-Jogo">
       <form method="dialog">
-        <div id="editarJogos">
-          <!-- Fechar -->
-          <button id="FecharModalEditarJogo">
-            <i id="botaofecharicone" class="bi bi-x"></i>
+        <div id="estilos-editar-jogo">
+          <button id="Fechar-Jogo">
+            <i id="botaofecharicone-jogo" class="bi bi-x"></i>
           </button>
 
-          <h1 id="EditarNomeJogo">Adicionar Jogo</h1>
+          <h1 id="EditarNomeCima-Jogo">Editar Jogo</h1>
+
+          <!-- NOME DO JOGO -->
+          <div id="nome-editar-jogo-div">
+            <label id="nome-editar-jogo-label">
+              <h1><i id="icone-nome-jogo" class="bi bi-pencil"></i></h1>
+              <input
+                id="nome-editar-jogo-campo"
+                type="text"
+                placeholder="Novo Nome do Jogo"
+              />
+            </label>
+          </div>
+
+          <!-- IMAGEM DO JOGO -->
+          <div id="imagem-editar-jogo-div">
+            <label id="imagem-editar-jogo-label">
+              <h1><i id="iconefoto-jogo" class="bi bi-card-image"></i></h1>
+              <input
+                id="imagem-editar-jogo-campo"
+                type="file"
+                accept=".jpg,.jpeg,.png"
+              />
+            </label>
+          </div>
+
+          <!-- Botão Salvar Jogo -->
+          <button id="botão-salvar-editar-jogo">Salvar Alterações</button>
         </div>
       </form>
     </dialog>

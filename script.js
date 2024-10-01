@@ -186,18 +186,19 @@ document.querySelectorAll("#BotaoEditarJogo").forEach(button => {
     ModalEditarJogo.showModal()
   })
 })
+  
+  // Modal Editar Jogo
+const botãoEditarJogo = document.querySelector("#BotaoEditarJogo");
+const BotãoEditarJogoFechar = document.querySelector("#Fechar-Jogo");
+const janelaEditarJogo = document.querySelector("#Janela-Editar-Jogo");
 
-// Modal Editar Jogo
-const BottaoEditar = document.querySelector("#BotaoEditarJogo");
-const ModalEditarJogo = document.querySelector("#editarJogos")
-const FecharModalEditarJogo = document.querySelector("#FecharModalEditarJogo")
-
-BottaoEditar.onclick = function () {
-  ModalEditarJogo.showModal()
+// Abrir o modal de edição de jogo
+botãoEditarJogo.onclick = function () {
+  janelaEditarJogo.showModal();
 }
 
-FecharModalEditarJogo.onclick = function () {
-  ModalEditarJogo.close()
+// Fechar o modal de edição de jogo
+BotãoEditarJogoFechar.onclick = function () {
+  janelaEditarJogo.close();
 }
-
 });
