@@ -288,24 +288,6 @@ footer.footer {
   transition: background-color 0.8s linear, color 0.8s linear;
 }
 
-
-/* Linkar Jogos0 */
-.ligar {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.ligar.game-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.ligar .progress-bar {
-  display: flex;
-  align-items: center;
-}
 /* Botão de Adicionar jogo */
 .addbtn {
   cursor: pointer;
@@ -707,6 +689,35 @@ button#closeModal:hover {
   justify-content: center;
   align-items: center;
   margin-bottom: 40px;
+}
+
+/* Modal Troféus */
+
+#ModalTroféus {
+  margin-bottom: 10px;
+  background: none;
+  padding: 0;
+  color: rgb(2, 255, 255);
+}
+
+#Fechar-Troféus {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+
+  transform: scale(1.5); 
+
+  background: none;
+  padding: 0px;
+}
+
+#Fechar-Troféus:hover {
+  color: rgb(255, 0, 0);
+}
+
+#botaofecharicone-troféus {
+  margin-top: -30px;
+  margin-right: -20px;
 }
 
   /* background-color: #00ff88; */

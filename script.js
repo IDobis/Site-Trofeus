@@ -179,26 +179,37 @@ addEventListener('DOMContentLoaded', () => {
     janelaEditar.close();
   });
 
-// Adicionar evento de clique ao botão "Editar Jogo"
-document.querySelectorAll("#BotaoEditarJogo").forEach(button => {
-  button.addEventListener("click", () => {
-    // Abre o modal de edição de jogo
-    ModalEditarJogo.showModal()
+  // Adicionar evento de clique ao botão "Editar Jogo"
+  document.querySelectorAll("#BotaoEditarJogo").forEach(button => {
+    button.addEventListener("click", () => {
+      // Abre o modal de edição de jogo
+      ModalEditarJogo.showModal()
+    })
   })
-})
-  
-  // Modal Editar Jogo
-const botãoEditarJogo = document.querySelector("#BotaoEditarJogo");
-const BotãoEditarJogoFechar = document.querySelector("#Fechar-Jogo");
-const janelaEditarJogo = document.querySelector("#Janela-Editar-Jogo");
+    
+    // Modal Editar Jogo
+  const botãoEditarJogo = document.querySelector("#BotaoEditarJogo");
+  const BotãoEditarJogoFechar = document.querySelector("#Fechar-Jogo");
+  const janelaEditarJogo = document.querySelector("#Janela-Editar-Jogo");
 
-// Abrir o modal de edição de jogo
-botãoEditarJogo.onclick = function () {
-  janelaEditarJogo.showModal();
-}
+  // Abrir o modal de edição de jogo
+  botãoEditarJogo.onclick = function () {
+    janelaEditarJogo.showModal();
+  }
 
-// Fechar o modal de edição de jogo
-BotãoEditarJogoFechar.onclick = function () {
-  janelaEditarJogo.close();
-}
+  // Fechar o modal de edição de jogo
+  BotãoEditarJogoFechar.onclick = function () {
+    janelaEditarJogo.close();
+  }
+
+  // MODAL TROFÉUS
+
+  const BotãoAbrirTroféus = document.querySelector("#ModalTroféus")
+  const ModalTrofeus = document.querySelector("#ModalTrofeus")
+
+  BotãoAbrirTroféus.onclick = function () {
+    ModalTrofeus.showModal()
+  }
+
+
 });

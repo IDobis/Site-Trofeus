@@ -61,30 +61,27 @@
         <div class="games-container">
           <div class="game-item">
             <button id="BotaoEditarJogo" class="editar-jogo">Editar</button>
-            <a href="Conquistas/Dark Souls 1/DarkSouls1.html" class="ligar">
-              <img
-                id="imagemJogo"
-                class="game-img"
-                src="images/ds1.jpg"
-                alt="Dark Souls Remastered"
-              />
-              <div class="game-info">
-                <h2 id="nomeJogo" class="game-name">
-                  Dark Souls Prepare To Die Edition
-                </h2>
-                <div class="trophies-container">
-                  <a
-                    href="Conquistas/Dark Souls 1/DarkSouls1.html"
-                    class="trophies-link"
-                    ><i class="bi bi-trophy-fill"></i> Troféus</a
-                  >
-                  <div class="progress-bar">
-                    <div class="progress" style="width: 100%"></div>
-                    <span class="progress-text">100%</span>
-                  </div>
+
+            <img
+              id="imagemJogo"
+              class="game-img"
+              src="images/ds1.jpg"
+              alt="Dark Souls Remastered"
+            />
+            <div class="game-info">
+              <h2 id="nomeJogo" class="game-name">
+                Dark Souls Prepare To Die Edition
+              </h2>
+              <div class="trophies-container">
+                <button id="ModalTroféus">
+                  <i class="bi bi-trophy-fill"></i> Troféus
+                </button>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 100%"></div>
+                  <span class="progress-text">100%</span>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
 
           <div class="game-item">
@@ -271,6 +268,16 @@
       </form>
     </dialog>
 
+    <dialog id="ModalTrofeus">
+      <form method="dialog">
+        <div id="estilos-editar-jogo">
+          <button id="Fechar-Troféus">
+            <i id="botaofecharicone-troféus" class="bi bi-x"></i>
+          </button>
+          <h1>Troféus</h1>
+        </div>
+      </form>
+    </dialog>
     <footer class="footer">
       <a href="#top" class="scroll-to-top">Voltar ao topo</a>
     </footer>
