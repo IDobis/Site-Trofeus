@@ -204,11 +204,31 @@ addEventListener('DOMContentLoaded', () => {
 
   // MODAL TROFÉUS
 
-  const BotãoAbrirTroféus = document.querySelector("#ModalTroféus")
-  const ModalTrofeus = document.querySelector("#ModalTrofeus")
+  const BotãoAbrirTroféus = document.querySelector("#BotãoModalTroféus")
+  const ModalTrofeus = document.querySelector("#ModalTroféus")
+  const BotãoFecharModalTroféus = document.querySelector("#Fechar-Troféus")
+
 
   BotãoAbrirTroféus.onclick = function () {
     ModalTrofeus.showModal()
+  }
+
+  BotãoFecharModalTroféus.onclick = function () {
+    ModalTrofeus.closeModal()
+  }
+
+  // Dentro do Modal
+
+  const BotãoAdicionarTroféus = document.querySelector("#AdicionarTroféus")
+  const ModalAdicionarTroféus = document.querySelector("#ModalAdicionarTroféus")
+  const BotãoFecharModalAdicionarTroféus = document.querySelector("#Fechar-AdicionarTroféus")
+
+  BotãoAdicionarTroféus.onclick = function () {
+    ModalAdicionarTroféus.showModal()
+  }
+
+  BotãoFecharModalAdicionarTroféus.onclick = function () {
+    ModalAdicionarTroféus.closeModal()
   }
 
 

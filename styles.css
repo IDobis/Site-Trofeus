@@ -692,8 +692,21 @@ button#closeModal:hover {
 }
 
 /* Modal Troféus */
-
 #ModalTroféus {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    border-radius: 12px;
+    
+    background-color: #1c1c1c;
+    color: rgb(2, 255, 255);
+    box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
+}
+
+/* Botão Troféus */
+#BotãoModalTroféus {
   margin-bottom: 10px;
   background: none;
   padding: 0;
@@ -720,4 +733,49 @@ button#closeModal:hover {
   margin-right: -20px;
 }
 
+
+/* MODAL ADICIONAR TROFÉUS */
+#AdicionarTroféus {
+  background: none;
+  padding: 0;
+
+  display: flex;
+  align-self: flex-end;
+
+  color: #00ff88;
+  font-size: 30px;
+}
+
+#ModalAdicionarTroféus {
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    border-radius: 12px;
+    
+    background-color: #1c1c1c;
+    color: rgb(2, 255, 255);
+    box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
+ }
+
+ #Fechar-AdicionarTroféus {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+
+  transform: scale(1.5); 
+
+  background: none;
+  padding: 0px;
+}
+
+#Fechar-AdicionarTroféus:hover {
+  color: rgb(255, 0, 0);
+}
+
+#botaofecharicone-adicionartroféus {
+  margin-top: -30px;
+  margin-right: -20px;
+}
   /* background-color: #00ff88; */
