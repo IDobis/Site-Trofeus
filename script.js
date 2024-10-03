@@ -210,12 +210,33 @@ addEventListener('DOMContentLoaded', () => {
 
 
   BotãoAbrirTroféus.onclick = function () {
-    ModalTrofeus.showModal()
+    ModalTrofeus.show()
   }
 
   BotãoFecharModalTroféus.onclick = function () {
-    ModalTrofeus.closeModal()
+    console.log("Close button clicked");
+    ModalTrofeus.close()
   }
+
+  //Check-Box
+  const checkbox = document.querySelector('#BotaoCheck > .checkbox-wrapper-4 > .cbx > .inp-cbx');
+
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      console.log('Checkbox is checked');
+      // Add code here to handle the checkbox being checked
+    } else {
+      console.log('Checkbox is unchecked');
+      // Add code here to handle the checkbox being unchecked
+    }
+  });
+
+  ModalTrofeus.addEventListener('click', (e) => {
+    if (e.target !== BotãoFecharModalTroféus) {
+      e.stopPropagation(); //esse +
+      e.preventDefault(); // esse funcionou
+    }
+  });
 
   // Dentro do Modal
 
@@ -224,11 +245,11 @@ addEventListener('DOMContentLoaded', () => {
   const BotãoFecharModalAdicionarTroféus = document.querySelector("#Fechar-AdicionarTroféus")
 
   BotãoAdicionarTroféus.onclick = function () {
-    ModalAdicionarTroféus.showModal()
+    ModalAdicionarTroféus.show()
   }
 
   BotãoFecharModalAdicionarTroféus.onclick = function () {
-    ModalAdicionarTroféus.closeModal()
+    ModalAdicionarTroféus.close()
   }
 
 
