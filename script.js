@@ -218,18 +218,19 @@ addEventListener('DOMContentLoaded', () => {
     ModalTrofeus.close()
   }
 
-  //Check-Box
-  const checkbox = document.querySelector('#BotaoCheck > .checkbox-wrapper-4 > .cbx > .inp-cbx');
+  const checkbox = document.querySelector('#BotaoCheck .checkbox-wrapper-4 .inp-cbx');
 
-  checkbox.addEventListener('change', function() {
-    if (this.checked) {
-      console.log('Checkbox is checked');
-      // Add code here to handle the checkbox being checked
-    } else {
-      console.log('Checkbox is unchecked');
-      // Add code here to handle the checkbox being unchecked
-    }
-  });
+  if (checkbox) {
+    checkbox.addEventListener('change', function() {
+      if (this.checked) {
+        console.log('Checkbox is checked');
+      } else {
+        console.log('Checkbox is unchecked');
+      }
+    });
+  } else {
+    console.error('Checkbox element not found');
+  }
 
   ModalTrofeus.addEventListener('click', (e) => {
     if (e.target !== BotãoFecharModalTroféus) {
