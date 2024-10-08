@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
 * {
   margin: 0;
@@ -236,7 +236,7 @@ main.container {
 }
 
 .progress {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   height: 100%;
   border-radius: 5px;
 }
@@ -367,7 +367,7 @@ button:hover {
 
 input[type="text"],
 input[type="file"] {
-   color: #fafafa; /* Cor do Texto */
+  color: #fafafa; /* Cor do Texto */
   background-color: #424242;
   width: 100%;
   padding: 10px;
@@ -475,13 +475,13 @@ button#closeModal:hover {
   width: auto;
   border-radius: 12px;
   transition: background-color 0.3s linear;
-  }
+}
 
 .editarft:hover {
   background-color: #c4c4c4;
 }
 
-.dark-mode .editarft{
+.dark-mode .editarft {
   background-color: #121212;
   color: #ffffff;
   padding: 5px 10px;
@@ -491,7 +491,7 @@ button#closeModal:hover {
   transition: background-color 0.3s linear;
 }
 
-.dark-mode .editarft:hover{
+.dark-mode .editarft:hover {
   background-color: #414040;
 }
 
@@ -504,7 +504,7 @@ button#closeModal:hover {
   transform: translate(-50%, -50%);
 
   border-radius: 12px;
-  
+
   background-color: #545355;
   color: rgb(177, 119, 231);
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
@@ -521,7 +521,7 @@ button#closeModal:hover {
   transform: translate(-50%, -50%);
 
   border-radius: 12px;
-  
+
   background-color: #545355;
   color: rgb(177, 119, 231);
   box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
@@ -567,7 +567,7 @@ button#closeModal:hover {
   justify-content: flex-end;
   margin-left: auto;
 
-  transform: scale(1.5); 
+  transform: scale(1.5);
 
   background: none;
   padding: 0px;
@@ -610,9 +610,9 @@ button#closeModal:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   border-radius: 12px;
-  
+
   background-color: #545355;
   color: rgb(177, 119, 231);
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
@@ -669,7 +669,7 @@ button#closeModal:hover {
   justify-content: flex-end;
   margin-left: auto;
 
-  transform: scale(1.5); 
+  transform: scale(1.5);
 
   background: none;
   padding: 0px;
@@ -693,16 +693,16 @@ button#closeModal:hover {
 
 /* Modal Troféus */
 #ModalTroféus {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    border-radius: 12px;
-    
-    background-color: #1c1c1c;
-    color: rgb(2, 255, 255);
-    box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
+  position: fixed;
+  top: 24%;
+  left: 21%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 12px;
+
+  background-color: #1c1c1c;
+  color: rgb(2, 255, 255);
+  box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
 }
 
 #NomePrincipalModalTrofeus {
@@ -718,7 +718,7 @@ button#closeModal:hover {
 }
 
 #ImagemTrofeu {
-  width: 100px; 
+  width: 100px;
   height: auto;
   margin-right: 10px;
 }
@@ -744,106 +744,53 @@ button#closeModal:hover {
   justify-self: end;
 }
 
-.checkbox-wrapper-4 * {
-  box-sizing: border-box;
+.checkbox-wrapper-37 input[type="checkbox"] {
+  display: none;
 }
-.checkbox-wrapper-4 .cbx {
-  -webkit-user-select: none;
-  user-select: none;
+
+.checkbox-wrapper-37 .terms-label {
   cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 6px;
-  overflow: hidden;
-  transition: all 0.2s ease;
-  display: inline-block;
+  display: flex;
+  align-items: center;
 }
-.checkbox-wrapper-4 .cbx:not(:last-child) {
-  margin-right: 6px;
+
+.checkbox-wrapper-37 .terms-label .label-text {
+  margin-left: 10px;
 }
-.checkbox-wrapper-4 .cbx:hover {
-  background: rgba(0,119,255,0.06);
+
+.checkbox-wrapper-37 .checkbox-svg {
+  width: 30px;
+  height: 30px;
 }
-.checkbox-wrapper-4 .cbx span {
-  float: left;
-  vertical-align: middle;
-  transform: translate3d(0, 0, 0);
+
+.checkbox-wrapper-37 .checkbox-box {
+  fill: #575757;
+  stroke: #00ff88;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  transition: stroke-dashoffset 0.6s ease-in;
 }
-.checkbox-wrapper-4 .cbx span:first-child {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  transform: scale(1);
-  border: 1px solid #cccfdb;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 1px rgba(0,16,75,0.05);
+
+.checkbox-wrapper-37 .checkbox-tick {
+  stroke: #00ff88;
+  stroke-dasharray: 172;
+  stroke-dashoffset: 172;
+  transition: stroke-dashoffset 0.6s ease-in;
 }
-.checkbox-wrapper-4 .cbx span:first-child svg {
-  position: absolute;
-  top: 3px;
-  left: 2px;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 16px;
-  stroke-dashoffset: 16px;
-  transition: all 0.3s ease;
-  transition-delay: 0.1s;
-  transform: translate3d(0, 0, 0);
-}
-.checkbox-wrapper-4 .cbx span:last-child {
-  padding-left: 8px;
-  line-height: 18px;
-}
-.checkbox-wrapper-4 .cbx:hover span:first-child {
-  border-color: #07f;
-}
-.checkbox-wrapper-4 .inp-cbx {
-  position: absolute;
-  visibility: hidden;
-}
-.checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child {
-  background: #07f;
-  border-color: #07f;
-  animation: wave-4 0.4s ease;
-}
-.checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child svg {
+
+.checkbox-wrapper-37
+  input[type="checkbox"]:checked
+  + .terms-label
+  .checkbox-box,
+.checkbox-wrapper-37
+  input[type="checkbox"]:checked
+  + .terms-label
+  .checkbox-tick {
   stroke-dashoffset: 0;
 }
-.checkbox-wrapper-4 .inline-svg {
-  position: absolute;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-  user-select: none;
-}
-@media screen and (max-width: 640px) {
-  .checkbox-wrapper-4 .cbx {
-    width: 100%;
-    display: inline-block;
-  }
-}
-@-moz-keyframes wave-4 {
-  50% {
-    transform: scale(0.9);
-  }
-}
-@-webkit-keyframes wave-4 {
-  50% {
-    transform: scale(0.9);
-  }
-}
-@-o-keyframes wave-4 {
-  50% {
-    transform: scale(0.9);
-  }
-}
-@keyframes wave-4 {
-  50% {
-    transform: scale(0.9);
-  }
+
+.checkbox-wrapper-37 input[type="checkbox"]:checked + .terms-label .label-text {
+  color: #00ff88; /* Altere para a cor desejada */
 }
 
 /* Termina o Molde */
@@ -861,7 +808,7 @@ button#closeModal:hover {
   justify-content: flex-end;
   margin-left: auto;
 
-  transform: scale(1.5); 
+  transform: scale(1.5);
 
   background: none;
   padding: 0px;
@@ -876,7 +823,6 @@ button#closeModal:hover {
   margin-right: -20px;
 }
 
-
 /* MODAL ADICIONAR TROFÉUS */
 #AdicionarTroféus {
   background: none;
@@ -888,27 +834,37 @@ button#closeModal:hover {
 
   color: #00ff88;
   font-size: 30px;
+  margin-bottom: -15px;
 }
 
 #ModalAdicionarTroféus {
   position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    border-radius: 12px;
-    
-    background-color: #1c1c1c;
-    color: rgb(2, 255, 255);
-    box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
- }
+  top: 48%;
+  left: 80%;
+  transform: translate(-50%, -50%);
 
- #Fechar-AdicionarTroféus {
+  border-radius: 12px;
+
+  background-color: #1c1c1c;
+  color: rgb(2, 255, 255);
+  box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
+}
+
+#TituloAdicionarTrofeus {
+  margin-top: -50px;
+}
+#SalvarAdicao {
+  background-color: #00ff88;
+  color: #121212;
+  margin-bottom: -12px;
+}
+
+#Fechar-AdicionarTroféus {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
 
-  transform: scale(1.5); 
+  transform: scale(1.5);
 
   background: none;
   padding: 0px;
@@ -922,4 +878,37 @@ button#closeModal:hover {
   margin-top: -30px;
   margin-right: -20px;
 }
-  /* background-color: #00ff88; */
+
+#NomeTrofeuLabel {
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#ImagemTrofeuLabel {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#DescricaoTrofeuLabel {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#DescricaoAdicionar {
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+#EspacoAdicionarTextos label,
+#EspacoAdicionarTextos input,
+#EspacoAdicionarTextos textarea {
+  margin-bottom: 20px; /* Espaço entre os elementos */
+}
+/* background-color: #00ff88; */

@@ -1,14 +1,14 @@
-addEventListener('DOMContentLoaded', () => {
+addEventListener("DOMContentLoaded", () => {
   // Função para mostrar a página
   function mostrarPagina(paginaId) {
-    const paginas = document.querySelectorAll('.pagina');
-    paginas.forEach(pagina => {
-      pagina.classList.remove('ativa');
+    const paginas = document.querySelectorAll(".pagina");
+    paginas.forEach((pagina) => {
+      pagina.classList.remove("ativa");
     });
-    document.getElementById(paginaId).classList.add('ativa');
+    document.getElementById(paginaId).classList.add("ativa");
   }
 
-  const gamecontainer = document.querySelector('.games-container');
+  const gamecontainer = document.querySelector(".games-container");
   const butao = document.getElementById("addbutton");
 
   butao.addEventListener("click", (event) => {
@@ -17,21 +17,21 @@ addEventListener('DOMContentLoaded', () => {
   });
 
   function AdicionarJogo() {
-    const nomejogo = document.getElementById('nomeaddjogodentro').value; // Obtém o valor do input
-    const imagem = document.getElementById('fileaddjogo').files[0]; // Obtém o arquivo da img selecionado
+    const nomejogo = document.getElementById("nomeaddjogodentro").value; // Obtém o valor do input
+    const imagem = document.getElementById("fileaddjogo").files[0]; // Obtém o arquivo da img selecionado
 
     if (nomejogo && imagem) {
       const reader = new FileReader();
-      reader.onload = function(e) {
-        const jogos = JSON.parse(localStorage.getItem('jogos')) || [];
+      reader.onload = function (e) {
+        const jogos = JSON.parse(localStorage.getItem("jogos")) || [];
         jogos.push({ nome: nomejogo, imagem: e.target.result });
-        localStorage.setItem('jogos', JSON.stringify(jogos));
+        localStorage.setItem("jogos", JSON.stringify(jogos));
 
         mostrarJogo(nomejogo, e.target.result);
-        
+
         // Limpa a entrada de arquivo
-        document.getElementById('fileaddjogo').value = '';
-        document.getElementById('nomeaddjogodentro').value = ''; // Limpa também o campo de nome
+        document.getElementById("fileaddjogo").value = "";
+        document.getElementById("nomeaddjogodentro").value = ""; // Limpa também o campo de nome
       };
       reader.readAsDataURL(imagem); // Lê o arquivo
     }
@@ -42,22 +42,22 @@ addEventListener('DOMContentLoaded', () => {
     gameItem.className = "game-item";
     gamecontainer.appendChild(gameItem);
 
-    const imgElemento = document.createElement('img');
+    const imgElemento = document.createElement("img");
     imgElemento.className = "game-img";
     imgElemento.src = imagemUrl; // Usar a URL do objeto para a imagem
     imgElemento.alt = nomejogo;
     gameItem.appendChild(imgElemento);
 
-    const nomejogoelemento = document.createElement('h2');
+    const nomejogoelemento = document.createElement("h2");
     nomejogoelemento.className = "game-name";
     nomejogoelemento.textContent = nomejogo;
     gameItem.appendChild(nomejogoelemento);
   }
 
   // Carregar jogos do localStorage ao iniciar
-  window.onload = function() {
-    const jogos = JSON.parse(localStorage.getItem('jogos')) || [];
-    jogos.forEach(jogo => {
+  window.onload = function () {
+    const jogos = JSON.parse(localStorage.getItem("jogos")) || [];
+    jogos.forEach((jogo) => {
       mostrarJogo(jogo.nome, jogo.imagem);
     });
 
@@ -77,55 +77,55 @@ addEventListener('DOMContentLoaded', () => {
   };
 
   // Adiciona eventos para os botões das páginas
-  document.getElementById('buttonPagina1').addEventListener('click', () => {
-    mostrarPagina('pagina1');
+  document.getElementById("buttonPagina1").addEventListener("click", () => {
+    mostrarPagina("pagina1");
   });
 
-  document.getElementById('buttonPagina2').addEventListener('click', () => {
-    mostrarPagina('pagina2');
+  document.getElementById("buttonPagina2").addEventListener("click", () => {
+    mostrarPagina("pagina2");
   });
 
   // Botão modo claro
-  const button = document.querySelector('.toggle-button');
+  const button = document.querySelector(".toggle-button");
 
   function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+    document.body.classList.toggle("dark-mode");
 
-    if (document.body.classList.contains('dark-mode')) {
-      button.textContent = 'Modo Claro';
-      localStorage.setItem('theme', 'dark');
+    if (document.body.classList.contains("dark-mode")) {
+      button.textContent = "Modo Claro";
+      localStorage.setItem("theme", "dark");
     } else {
-      button.textContent = 'Modo Escuro';
-      localStorage.setItem('theme', 'light');
+      button.textContent = "Modo Escuro";
+      localStorage.setItem("theme", "light");
     }
   }
 
   // Salvar modo de Tela
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-    button.textContent = 'Modo Claro'; 
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    button.textContent = "Modo Claro";
   } else {
-    document.body.classList.remove('dark-mode');
-    button.textContent = 'Modo Escuro';
+    document.body.classList.remove("dark-mode");
+    button.textContent = "Modo Escuro";
   }
 
-  button.addEventListener('click', toggleDarkMode);
+  button.addEventListener("click", toggleDarkMode);
 
-  document.getElementById('openModal').addEventListener('click', () => {
-    const modal = document.getElementById('myModal');
+  document.getElementById("openModal").addEventListener("click", () => {
+    const modal = document.getElementById("myModal");
     modal.showModal();
 
     requestAnimationFrame(() => {
-      modal.style.opacity = '1'; // Set opacity to fully visible
-      modal.style.transform = 'scale(1)'; // Scale to original size
+      modal.style.opacity = "1"; // Set opacity to fully visible
+      modal.style.transform = "scale(1)"; // Scale to original size
     });
   });
 
-  document.getElementById('closeModal').addEventListener('click', () => {
-    const modal = document.getElementById('myModal');
-    modal.style.opacity = '0'; // Fade out
-    modal.style.transform = 'scale(0.8)'; // Scale down
+  document.getElementById("closeModal").addEventListener("click", () => {
+    const modal = document.getElementById("myModal");
+    modal.style.opacity = "0"; // Fade out
+    modal.style.transform = "scale(0.8)"; // Scale down
 
     setTimeout(() => {
       modal.close();
@@ -133,23 +133,23 @@ addEventListener('DOMContentLoaded', () => {
   });
 
   // MODAL EDIÇÃO
-  const botãoEditar = document.querySelector("#botão-editar")
-  const BotãoEditarFechar = document.querySelector("#Fechar")
-  const janelaEditar = document.querySelector("#Janela-Editar")
+  const botãoEditar = document.querySelector("#botão-editar");
+  const BotãoEditarFechar = document.querySelector("#Fechar");
+  const janelaEditar = document.querySelector("#Janela-Editar");
 
   botãoEditar.onclick = function () {
-    janelaEditar.showModal()
-  }
+    janelaEditar.showModal();
+  };
   BotãoEditarFechar.onclick = function () {
-    janelaEditar.closeModal()
-  }
-  
+    janelaEditar.closeModal();
+  };
+
   // Botão modal salvar
   const salvarperfil = document.querySelector("#botão-salvar-editar-perfil");
   const formEditar = document.querySelector("#Janela-Editar form");
 
   // Evento para salvar o nome e a imagem
-  formEditar.addEventListener("submit", function(event) {
+  formEditar.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission behavior
 
     const nomePerfil = document.querySelector("#profileName");
@@ -167,7 +167,7 @@ addEventListener('DOMContentLoaded', () => {
     if (novaFoto.files[0]) {
       const reader = new FileReader();
 
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         imagemPerfil.src = e.target.result; // Carrega a nova imagem na tag <img>
         localStorage.setItem("imagemPerfil", e.target.result); // Salva a imagem no localStorage
       };
@@ -180,14 +180,14 @@ addEventListener('DOMContentLoaded', () => {
   });
 
   // Adicionar evento de clique ao botão "Editar Jogo"
-  document.querySelectorAll("#BotaoEditarJogo").forEach(button => {
+  document.querySelectorAll("#BotaoEditarJogo").forEach((button) => {
     button.addEventListener("click", () => {
       // Abre o modal de edição de jogo
-      ModalEditarJogo.showModal()
-    })
-  })
-    
-    // Modal Editar Jogo
+      ModalEditarJogo.showModal();
+    });
+  });
+
+  // Modal Editar Jogo
   const botãoEditarJogo = document.querySelector("#BotaoEditarJogo");
   const BotãoEditarJogoFechar = document.querySelector("#Fechar-Jogo");
   const janelaEditarJogo = document.querySelector("#Janela-Editar-Jogo");
@@ -195,63 +195,44 @@ addEventListener('DOMContentLoaded', () => {
   // Abrir o modal de edição de jogo
   botãoEditarJogo.onclick = function () {
     janelaEditarJogo.showModal();
-  }
+  };
 
   // Fechar o modal de edição de jogo
   BotãoEditarJogoFechar.onclick = function () {
     janelaEditarJogo.close();
-  }
+  };
 
   // MODAL TROFÉUS
 
-  const BotãoAbrirTroféus = document.querySelector("#BotãoModalTroféus")
-  const ModalTrofeus = document.querySelector("#ModalTroféus")
-  const BotãoFecharModalTroféus = document.querySelector("#Fechar-Troféus")
-
+  const BotãoAbrirTroféus = document.querySelector("#BotãoModalTroféus");
+  const ModalTrofeus = document.querySelector("#ModalTroféus");
+  const BotãoFecharModalTroféus = document.querySelector("#Fechar-Troféus");
 
   BotãoAbrirTroféus.onclick = function () {
-    ModalTrofeus.show()
-  }
+    ModalTrofeus.show();
+  };
 
   BotãoFecharModalTroféus.onclick = function () {
     console.log("Close button clicked");
-    ModalTrofeus.close()
-  }
-
-  const checkbox = document.querySelector('#BotaoCheck .checkbox-wrapper-4 .inp-cbx');
-
-  if (checkbox) {
-    checkbox.addEventListener('change', function() {
-      if (this.checked) {
-        console.log('Checkbox is checked');
-      } else {
-        console.log('Checkbox is unchecked');
-      }
-    });
-  } else {
-    console.error('Checkbox element not found');
-  }
-
-  ModalTrofeus.addEventListener('click', (e) => {
-    if (e.target !== BotãoFecharModalTroféus) {
-      e.stopPropagation(); //esse +
-      e.preventDefault(); // esse funcionou
-    }
-  });
+    ModalTrofeus.close();
+  };
 
   // Dentro do Modal
 
-  const BotãoAdicionarTroféus = document.querySelector("#AdicionarTroféus")
-  const ModalAdicionarTroféus = document.querySelector("#ModalAdicionarTroféus")
-  const BotãoFecharModalAdicionarTroféus = document.querySelector("#Fechar-AdicionarTroféus")
+  const BotãoAdicionarTroféus = document.querySelector("#AdicionarTroféus");
+  const ModalAdicionarTroféus = document.querySelector(
+    "#ModalAdicionarTroféus"
+  );
+  const BotãoFecharModalAdicionarTroféus = document.querySelector(
+    "#Fechar-AdicionarTroféus"
+  );
 
-  BotãoAdicionarTroféus.onclick = function () {
-    ModalAdicionarTroféus.show()
-  }
+  BotãoAdicionarTroféus.onclick = function (event) {
+    event.preventDefault();
+    ModalAdicionarTroféus.show();
+  };
 
   BotãoFecharModalAdicionarTroféus.onclick = function () {
-    ModalAdicionarTroféus.close()
-  }
-
-
+    ModalAdicionarTroféus.close();
+  };
 });

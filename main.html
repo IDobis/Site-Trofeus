@@ -276,26 +276,47 @@
           </button>
           <h1 id="NomePrincipalModalTrofeus">Troféus</h1>
 
-          <div id="divTrofeus">
-            <img src="ConquistasIMG/DS1/1.jpg" alt="" id="ImagemTrofeu" />
-            <div id="TextoTrofeu">
-              <h2 id="NomeTrofeu">TAEV</h2>
-              <p id="DescricaoTrofeu">Uma bela fogueira</p>
-            </div>
-            <div id="BotaoCheck">
-              <div class="checkbox-wrapper-4">
-                <input class="inp-cbx" id="morning" type="checkbox" />
-                <label class="cbx" for="morning"
-                  ><span>
-                    <svg width="12px" height="10px">
-                      <use xlink:href="#check-4"></use></svg></span
-                  ><span>Concluído</span></label
-                >
-                <svg class="inline-svg">
-                  <symbol id="check-4" viewbox="0 0 12 10">
-                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                  </symbol>
-                </svg>
+          <div id="trofeus-container">
+            <div id="divTrofeus">
+              <img src="ConquistasIMG/DS1/1.jpg" alt="" id="ImagemTrofeu" />
+              <div id="TextoTrofeu">
+                <h2 id="NomeTrofeu">TAEV</h2>
+                <p id="DescricaoTrofeu">Uma bela fogueira</p>
+              </div>
+
+              <div id="BotaoCheck">
+                <div class="checkbox-wrapper-37">
+                  <input
+                    type="checkbox"
+                    name="checkbox"
+                    id="terms-checkbox-37"
+                  />
+                  <label for="terms-checkbox-37" class="terms-label">
+                    <svg
+                      class="checkbox-svg"
+                      viewBox="0 0 200 200"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <mask id="path-1-inside-1_476_5-37" fill="white">
+                        <rect width="200" height="200" />
+                      </mask>
+                      <rect
+                        width="200"
+                        height="200"
+                        class="checkbox-box"
+                        stroke-width="40"
+                        mask="url(#path-1-inside-1_476_5-37)"
+                      />
+                      <path
+                        class="checkbox-tick"
+                        d="M52 111.018L76.9867 136L149 64"
+                        stroke-width="15"
+                      />
+                    </svg>
+                    <span id="CorTextoCheck" class="label-text">Concluído</span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -314,7 +335,34 @@
           <i id="botaofecharicone-adicionartroféus" class="bi bi-x"></i>
         </button>
 
-        <h1>Adicionar <i class="bi bi-trophy-fill"></i></h1>
+        <h1 id="TituloAdicionarTrofeus">
+          Adicionar <i class="bi bi-trophy-fill"></i>
+        </h1>
+        <div id="EspacoAdicionarTextos">
+          <label id="NomeTrofeuLabel" for="NomeAdicionarTrofeu"
+            >Nome do Troféu:</label
+          >
+          <input
+            type="text"
+            id="NomeAdicionar"
+            placeholder="Digite o Nome do Troféu"
+          />
+
+          <label id="ImagemTrofeuLabel" for="ImagemAdicionarTrofeu"
+            >Imagem do Troféu:</label
+          >
+          <input type="file" id="ImagemAdicionar" accept=".jpeg, .jpg, .png" />
+
+          <label id="DescricaoTrofeuLabel" for="DescricaoAdicionarTrofeu"
+            >Descrição do Troféu:</label
+          >
+          <textarea
+            id="DescricaoAdicionar"
+            placeholder="Digite a descrição do troféu"
+          ></textarea>
+        </div>
+
+        <button id="SalvarAdicao">Salvar e Adicionar</button>
       </form>
     </dialog>
 
