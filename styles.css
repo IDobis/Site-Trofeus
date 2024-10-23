@@ -909,6 +909,6 @@ button#closeModal:hover {
 #EspacoAdicionarTextos label,
 #EspacoAdicionarTextos input,
 #EspacoAdicionarTextos textarea {
-  margin-bottom: 20px; /* Espaço entre os elementos */
+  margin-bottom: 20px;
 }
 /* background-color: #00ff88; */
