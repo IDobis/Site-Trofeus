@@ -229,7 +229,7 @@ main.container {
 
 .progress-bar {
   background-color: #ddd;
-  border-radius: 5px;
+  border-radius: 2px;
   height: 10px;
   position: relative;
   width: 100px;
@@ -238,7 +238,7 @@ main.container {
 .progress {
   background-color: #4caf50;
   height: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .progress-text {
@@ -247,7 +247,7 @@ main.container {
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 14px;
-  color: #333; /* Ajuste a cor conforme o tema */
+  color: #333;
   white-space: nowrap;
 }
 
@@ -402,20 +402,6 @@ button#closeModal:hover {
   dialog {
     width: 95%; /* Ajusta a largura para telas menores */
   }
-}
-
-/* páginas */
-.pagina {
-  display: none;
-  transition: opacity 0.3s linear;
-}
-.pagina.ativa {
-  display: block;
-  opacity: 1;
-}
-.pagina:not(.ativa) {
-  opacity: 0;
-  pointer-events: none;
 }
 
 #buttonPagina1 {
@@ -694,9 +680,12 @@ button#closeModal:hover {
 /* Modal Troféus */
 #ModalTroféus {
   position: fixed;
-  top: 24%;
+  top: 48%;
   left: 21%;
   transform: translate(-50%, -50%);
+
+  width: 500px;
+  height: 600px;
 
   border-radius: 12px;
 
@@ -718,8 +707,9 @@ button#closeModal:hover {
 }
 
 #ImagemTrofeu {
+  padding-bottom: 12px;
   width: 100px;
-  height: auto;
+  height: 100px;
   margin-right: 10px;
 }
 

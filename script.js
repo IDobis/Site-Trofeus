@@ -76,14 +76,24 @@ addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Adiciona eventos para os botões das páginas
-  document.getElementById("buttonPagina1").addEventListener("click", () => {
-    mostrarPagina("pagina1");
-  });
+  // Barra de progressão
+  const checkbox = document.querySelector("#terms-checkbox-37");
+  const progressBar = document.querySelector(".progress");
+  const progressText = document.querySelector(".progress-text");
 
-  document.getElementById("buttonPagina2").addEventListener("click", () => {
-    mostrarPagina("pagina2");
-  });
+  function updateBarradeProgresso() {
+    // Check if the checkbox is checked
+    if (checkbox.checked) {
+      progressBar.style.width = "100%";
+      progressText.textContent = "100%";
+    } else {
+      progressBar.style.width = "0%";
+      progressText.textContent = "0%";
+    }
+  }
+
+  // Add event listener to the checkbox
+  checkbox.addEventListener("change", updateBarradeProgresso);
 
   // Botão modo claro
   const button = document.querySelector(".toggle-button");
