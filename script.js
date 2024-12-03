@@ -7,7 +7,9 @@ addEventListener("DOMContentLoaded", () => {
     });
     document.getElementById(paginaId).classList.add("ativa");
   }
+  // =========================================================================================================================== //
 
+  // Função Adicionar Jogo
   const gamecontainer = document.querySelector(".games-container");
   const butao = document.getElementById("addbutton");
 
@@ -75,6 +77,28 @@ addEventListener("DOMContentLoaded", () => {
       imagemPerfil.src = imagemSalva;
     }
   };
+  //Modal AdicionarJogo
+
+  document.getElementById("openModal").addEventListener("click", () => {
+    const modal = document.getElementById("myModal");
+    modal.showModal();
+
+    requestAnimationFrame(() => {
+      modal.style.opacity = "1"; // Set opacity to fully visible
+      modal.style.transform = "scale(1)"; // Scale to original size
+    });
+  });
+
+  document.getElementById("closeModal").addEventListener("click", () => {
+    const modal = document.getElementById("myModal");
+    modal.style.opacity = "0"; // Fade out
+    modal.style.transform = "scale(0.8)"; // Scale down
+
+    setTimeout(() => {
+      modal.close();
+    }, 300);
+  });
+  // =========================================================================================================================== //
 
   // Barra de progressão
   const checkbox = document.querySelector("#terms-checkbox-37");
@@ -94,6 +118,7 @@ addEventListener("DOMContentLoaded", () => {
 
   // Add event listener to the checkbox
   checkbox.addEventListener("change", updateBarradeProgresso);
+  // =========================================================================================================================== //
 
   // Botão modo claro
   const button = document.querySelector(".toggle-button");
@@ -121,28 +146,9 @@ addEventListener("DOMContentLoaded", () => {
   }
 
   button.addEventListener("click", toggleDarkMode);
+  // =========================================================================================================================== //
 
-  document.getElementById("openModal").addEventListener("click", () => {
-    const modal = document.getElementById("myModal");
-    modal.showModal();
-
-    requestAnimationFrame(() => {
-      modal.style.opacity = "1"; // Set opacity to fully visible
-      modal.style.transform = "scale(1)"; // Scale to original size
-    });
-  });
-
-  document.getElementById("closeModal").addEventListener("click", () => {
-    const modal = document.getElementById("myModal");
-    modal.style.opacity = "0"; // Fade out
-    modal.style.transform = "scale(0.8)"; // Scale down
-
-    setTimeout(() => {
-      modal.close();
-    }, 300);
-  });
-
-  // MODAL EDIÇÃO
+  // Modal Editar Perfil
   const botãoEditar = document.querySelector("#botão-editar");
   const BotãoEditarFechar = document.querySelector("#Fechar");
   const janelaEditar = document.querySelector("#Janela-Editar");
@@ -185,32 +191,93 @@ addEventListener("DOMContentLoaded", () => {
       reader.readAsDataURL(novaFoto.files[0]); // Lê o arquivo
     }
 
-    // Close the modal after saving the changes
+    // Fechar Modal
     janelaEditar.close();
   });
+  // =========================================================================================================================== //
 
-  // Adicionar evento de clique ao botão "Editar Jogo"
-  document.querySelectorAll("#BotaoEditarJogo").forEach((button) => {
-    button.addEventListener("click", () => {
-      // Abre o modal de edição de jogo
-      ModalEditarJogo.showModal();
+  // Seleciona o diálogo e os botões
+  const janelaEditarJogo = document.getElementById("Janela-Editar-Jogo");
+  const botaoFechar = document.getElementById("Fechar-Jogo");
+  const botaoSalvar = document.getElementById("botão-salvar-editar-jogo");
+
+  // Evento para abrir a janela de edição
+  document
+    .getElementById("BotaoEditarJogo")
+    .addEventListener("click", function () {
+      janelaEditarJogo.showModal(); // Abre o diálogo
+
+      // Preenche os campos com os valores atuais
+      const nomeJogoSalvo = localStorage.getItem("nomeJogo");
+      const imagemJogoSalvo = localStorage.getItem("imagemJogo");
+
+      if (nomeJogoSalvo) {
+        document.getElementById("nome-editar-jogo-campo").value = nomeJogoSalvo;
+      }
+      if (imagemJogoSalvo) {
+        // Se a imagem já estiver salva, você pode mostrar a imagem atual
+        const imagemPerfilJogo = document.getElementById("imagemJogo");
+        imagemPerfilJogo.src = imagemJogoSalvo; // Atualiza a imagem na página
+      }
     });
+
+  // Evento para fechar a janela de edição
+  botaoFechar.addEventListener("click", function () {
+    janelaEditarJogo.close(); // Fecha o diálogo
   });
 
-  // Modal Editar Jogo
-  const botãoEditarJogo = document.querySelector("#BotaoEditarJogo");
-  const BotãoEditarJogoFechar = document.querySelector("#Fechar-Jogo");
-  const janelaEditarJogo = document.querySelector("#Janela-Editar-Jogo");
+  // Evento para salvar as alterações
+  botaoSalvar.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevenir o envio do formulário
 
-  // Abrir o modal de edição de jogo
-  botãoEditarJogo.onclick = function () {
-    janelaEditarJogo.showModal();
-  };
+    const novoNomeJogo = document.getElementById(
+      "nome-editar-jogo-campo"
+    ).value;
+    const novaFotoJogo = document.getElementById("imagem-editar-jogo-campo");
 
-  // Fechar o modal de edição de jogo
-  BotãoEditarJogoFechar.onclick = function () {
+    // Salvar nome do jogo
+    if (novoNomeJogo) {
+      localStorage.setItem("nomeJogo", novoNomeJogo);
+      console.log("Nome do jogo salvo:", novoNomeJogo);
+
+      // Atualiza o nome do jogo na interface
+      document.getElementById("nomeJogo").textContent = novoNomeJogo;
+    }
+
+    // Salvar imagem do jogo
+    if (novaFotoJogo.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        localStorage.setItem("imagemJogo", e.target.result);
+        console.log("Imagem do jogo salva:", e.target.result);
+
+        // Atualiza a imagem na página
+        const imagemPerfilJogo = document.getElementById("imagemJogo");
+        imagemPerfilJogo.src = e.target.result; // Atualiza a imagem na página
+      };
+      reader.readAsDataURL(novaFotoJogo.files[0]); // Lê o arquivo da imagem
+    }
+
+    // Fechar o diálogo após salvar
     janelaEditarJogo.close();
-  };
+  });
+
+  // Carregar dados do localStorage ao abrir a página
+  window.addEventListener("load", function () {
+    const nomeJogoSalvo = localStorage.getItem("nomeJogo");
+    const imagemJogoSalvo = localStorage.getItem("imagemJogo");
+
+    if (nomeJogoSalvo) {
+      document.getElementById("nomeJogo").textContent = nomeJogoSalvo; // Atualiza o nome na página
+    }
+
+    if (imagemJogoSalvo) {
+      const imagemPerfilJogo = document.getElementById("imagemJogo");
+      imagemPerfilJogo.src = imagemJogoSalvo; // Atualiza a imagem na página
+    }
+  });
+
+  // =========================================================================================================================== //
 
   // MODAL TROFÉUS
 
@@ -322,4 +389,5 @@ addEventListener("DOMContentLoaded", () => {
       // Fechar o modal
       document.getElementById("ModalAdicionarTroféus").close();
     });
+  // =========================================================================================================================== //
 });
