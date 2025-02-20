@@ -202,24 +202,21 @@ addEventListener("DOMContentLoaded", () => {
   const botaoSalvar = document.getElementById("botão-salvar-editar-jogo");
 
   // Evento para abrir a janela de edição
-  document
-    .getElementById("BotaoEditarJogo")
-    .addEventListener("click", function () {
-      janelaEditarJogo.showModal(); // Abre o diálogo
+  document.getElementById("BotaoEditarJogo").addEventListener("click", function () {
+    janelaEditarJogo.showModal(); // Abre o diálogo
 
-      // Preenche os campos com os valores atuais
-      const nomeJogoSalvo = localStorage.getItem("nomeJogo");
-      const imagemJogoSalvo = localStorage.getItem("imagemJogo");
+    // Preenche os campos com os valores atuais
+    const nomeJogoSalvo = localStorage.getItem("nomeJogo");
+    const imagemJogoSalvo = localStorage.getItem("imagemJogo");
 
-      if (nomeJogoSalvo) {
-        document.getElementById("nome-editar-jogo-campo").value = nomeJogoSalvo;
-      }
-      if (imagemJogoSalvo) {
-        // Se a imagem já estiver salva, você pode mostrar a imagem atual
-        const imagemPerfilJogo = document.getElementById("imagemJogo");
-        imagemPerfilJogo.src = imagemJogoSalvo; // Atualiza a imagem na página
-      }
-    });
+    if (nomeJogoSalvo) {
+      document.getElementById("nome-editar-jogo-campo").value = nomeJogoSalvo;
+    }
+    if (imagemJogoSalvo) {
+      const imagemPerfilJogo = document.getElementById("imagem-editar-jogo-preview");
+      imagemPerfilJogo.src = imagemJogoSalvo; // Atualiza a imagem na página
+    }
+  });
 
   // Evento para fechar a janela de edição
   botaoFechar.addEventListener("click", function () {
@@ -230,9 +227,7 @@ addEventListener("DOMContentLoaded", () => {
   botaoSalvar.addEventListener("click", function (event) {
     event.preventDefault(); // Prevenir o envio do formulário
 
-    const novoNomeJogo = document.getElementById(
-      "nome-editar-jogo-campo"
-    ).value;
+    const novoNomeJogo = document.getElementById("nome-editar-jogo-campo").value;
     const novaFotoJogo = document.getElementById("imagem-editar-jogo-campo");
 
     // Salvar nome do jogo
