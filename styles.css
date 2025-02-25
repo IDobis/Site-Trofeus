@@ -19,6 +19,17 @@ body {
   margin: 0;
   transition: background-color 0.3s linear, color 0.3s linear;
 }
+
+html.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
 input {
   background-color: black; /* Fundo do input preto */
   color: white; /* Cor do texto no input */
