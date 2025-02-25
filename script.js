@@ -306,81 +306,113 @@ addEventListener("DOMContentLoaded", () => {
     ModalAdicionarTroféus.close();
   };
 
-  //TESTE NOVAMENTE
-  document
-    .getElementById("SalvarAdicao")
-    .addEventListener("click", function (event) {
-      event.preventDefault(); // Evita o envio do formulário
+  // Função para atualizar a barra de progresso
+  function updateProgressBar() {
+    const checkboxes = document.querySelectorAll("#trofeus-container input[type='checkbox']");
+    const total = checkboxes.length;
+    const completed = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const percentage = total > 0 ? (completed / total) * 100 : 0;
 
-      // Coletar dados do formulário
-      const nomeTrofeu = document.getElementById("NomeAdicionar").value;
-      const descricaoTrofeu =
-        document.getElementById("DescricaoAdicionar").value;
-      const imagemTrofeu = document.getElementById("ImagemAdicionar").files[0];
+    const progressBar = document.querySelector(".progress");
+    const progressText = document.querySelector(".progress-text");
 
-      // Criar um novo elemento de troféu
-      const novoTrofeu = document.createElement("div");
-      novoTrofeu.id = "divTrofeus";
+    progressBar.style.width = `${percentage}%`;
+    progressText.textContent = `${percentage.toFixed(1)}%`;
+  }
 
-      const img = document.createElement("img");
-      img.src = URL.createObjectURL(imagemTrofeu);
-      img.alt = "";
-      img.id = "ImagemTrofeu";
+  // Adicionar evento de mudança para cada checkbox
+  document.querySelectorAll("#trofeus-container input[type='checkbox']").forEach(checkbox => {
+    checkbox.addEventListener("change", updateProgressBar);
+  });
 
-      const textoTrofeu = document.createElement("div");
-      textoTrofeu.id = "TextoTrofeu";
+  // Função para adicionar troféu
+  function adicionarTrofeu(nome, descricao, imagemUrl) {
+    const container = document.getElementById("trofeus-container");
 
-      const h2 = document.createElement("h2");
-      h2.id = "NomeTrofeu";
-      h2.textContent = nomeTrofeu;
+    const novoTrofeu = document.createElement("div");
+    novoTrofeu.id = "divTrofeus";
 
-      const p = document.createElement("p");
-      p.id = "DescricaoTrofeu";
-      p.textContent = descricaoTrofeu;
+    const img = document.createElement("img");
+    img.src = imagemUrl;
+    img.alt = "";
+    img.id = "ImagemTrofeu";
 
-      textoTrofeu.appendChild(h2);
-      textoTrofeu.appendChild(p);
+    const textoTrofeu = document.createElement("div");
+    textoTrofeu.id = "TextoTrofeu";
 
-      const botaoCheck = document.createElement("div");
-      botaoCheck.id = "BotaoCheck";
+    const h2 = document.createElement("h2");
+    h2.id = "NomeTrofeu";
+    h2.textContent = nome;
 
-      const checkboxWrapper = document.createElement("div");
-      checkboxWrapper.className = "checkbox-wrapper-37";
+    const p = document.createElement("p");
+    p.id = "DescricaoTrofeu";
+    p.textContent = descricao;
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.name = "checkbox";
-      checkbox.id = "terms-checkbox-" + Math.random(); // Gera um ID único
+    textoTrofeu.appendChild(h2);
+    textoTrofeu.appendChild(p);
 
-      const label = document.createElement("label");
-      label.htmlFor = checkbox.id;
-      label.className = "terms-label";
+    const botaoCheck = document.createElement("div");
+    botaoCheck.id = "BotaoCheck";
 
-      // Adicionando o SVG e texto ao label
-      const svg = `<svg class="checkbox-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="path-1-inside-1_476_5-37" fill="white">
-                        <rect width="200" height="200" />
-                    </mask>
-                    <rect width="200" height="200" class="checkbox-box" stroke-width="40" mask="url(#path-1-inside-1_476_5-37)" />
-                    <path class="checkbox-tick" d="M52 111.018L76.9867 136L149 64" stroke-width="15" />
-                </svg>`;
-      label.innerHTML =
-        svg + '<span id="CorTextoCheck" class="label-text">Concluído</span>';
+    const checkboxWrapper = document.createElement("div");
+    checkboxWrapper.className = "checkbox-wrapper-37";
 
-      checkboxWrapper.appendChild(checkbox);
-      checkboxWrapper.appendChild(label);
-      botaoCheck.appendChild(checkboxWrapper);
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = "checkbox";
+    checkbox.id = "terms-checkbox-" + Math.random(); // Gera um ID único
 
-      // Adicionando todos os elementos ao novo troféu
-      novoTrofeu.appendChild(img);
-      novoTrofeu.appendChild(textoTrofeu);
-      novoTrofeu.appendChild(botaoCheck);
+    const label = document.createElement("label");
+    label.htmlFor = checkbox.id;
+    label.className = "terms-label";
 
-      // Adicionando o novo troféu ao container
-      document.getElementById("trofeus-container").appendChild(novoTrofeu);
+    // Adicionando o SVG e texto ao label
+    const svg = `<svg class="checkbox-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <mask id="path-1-inside-1_476_5-37" fill="white">
+                      <rect width="200" height="200" />
+                  </mask>
+                  <rect width="200" height="200" class="checkbox-box" stroke-width="40" mask="url(#path-1-inside-1_476_5-37)" />
+                  <path class="checkbox-tick" d="M52 111.018L76.9867 136L149 64" stroke-width="15" />
+              </svg>`;
+    label.innerHTML =
+      svg + '<span id="CorTextoCheck" class="label-text">Concluído</span>';
 
-      // Fechar o modal
-      document.getElementById("ModalAdicionarTroféus").close();
-    });
+    checkboxWrapper.appendChild(checkbox);
+    checkboxWrapper.appendChild(label);
+    botaoCheck.appendChild(checkboxWrapper);
+
+    // Adicionando todos os elementos ao novo troféu
+    novoTrofeu.appendChild(img);
+    novoTrofeu.appendChild(textoTrofeu);
+    novoTrofeu.appendChild(botaoCheck);
+
+    // Adicionando o novo troféu ao container
+    container.appendChild(novoTrofeu);
+
+    // Adicionar evento de mudança para o novo checkbox
+    checkbox.addEventListener("change", updateProgressBar);
+
+    // Atualizar a barra de progresso
+    updateProgressBar();
+  }
+
+  // Evento para adicionar troféu
+  document.getElementById("SalvarAdicao").addEventListener("click", function (event) {
+    event.preventDefault(); // Evita o envio do formulário
+
+    // Coletar dados do formulário
+    const nomeTrofeu = document.getElementById("NomeAdicionar").value;
+    const descricaoTrofeu = document.getElementById("DescricaoAdicionar").value;
+    const imagemTrofeu = document.getElementById("ImagemAdicionar").files[0];
+
+    if (nomeTrofeu && descricaoTrofeu && imagemTrofeu) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        adicionarTrofeu(nomeTrofeu, descricaoTrofeu, e.target.result);
+        document.getElementById("ModalAdicionarTroféus").close();
+      };
+      reader.readAsDataURL(imagemTrofeu);
+    }
+  });
   // =========================================================================================================================== //
 });
