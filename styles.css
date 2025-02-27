@@ -415,54 +415,6 @@ button#closeModal:hover {
   }
 }
 
-#buttonPagina1 {
-  cursor: pointer;
-  padding: 10px;
-  background-color: #333;
-  border: none;
-  color: white;
-  border-radius: 12px;
-  font-size: 16px;
-}
-
-#buttonPagina1:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-.dark-mode #buttonPagina1 {
-  background-color: #1c1c1c;
-}
-
-.dark-mode #buttonPagina1:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-#buttonPagina2 {
-  cursor: pointer;
-  padding: 10px;
-  background-color: #333;
-  border: none;
-  color: white;
-  border-radius: 12px;
-  font-size: 16px;
-}
-
-#buttonPagina2:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-.dark-mode #buttonPagina2 {
-  background-color: #1c1c1c;
-}
-
-.dark-mode #buttonPagina2:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
 /* botão editar */
 .editarft {
   background-color: #ffffff;

@@ -1,12 +1,4 @@
 addEventListener("DOMContentLoaded", () => {
-  // Função para mostrar a página
-  function mostrarPagina(paginaId) {
-    const paginas = document.querySelectorAll(".pagina");
-    paginas.forEach((pagina) => {
-      pagina.classList.remove("ativa");
-    });
-    document.getElementById(paginaId).classList.add("ativa");
-  }
   // =========================================================================================================================== //
 
   // Função Adicionar Jogo
