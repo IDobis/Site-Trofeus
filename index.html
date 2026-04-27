@@ -102,8 +102,11 @@
           <input
             type="text"
             id="campoNomeNovoJogo"
+            maxlength="25"
+            required
             placeholder="Digite o nome do jogo"
           />
+          <p id="mensagemNomeNovoJogo" class="MensagemCampo" aria-live="polite"></p>
         </div>
 
         <div class="CampoFormulario">
@@ -112,7 +115,9 @@
             type="file"
             id="campoImagemNovoJogo"
             accept=".jpeg, .jpg, .png"
+            required
           />
+          <p id="mensagemImagemNovoJogo" class="MensagemCampo" aria-live="polite"></p>
         </div>
 
         <div class="AcoesModal">
@@ -140,8 +145,10 @@
           <input
             id="campoNomePerfil"
             type="text"
+            maxlength="20"
             placeholder="Digite o novo nome"
           />
+          <p id="mensagemNomePerfil" class="MensagemCampo" aria-live="polite"></p>
         </div>
 
         <div class="CampoFormulario">
@@ -202,8 +209,10 @@
           <input
             id="campoNomeEditarJogo"
             type="text"
+            maxlength="25"
             placeholder="Digite o novo nome do jogo"
           />
+          <p id="mensagemNomeEditarJogo" class="MensagemCampo" aria-live="polite"></p>
         </div>
 
         <div class="CampoFormulario">

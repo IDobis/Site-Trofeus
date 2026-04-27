@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const listaTrofeus = document.getElementById("listaTrofeus");
   const tituloJanelaTrofeus = document.getElementById("tituloJanelaTrofeus");
   const botaoLogin = document.getElementById("botaoLogin");
+  const mensagemNomeNovoJogo = document.getElementById("mensagemNomeNovoJogo");
+  const mensagemImagemNovoJogo = document.getElementById("mensagemImagemNovoJogo");
+  const mensagemNomePerfil = document.getElementById("mensagemNomePerfil");
+  const mensagemNomeEditarJogo = document.getElementById("mensagemNomeEditarJogo");
   const botaoMenuPerfil = document.getElementById("botaoMenuPerfil");
   const botaoAbrirEditarPerfilModal = document.getElementById(
     "botaoAbrirEditarPerfilModal"
@@ -73,7 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document
     .getElementById("botaoAbrirAdicionarJogo")
-    .addEventListener("click", () => abrirJanela(janelaAdicionarJogo));
+    .addEventListener("click", () => {
+      limparMensagemCampo(mensagemNomeNovoJogo);
+      limparMensagemCampo(mensagemImagemNovoJogo);
+      abrirJanela(janelaAdicionarJogo);
+    });
 
   document
     .getElementById("botaoAbrirAdicionarTrofeu")
@@ -110,14 +118,45 @@ document.addEventListener("DOMContentLoaded", () => {
   botaoAbrirEditarPerfilModal.addEventListener("click", abrirEditarPerfilPorAcoes);
   botaoAbrirEditarJogo.addEventListener("click", abrirEditarJogoPorAcoes);
   botaoRemoverJogoModal.addEventListener("click", removerJogoPorAcoes);
+  campoNomeNovoJogo.addEventListener("input", () =>
+    validarLimiteCaracteres(campoNomeNovoJogo, mensagemNomeNovoJogo, 25)
+  );
+  campoImagemNovoJogo.addEventListener("change", () =>
+    limparMensagemCampo(mensagemImagemNovoJogo)
+  );
+  campoNomePerfil.addEventListener("input", () =>
+    validarLimiteCaracteres(campoNomePerfil, mensagemNomePerfil, 20)
+  );
+  campoNomeEditarJogo.addEventListener("input", () =>
+    validarLimiteCaracteres(campoNomeEditarJogo, mensagemNomeEditarJogo, 25)
+  );
 
   formAdicionarJogo.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
-    const nome = campoNomeNovoJogo.value.trim();
+    const nome = campoNomeNovoJogo.value.trim().slice(0, 25);
     const arquivoImagem = campoImagemNovoJogo.files[0];
+    let formularioValido = true;
 
-    if (!nome || !arquivoImagem) {
+    if (!nome) {
+      definirMensagemCampo(
+        mensagemNomeNovoJogo,
+        "Informe o nome do jogo.",
+        true
+      );
+      formularioValido = false;
+    }
+
+    if (!arquivoImagem) {
+      definirMensagemCampo(
+        mensagemImagemNovoJogo,
+        "Selecione uma imagem para o jogo.",
+        true
+      );
+      formularioValido = false;
+    }
+
+    if (!formularioValido) {
       return;
     }
 
@@ -132,13 +171,15 @@ document.addEventListener("DOMContentLoaded", () => {
     salvarJogos();
     renderizarJogos();
     formAdicionarJogo.reset();
+    limparMensagemCampo(mensagemNomeNovoJogo);
+    limparMensagemCampo(mensagemImagemNovoJogo);
     fecharJanela(janelaAdicionarJogo);
   });
 
   formEditarPerfil.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
-    const novoNome = campoNomePerfil.value.trim();
+    const novoNome = campoNomePerfil.value.trim().slice(0, 20);
     const novaImagem = campoImagemPerfil.files[0];
 
     if (novoNome) {
@@ -163,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const jogo = jogos[indiceJogoSelecionado];
-    const novoNome = campoNomeEditarJogo.value.trim();
+    const novoNome = campoNomeEditarJogo.value.trim().slice(0, 25);
     const novaImagem = campoImagemEditarJogo.files[0];
 
     if (novoNome) {
@@ -348,6 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function abrirEditarPerfil() {
     campoNomePerfil.value = perfil.nome;
     campoImagemPerfil.value = "";
+    validarLimiteCaracteres(campoNomePerfil, mensagemNomePerfil, 20);
     abrirJanela(janelaEditarPerfil);
   }
 
@@ -368,6 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
     indiceJogoSelecionado = indiceJogo;
     campoNomeEditarJogo.value = jogos[indiceJogo].nome;
     campoImagemEditarJogo.value = "";
+    validarLimiteCaracteres(campoNomeEditarJogo, mensagemNomeEditarJogo, 25);
     abrirJanela(janelaEditarJogo);
   }
 
@@ -539,6 +582,32 @@ document.addEventListener("DOMContentLoaded", () => {
       leitor.onerror = () => reject(new Error("Falha ao ler o arquivo."));
       leitor.readAsDataURL(arquivo);
     });
+  }
+
+  function definirMensagemCampo(elementoMensagem, texto, erro = false) {
+    elementoMensagem.textContent = texto;
+    elementoMensagem.classList.toggle("ErroCampo", erro);
+  }
+
+  function limparMensagemCampo(elementoMensagem) {
+    definirMensagemCampo(elementoMensagem, "", false);
+  }
+
+  function validarLimiteCaracteres(campo, elementoMensagem, limite) {
+    if (campo.value.length >= limite) {
+      definirMensagemCampo(
+        elementoMensagem,
+        `Máximo de ${limite} caracteres atingido.`,
+        false
+      );
+      return;
+    }
+
+    if (elementoMensagem.classList.contains("ErroCampo")) {
+      limparMensagemCampo(elementoMensagem);
+    } else {
+      definirMensagemCampo(elementoMensagem, "", false);
+    }
   }
 
   function criarImagemPadrao(texto, corFundo, corTexto, largura, altura) {

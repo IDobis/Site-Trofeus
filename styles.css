@@ -429,6 +429,16 @@ textarea {
   font-weight: 700;
 }
 
+.MensagemCampo {
+  min-height: 18px;
+  font-size: 13px;
+  color: var(--corTextoSecundario);
+}
+
+.MensagemCampo.ErroCampo {
+  color: var(--corPerigo);
+}
+
 .AcoesModal {
   display: flex;
   justify-content: flex-end;
