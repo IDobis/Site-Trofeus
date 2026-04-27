@@ -67,6 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const mensagemImagemNovoJogo = document.getElementById("mensagemImagemNovoJogo");
   const mensagemNomePerfil = document.getElementById("mensagemNomePerfil");
   const mensagemNomeEditarJogo = document.getElementById("mensagemNomeEditarJogo");
+  const mensagemNomeTrofeu = document.getElementById("mensagemNomeTrofeu");
+  const mensagemImagemTrofeu = document.getElementById("mensagemImagemTrofeu");
+  const mensagemDescricaoTrofeu = document.getElementById("mensagemDescricaoTrofeu");
+  const mensagemNomeEditarTrofeu = document.getElementById("mensagemNomeEditarTrofeu");
+  const mensagemDescricaoEditarTrofeu = document.getElementById(
+    "mensagemDescricaoEditarTrofeu"
+  );
   const botaoMenuPerfil = document.getElementById("botaoMenuPerfil");
   const botaoAbrirEditarPerfilModal = document.getElementById(
     "botaoAbrirEditarPerfilModal"
@@ -150,6 +157,26 @@ document.addEventListener("DOMContentLoaded", () => {
   campoNomeEditarJogo.addEventListener("input", () =>
     validarLimiteCaracteres(campoNomeEditarJogo, mensagemNomeEditarJogo, 25)
   );
+  campoNomeTrofeu.addEventListener("input", () => {
+    campoNomeTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemNomeTrofeu);
+  });
+  campoImagemTrofeu.addEventListener("change", () => {
+    campoImagemTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemImagemTrofeu);
+  });
+  campoDescricaoTrofeu.addEventListener("input", () => {
+    campoDescricaoTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemDescricaoTrofeu);
+  });
+  campoNomeEditarTrofeu.addEventListener("input", () => {
+    campoNomeEditarTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemNomeEditarTrofeu);
+  });
+  campoDescricaoEditarTrofeu.addEventListener("input", () => {
+    campoDescricaoEditarTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemDescricaoEditarTrofeu);
+  });
 
   formAdicionarJogo.addEventListener("submit", async (evento) => {
     evento.preventDefault();
@@ -249,11 +276,49 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    campoNomeTrofeu.setCustomValidity("");
+    campoImagemTrofeu.setCustomValidity("");
+    campoDescricaoTrofeu.setCustomValidity("");
+
+    if (!formAdicionarTrofeu.checkValidity()) {
+      formAdicionarTrofeu.reportValidity();
+      return;
+    }
+
     const nome = campoNomeTrofeu.value.trim();
     const descricao = campoDescricaoTrofeu.value.trim();
     const arquivoImagem = campoImagemTrofeu.files[0];
 
-    if (!nome || !descricao || !arquivoImagem) {
+    if (!nome) {
+      definirMensagemCampo(
+        mensagemNomeTrofeu,
+        "Informe o nome do troféu.",
+        true
+      );
+      campoNomeTrofeu.setCustomValidity("Informe o nome do troféu.");
+      campoNomeTrofeu.reportValidity();
+      return;
+    }
+
+    if (!arquivoImagem) {
+      definirMensagemCampo(
+        mensagemImagemTrofeu,
+        "Selecione uma imagem para o troféu.",
+        true
+      );
+      campoImagemTrofeu.setCustomValidity("Selecione uma imagem para o troféu.");
+      campoImagemTrofeu.reportValidity();
+      return;
+    }
+
+    if (!descricao) {
+      definirMensagemCampo(
+        mensagemDescricaoTrofeu,
+        "Informe a descrição do troféu.",
+        true
+      );
+      campoDescricaoTrofeu.setCustomValidity("Informe a descrição do troféu.");
+      campoDescricaoTrofeu.reportValidity();
       return;
     }
 
@@ -270,6 +335,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarJogos();
     renderizarTrofeus();
     formAdicionarTrofeu.reset();
+    campoNomeTrofeu.setCustomValidity("");
+    campoImagemTrofeu.setCustomValidity("");
+    campoDescricaoTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemNomeTrofeu);
+    limparMensagemCampo(mensagemImagemTrofeu);
+    limparMensagemCampo(mensagemDescricaoTrofeu);
     fecharJanela(janelaAdicionarTrofeu);
   });
 
@@ -280,18 +351,45 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    campoNomeEditarTrofeu.setCustomValidity("");
+    campoDescricaoEditarTrofeu.setCustomValidity("");
+
+    if (!formEditarTrofeu.checkValidity()) {
+      formEditarTrofeu.reportValidity();
+      return;
+    }
+
     const trofeu = jogos[indiceJogoSelecionado].trofeus[indiceTrofeuSelecionado];
     const novoNome = campoNomeEditarTrofeu.value.trim();
     const novaDescricao = campoDescricaoEditarTrofeu.value.trim();
     const novaImagem = campoImagemEditarTrofeu.files[0];
 
-    if (novoNome) {
-      trofeu.nome = novoNome;
+    if (!novoNome) {
+      definirMensagemCampo(
+        mensagemNomeEditarTrofeu,
+        "Informe o nome do troféu.",
+        true
+      );
+      campoNomeEditarTrofeu.setCustomValidity("Informe o nome do troféu.");
+      campoNomeEditarTrofeu.reportValidity();
+      return;
     }
 
-    if (novaDescricao) {
-      trofeu.descricao = novaDescricao;
+    if (!novaDescricao) {
+      definirMensagemCampo(
+        mensagemDescricaoEditarTrofeu,
+        "Informe a descrição do troféu.",
+        true
+      );
+      campoDescricaoEditarTrofeu.setCustomValidity(
+        "Informe a descrição do troféu."
+      );
+      campoDescricaoEditarTrofeu.reportValidity();
+      return;
     }
+
+    trofeu.nome = novoNome;
+    trofeu.descricao = novaDescricao;
 
     if (novaImagem) {
       trofeu.imagem = await lerArquivoComoDataUrl(novaImagem);
@@ -301,6 +399,10 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarTrofeus();
     renderizarJogos();
     formEditarTrofeu.reset();
+    campoNomeEditarTrofeu.setCustomValidity("");
+    campoDescricaoEditarTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemNomeEditarTrofeu);
+    limparMensagemCampo(mensagemDescricaoEditarTrofeu);
     indiceTrofeuSelecionado = null;
     fecharJanela(janelaEditarTrofeu);
   });
@@ -519,6 +621,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     formAdicionarTrofeu.reset();
+    campoNomeTrofeu.setCustomValidity("");
+    campoImagemTrofeu.setCustomValidity("");
+    campoDescricaoTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemNomeTrofeu);
+    limparMensagemCampo(mensagemImagemTrofeu);
+    limparMensagemCampo(mensagemDescricaoTrofeu);
     abrirJanela(janelaAdicionarTrofeu);
   }
 
@@ -602,6 +710,10 @@ document.addEventListener("DOMContentLoaded", () => {
     campoNomeEditarTrofeu.value = trofeu.nome;
     campoDescricaoEditarTrofeu.value = trofeu.descricao;
     campoImagemEditarTrofeu.value = "";
+    campoNomeEditarTrofeu.setCustomValidity("");
+    campoDescricaoEditarTrofeu.setCustomValidity("");
+    limparMensagemCampo(mensagemNomeEditarTrofeu);
+    limparMensagemCampo(mensagemDescricaoEditarTrofeu);
     abrirJanela(janelaEditarTrofeu);
   }
 
