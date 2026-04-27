@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const janelaAdicionarJogo = document.getElementById("janelaAdicionarJogo");
   const janelaEditarPerfil = document.getElementById("janelaEditarPerfil");
   const janelaEditarJogo = document.getElementById("janelaEditarJogo");
+  const janelaAcoesJogo = document.getElementById("janelaAcoesJogo");
   const janelaTrofeus = document.getElementById("janelaTrofeus");
   const janelaAdicionarTrofeu = document.getElementById("janelaAdicionarTrofeu");
 
@@ -53,8 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const listaTrofeus = document.getElementById("listaTrofeus");
   const tituloJanelaTrofeus = document.getElementById("tituloJanelaTrofeus");
   const botaoLogin = document.getElementById("botaoLogin");
+  const botaoAbrirEditarJogo = document.getElementById("botaoAbrirEditarJogo");
+  const botaoRemoverJogoModal = document.getElementById("botaoRemoverJogoModal");
 
   let indiceJogoSelecionado = null;
+  let indiceJogoAcoes = null;
   let perfil = carregarPerfil();
   let jogos = carregarJogos();
 
@@ -88,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("botaoFecharEditarJogo")
     .addEventListener("click", () => fecharJanela(janelaEditarJogo));
   document
+    .getElementById("botaoFecharAcoesJogo")
+    .addEventListener("click", fecharAcoesJogo);
+  document
     .getElementById("botaoFecharTrofeus")
     .addEventListener("click", () => fecharJanela(janelaTrofeus));
   document
@@ -95,6 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", () => fecharJanela(janelaAdicionarTrofeu));
 
   botaoTema.addEventListener("click", alternarModoEscuro);
+  botaoAbrirEditarJogo.addEventListener("click", abrirEditarJogoPorAcoes);
+  botaoRemoverJogoModal.addEventListener("click", removerJogoPorAcoes);
 
   formAdicionarJogo.addEventListener("submit", async (evento) => {
     evento.preventDefault();
@@ -297,10 +306,13 @@ document.addEventListener("DOMContentLoaded", () => {
       cartaoJogo.className = "CartaoJogo";
 
       cartaoJogo.innerHTML = `
-        <div class="AcoesJogo">
-          <button class="BotaoEditarJogo" type="button">Editar</button>
-          <button class="BotaoRemoverJogo" type="button">Remover</button>
-        </div>
+        <button
+          class="BotaoMenuJogo"
+          type="button"
+          aria-label="Abrir ações do jogo ${jogo.nome}"
+        >
+          <i class="bi bi-three-dots"></i>
+        </button>
         <img class="ImagemJogo" src="${jogo.imagem}" alt="Capa do jogo ${jogo.nome}" />
         <div class="InfoJogo">
           <h2 class="NomeJogo">${jogo.nome}</h2>
@@ -317,12 +329,10 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      const botaoEditarJogo = cartaoJogo.querySelector(".BotaoEditarJogo");
-      const botaoRemoverJogo = cartaoJogo.querySelector(".BotaoRemoverJogo");
+      const botaoMenuJogo = cartaoJogo.querySelector(".BotaoMenuJogo");
       const botaoTrofeus = cartaoJogo.querySelector(".BotaoTrofeus");
 
-      botaoEditarJogo.addEventListener("click", () => abrirEditarJogo(indiceJogo));
-      botaoRemoverJogo.addEventListener("click", () => removerJogo(indiceJogo));
+      botaoMenuJogo.addEventListener("click", () => abrirAcoesJogo(indiceJogo));
       botaoTrofeus.addEventListener("click", () => abrirTrofeus(indiceJogo));
 
       listaJogos.appendChild(cartaoJogo);
@@ -340,6 +350,36 @@ document.addEventListener("DOMContentLoaded", () => {
     campoNomeEditarJogo.value = jogos[indiceJogo].nome;
     campoImagemEditarJogo.value = "";
     abrirJanela(janelaEditarJogo);
+  }
+
+  function abrirAcoesJogo(indiceJogo) {
+    indiceJogoAcoes = indiceJogo;
+    abrirJanela(janelaAcoesJogo);
+  }
+
+  function fecharAcoesJogo() {
+    indiceJogoAcoes = null;
+    fecharJanela(janelaAcoesJogo);
+  }
+
+  function abrirEditarJogoPorAcoes() {
+    if (indiceJogoAcoes === null) {
+      return;
+    }
+
+    const indiceJogo = indiceJogoAcoes;
+    fecharAcoesJogo();
+    abrirEditarJogo(indiceJogo);
+  }
+
+  function removerJogoPorAcoes() {
+    if (indiceJogoAcoes === null) {
+      return;
+    }
+
+    const indiceJogo = indiceJogoAcoes;
+    fecharAcoesJogo();
+    removerJogo(indiceJogo);
   }
 
   function abrirTrofeus(indiceJogo) {
@@ -418,6 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
     jogos.splice(indiceJogo, 1);
     salvarJogos();
     renderizarJogos();
+    indiceJogoAcoes = null;
 
     if (indiceJogoSelecionado === indiceJogo) {
       indiceJogoSelecionado = null;

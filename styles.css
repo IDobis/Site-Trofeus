@@ -149,10 +149,10 @@ textarea {
 .BotaoTema,
 .BotaoSecundario,
 .BotaoAcao,
-.BotaoEditarJogo,
-.BotaoRemoverJogo,
+.BotaoAcaoJogoModal,
 .BotaoTrofeus,
-.BotaoRemoverTrofeu {
+.BotaoRemoverTrofeu,
+.BotaoRemoverJogoModal {
   border: 1px solid var(--corBorda);
   border-radius: var(--bordaRaioMedia);
 }
@@ -175,8 +175,7 @@ textarea {
 .BotaoTema,
 .BotaoSecundario,
 .BotaoAcao,
-.BotaoEditarJogo,
-.BotaoRemoverJogo,
+.BotaoAcaoJogoModal,
 .BotaoRemoverTrofeu {
   padding: 12px 18px;
   background-color: var(--corSuperficie);
@@ -187,8 +186,7 @@ textarea {
 .BotaoSecundario:hover,
 .BotaoTema:hover,
 .BotaoAcao:hover,
-.BotaoEditarJogo:hover,
-.BotaoRemoverJogo:hover,
+.BotaoAcaoJogoModal:hover,
 .BotaoRemoverTrofeu:hover {
   background-color: var(--corSuperficieSecundaria);
 }
@@ -204,13 +202,13 @@ textarea {
   border-color: var(--corDestaqueHover);
 }
 
-.BotaoRemoverJogo,
-.BotaoRemoverTrofeu {
+.BotaoRemoverTrofeu,
+.BotaoRemoverJogoModal {
   color: var(--corPerigo);
 }
 
-.BotaoRemoverJogo:hover,
-.BotaoRemoverTrofeu:hover {
+.BotaoRemoverTrofeu:hover,
+.BotaoRemoverJogoModal:hover {
   background-color: color-mix(in srgb, var(--corPerigo) 10%, transparent);
 }
 
@@ -277,25 +275,30 @@ textarea {
 }
 
 .CartaoJogo {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 18px;
   background-color: var(--corSuperficie);
   border: 1px solid var(--corBorda);
   border-radius: var(--bordaRaioMedia);
-  padding: 18px;
+  padding: 18px 18px 18px 18px;
 }
 
-.AcoesJogo {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-self: stretch;
+.BotaoMenuJogo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  color: var(--corTextoSecundario);
+  border: 0;
+  padding: 4px;
+  line-height: 1;
+  font-size: 20px;
 }
 
-.BotaoEditarJogo {
-  align-self: flex-start;
-  white-space: nowrap;
+.BotaoMenuJogo:hover {
+  color: var(--corTextoPrimario);
 }
 
 .ImagemJogo {
@@ -391,6 +394,10 @@ textarea {
   width: min(92vw, 720px);
 }
 
+.JanelaAcoesJogo {
+  width: min(92vw, 320px);
+}
+
 .FormularioModal {
   display: flex;
   flex-direction: column;
@@ -435,6 +442,16 @@ textarea {
 .AcoesModal {
   display: flex;
   justify-content: flex-end;
+}
+
+.AcoesJogoModal {
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.BotaoAcaoJogoModal {
+  padding: 8px 12px;
+  font-size: 14px;
 }
 
 .BotaoConfirmar {
@@ -593,8 +610,7 @@ textarea {
   }
 
   .BotaoEditarPerfil,
-  .BotaoEditarJogo,
-  .BotaoRemoverJogo {
+  .BotaoAcaoJogoModal {
     align-self: stretch;
     justify-content: center;
   }

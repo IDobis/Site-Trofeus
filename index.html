@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
     <link
       rel="stylesheet"
@@ -192,6 +192,31 @@
         <div class="AcoesModal">
           <button id="botaoSalvarJogo" class="BotaoConfirmar" type="submit">
             Salvar alterações
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="janelaAcoesJogo" class="JanelaModal JanelaAcoesJogo">
+      <form method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Ações do jogo</h2>
+          <button
+            id="botaoFecharAcoesJogo"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de ações do jogo"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <div class="AcoesModal AcoesJogoModal">
+          <button id="botaoAbrirEditarJogo" class="BotaoAcaoJogoModal" type="button">
+            Editar
+          </button>
+          <button id="botaoRemoverJogoModal" class="BotaoAcaoJogoModal BotaoRemoverJogoModal" type="button">
+            Remover
           </button>
         </div>
       </form>
