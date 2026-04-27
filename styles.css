@@ -226,6 +226,7 @@ textarea {
 }
 
 .CabecalhoPerfil {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -253,21 +254,6 @@ textarea {
   line-height: var(--lineHeightTitulo);
 }
 
-.BotaoEditarPerfil {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--corSuperficie);
-  color: var(--corTextoPrimario);
-  padding: 10px 14px;
-  border: 1px solid var(--corBorda);
-  border-radius: var(--bordaRaioMedia);
-}
-
-.BotaoEditarPerfil:hover {
-  background-color: var(--corSuperficieSecundaria);
-}
-
 .ListaJogos {
   display: flex;
   flex-direction: column;
@@ -285,7 +271,7 @@ textarea {
   padding: 18px 18px 18px 18px;
 }
 
-.BotaoMenuJogo {
+.BotaoMenuCard {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -297,7 +283,7 @@ textarea {
   font-size: 20px;
 }
 
-.BotaoMenuJogo:hover {
+.BotaoMenuCard:hover {
   color: var(--corTextoPrimario);
 }
 
@@ -398,6 +384,10 @@ textarea {
   width: min(92vw, 320px);
 }
 
+.JanelaAcoesPerfil {
+  width: min(92vw, 320px);
+}
+
 .FormularioModal {
   display: flex;
   flex-direction: column;
@@ -447,6 +437,10 @@ textarea {
 .AcoesJogoModal {
   justify-content: flex-end;
   gap: 10px;
+}
+
+.AcoesPerfilModal {
+  justify-content: flex-end;
 }
 
 .BotaoAcaoJogoModal {
@@ -609,7 +603,6 @@ textarea {
     align-items: flex-start;
   }
 
-  .BotaoEditarPerfil,
   .BotaoAcaoJogoModal {
     align-self: stretch;
     justify-content: center;

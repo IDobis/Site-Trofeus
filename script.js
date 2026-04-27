@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const janelaAdicionarJogo = document.getElementById("janelaAdicionarJogo");
   const janelaEditarPerfil = document.getElementById("janelaEditarPerfil");
+  const janelaAcoesPerfil = document.getElementById("janelaAcoesPerfil");
   const janelaEditarJogo = document.getElementById("janelaEditarJogo");
   const janelaAcoesJogo = document.getElementById("janelaAcoesJogo");
   const janelaTrofeus = document.getElementById("janelaTrofeus");
@@ -54,6 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const listaTrofeus = document.getElementById("listaTrofeus");
   const tituloJanelaTrofeus = document.getElementById("tituloJanelaTrofeus");
   const botaoLogin = document.getElementById("botaoLogin");
+  const botaoMenuPerfil = document.getElementById("botaoMenuPerfil");
+  const botaoAbrirEditarPerfilModal = document.getElementById(
+    "botaoAbrirEditarPerfilModal"
+  );
   const botaoAbrirEditarJogo = document.getElementById("botaoAbrirEditarJogo");
   const botaoRemoverJogoModal = document.getElementById("botaoRemoverJogoModal");
 
@@ -71,10 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", () => abrirJanela(janelaAdicionarJogo));
 
   document
-    .getElementById("botaoEditarPerfil")
-    .addEventListener("click", abrirEditarPerfil);
-
-  document
     .getElementById("botaoAbrirAdicionarTrofeu")
     .addEventListener("click", abrirAdicionarTrofeu);
 
@@ -89,6 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("botaoFecharEditarPerfil")
     .addEventListener("click", () => fecharJanela(janelaEditarPerfil));
   document
+    .getElementById("botaoFecharAcoesPerfil")
+    .addEventListener("click", fecharAcoesPerfil);
+  document
     .getElementById("botaoFecharEditarJogo")
     .addEventListener("click", () => fecharJanela(janelaEditarJogo));
   document
@@ -102,6 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", () => fecharJanela(janelaAdicionarTrofeu));
 
   botaoTema.addEventListener("click", alternarModoEscuro);
+  botaoMenuPerfil.addEventListener("click", abrirAcoesPerfil);
+  botaoAbrirEditarPerfilModal.addEventListener("click", abrirEditarPerfilPorAcoes);
   botaoAbrirEditarJogo.addEventListener("click", abrirEditarJogoPorAcoes);
   botaoRemoverJogoModal.addEventListener("click", removerJogoPorAcoes);
 
@@ -307,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cartaoJogo.innerHTML = `
         <button
-          class="BotaoMenuJogo"
+          class="BotaoMenuCard"
           type="button"
           aria-label="Abrir ações do jogo ${jogo.nome}"
         >
@@ -329,7 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      const botaoMenuJogo = cartaoJogo.querySelector(".BotaoMenuJogo");
+      const botaoMenuJogo = cartaoJogo.querySelector(".BotaoMenuCard");
       const botaoTrofeus = cartaoJogo.querySelector(".BotaoTrofeus");
 
       botaoMenuJogo.addEventListener("click", () => abrirAcoesJogo(indiceJogo));
@@ -343,6 +349,19 @@ document.addEventListener("DOMContentLoaded", () => {
     campoNomePerfil.value = perfil.nome;
     campoImagemPerfil.value = "";
     abrirJanela(janelaEditarPerfil);
+  }
+
+  function abrirAcoesPerfil() {
+    abrirJanela(janelaAcoesPerfil);
+  }
+
+  function fecharAcoesPerfil() {
+    fecharJanela(janelaAcoesPerfil);
+  }
+
+  function abrirEditarPerfilPorAcoes() {
+    fecharAcoesPerfil();
+    abrirEditarPerfil();
   }
 
   function abrirEditarJogo(indiceJogo) {

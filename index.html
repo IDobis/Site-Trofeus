@@ -51,6 +51,14 @@
     <main class="ConteudoPrincipal">
       <section class="Perfil" aria-label="Perfil">
         <div class="CabecalhoPerfil">
+          <button
+            id="botaoMenuPerfil"
+            class="BotaoMenuCard"
+            type="button"
+            aria-label="Abrir ações do perfil"
+          >
+            <i class="bi bi-three-dots"></i>
+          </button>
           <img
             id="imagemPerfil"
             src=""
@@ -60,10 +68,6 @@
           <div class="InfoPerfil">
             <h1 id="nomePerfil" class="NomePerfil">Dobis</h1>
           </div>
-          <button id="botaoEditarPerfil" class="BotaoEditarPerfil" type="button">
-            <i class="bi bi-person-fill"></i>
-            Editar
-          </button>
         </div>
       </section>
 
@@ -152,6 +156,28 @@
         <div class="AcoesModal">
           <button id="botaoSalvarPerfil" class="BotaoConfirmar" type="submit">
             Salvar alterações
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="janelaAcoesPerfil" class="JanelaModal JanelaAcoesPerfil">
+      <form method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Ações do perfil</h2>
+          <button
+            id="botaoFecharAcoesPerfil"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de ações do perfil"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <div class="AcoesModal AcoesPerfilModal">
+          <button id="botaoAbrirEditarPerfilModal" class="BotaoAcaoJogoModal" type="button">
+            Editar
           </button>
         </div>
       </form>
