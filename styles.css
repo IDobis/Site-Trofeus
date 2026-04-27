@@ -1,4 +1,52 @@
-@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Muli:wght@400;600;700&display=swap");
+
+:root {
+  --corFundoPrincipal: #f6f8fa;
+  --corSuperficie: #ffffff;
+  --corSuperficieSecundaria: #f0f2f5;
+  --corTextoPrimario: #1f2328;
+  --corTextoSecundario: #57606a;
+  --corBorda: #d0d7de;
+  --corBordaSuave: rgba(31, 35, 40, 0.08);
+  --corDestaque: #0969da;
+  --corDestaqueHover: #0858b8;
+  --corPerigo: #cf222e;
+  --corPerigoHover: #a40e26;
+  --corSobreDestaque: #ffffff;
+  --corSobreSuperficieEscura: #f6f8fa;
+  --corEntrada: #ffffff;
+  --corNavbar: rgba(246, 248, 250, 0.8);
+  --corRodape: #f0f2f5;
+  --corMarcacao: #0969da;
+  --lineHeightTexto: 1.55;
+  --lineHeightTitulo: 1.25;
+  --bordaRaioMedia: 8px;
+  --bordaRaioPequena: 6px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.modoEscuro {
+  --corFundoPrincipal: #0d1117;
+  --corSuperficie: #161b22;
+  --corSuperficieSecundaria: #0f141b;
+  --corTextoPrimario: #e6edf3;
+  --corTextoSecundario: #9aa4af;
+  --corBorda: #30363d;
+  --corBordaSuave: rgba(230, 237, 243, 0.08);
+  --corDestaque: #58a6ff;
+  --corDestaqueHover: #79b8ff;
+  --corPerigo: #ff7b72;
+  --corPerigoHover: #ff938c;
+  --corSobreDestaque: #0d1117;
+  --corSobreSuperficieEscura: #e6edf3;
+  --corEntrada: #0d1117;
+  --corNavbar: rgba(13, 17, 23, 0.78);
+  --corRodape: #11161d;
+  --corMarcacao: #58a6ff;
+}
 
 * {
   margin: 0;
@@ -8,860 +56,575 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #fafafa;
+  font-family: "Muli", Arial, Helvetica, sans-serif;
+  background-color: var(--corFundoPrincipal);
+  color: var(--corTextoPrimario);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: 100vh;
-
-  margin: 0;
+  line-height: var(--lineHeightTexto);
   transition: background-color 0.3s linear, color 0.3s linear;
 }
 
-html.dark-mode {
-  background-color: #121212;
-  color: #e0e0e0;
+button,
+input,
+textarea {
+  font: inherit;
 }
 
-.dark-mode body {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-input {
-  background-color: black; /* Fundo do input preto */
-  color: white; /* Cor do texto no input */
-  border: 0px;
-  padding: 10px; /* Espaçamento interno */
-  font-size: 16px; /* Tamanho da fonte */
-  border-radius: 4px; /* Bordas arredondadas */
-}
-
-input::placeholder {
-  color: #888; /* Cor do placeholder */
-}
-
-header.navbar {
-  display: flex;
-  height: 65px;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-#DentroNavbar {
-  display: flex;
-  width: 1000px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-#Itens-Dentro-Navbar {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-#Esquerda {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-#BotãoTema {
-  display: flex;
-  justify-content: flex-end;
-}
-
-#Botao-Inicio {
-  display: flex;
-  padding: 10px 20px;
-  width: 30px;
-  height: 30px;
-  border-radius: 12px;
-  font-size: 16px;
-
-  justify-content: center; /* Center text horizontally */
-  align-items: center; /* Center text vertically */
-  transition: background-color 0.3s; /* Smooth hover effect */
-
-  background-color: #333;
-  color: white;
-}
-
-.dark-mode #Botao-Inicio {
-  display: flex;
-  padding: 10px 20px;
-  width: 30px;
-  height: 30px;
-  border-radius: 12px;
-  font-size: 16px;
-
-  justify-content: center; /* Center text horizontally */
-  align-items: center; /* Center text vertically */
-  transition: background-color 0.3s; /* Smooth hover effect */
-
-  background-color: #1c1c1c;
-}
-
-.dark-mode #Botao-Inicio:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-#Botao-Casa {
-  color: #00ff88;
-}
-
-/* Botão enquanto está no modo Claro */
-.toggle-button {
-  cursor: pointer;
-  padding: 10px;
-  background-color: #333;
-  border: none;
-  color: white;
-  border-radius: 12px;
-  font-size: 16px;
-}
-
-/* Cursor sobre o botão no modo Claro */
-.toggle-button:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-.dark-mode {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-/* Enquanto está escuro, a barra total */
-.dark-mode header.navbar {
-  background-color: #1c1c1c;
-}
-
-/* Enquanto está escuro, o botão */
-.dark-mode .toggle-button {
-  background-color: #1c1c1c;
-}
-
-/* Enquanto está escuro, cursor sobre o botão */
-.dark-mode .toggle-button:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-main.container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-}
-
-.profile-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-  width: 100%;
-}
-
-.profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
-  margin-top: 20px;
-}
-
-.profile-info {
-  text-align: left;
-  margin-top: 20px;
-}
-
-.name {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.games-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-}
-
-.game-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-}
-
-.game-img {
-  width: 160px;
-  height: 100px;
-  border-radius: 5px;
-}
-
-.game-info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
-}
-
-.game-name {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.trophies-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.trophies-link {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-}
-
-.trophies-link:hover {
-  text-decoration: underline;
-}
-
-.progress-bar {
-  background-color: #ddd;
-  border-radius: 2px;
-  height: 10px;
-  position: relative;
-  width: 100px;
-}
-
-.progress {
-  background-color: #4caf50;
-  height: 100%;
-  border-radius: 2px;
-}
-
-.progress-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-  color: #333;
-  white-space: nowrap;
-}
-
-.dark-mode .progress-text {
-  color: #e0e0e0;
-}
-
-.dark-mode .trophies-link {
-  color: rgb(2, 255, 255);
-  text-decoration: none;
-}
-
-/* Estilo para o footer estilo minha navbar */
-footer.footer {
-  margin-top: auto;
-  width: 100%;
-  text-align: center;
-  padding: 20px;
-  background-color: #1c1c1c;
-  color: white;
-  border-radius: 12px;
-}
-
-.scroll-to-top {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #1c1c1c;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.scroll-to-top:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-/* Botão de Adicionar jogo */
-.addbtn {
-  cursor: pointer;
-  padding: 10px;
-  background-color: #00ff88;
-  border: none;
-  color: rgb(0, 0, 0);
-  border-radius: 5px;
-  font-size: 16px;
-  margin-top: 16px;
-  margin-bottom: 0px;
-}
-
-/* Estilos para o botão no modo escuro */
-.dark-mode .addbtn {
-  background-color: #00ff88;
-}
-
-/* Estilo para o botão em cima */
-.addbtn:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-
-/* Estilo para o botão em cima no modo escuro */
-.dark-mode .addbtn:hover {
-  background-color: #575757;
-  transition: background-color 0.8s linear, color 0.8s linear;
-}
-/* PopUp */
-dialog {
-  position: fixed;
-  transform: translate(-50%, -50%);
-  padding: 40px;
-  width: 90%;
-  max-width: 500px;
-  font-size: 16px;
-  background-color: #1c1c1c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  opacity: 0; /* Começa invisível */
-  transform: scale(0.8); /* Começa reduzido */
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  display: none; /* Esconde o dialog inicialmente */
-  text-align: center; /* Centraliza o texto dentro do dialog */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra opcional */
-}
-
-dialog[open] {
-  opacity: 1; /* Totalmente visível quando aberto */
-  transform: scale(1); /* Escala para o tamanho original */
-  display: block; /* Mostra o dialog quando aberto */
-}
-
-/* Botão */
 button {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding: 15px 30px;
-  font-size: 16px;
-  background-color: #1c1c1c;
-  color: white;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.5s linear;
+  transition: background-color 0.25s ease, color 0.25s ease,
+    transform 0.25s ease;
 }
 
 button:hover {
-  background-color: #6b6a6d; /* Tom mais escuro ao passar o mouse */
+  transform: translateY(-1px);
 }
 
-.form-element {
-  margin-bottom: 20px; /* Espaço entre os campos */
-}
-
-input[type="text"],
-input[type="file"] {
-  color: #fafafa; /* Cor do Texto */
-  background-color: #424242;
+input,
+textarea {
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  transition: border 0.3s;
+  background-color: var(--corEntrada);
+  color: var(--corTextoPrimario);
+  padding: 12px 14px;
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
 }
 
-input[type="text"]:focus,
-input[type="file"]:focus {
-  border: 1px solid #00ff88; /* Cor de foco */
+input::placeholder,
+textarea::placeholder {
+  color: var(--corTextoSecundario);
 }
 
-button#closeModal {
-  background-color: #f44336; /* Cor do botão fechar */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  margin-top: 10px;
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--corDestaque);
 }
 
-button#closeModal:hover {
-  background-color: #d32f2f; /* Tom mais escuro ao passar o mouse */
+textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
-/* Ajustes responsivos */
-@media (max-width: 800px) {
-  dialog {
-    width: 95%; /* Ajusta a largura para telas menores */
-  }
+.BarraNavegacao {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: var(--corNavbar);
+  color: var(--corTextoPrimario);
+  border-bottom: 1px solid var(--corBordaSuave);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background-color 0.3s linear, border-color 0.3s linear;
 }
 
-/* botão editar */
-.editarft {
-  background-color: #ffffff;
-  color: #121212;
-  padding: 5px 10px;
-  font-size: 12px;
-  width: auto;
-  border-radius: 12px;
-  transition: background-color 0.3s linear;
+.ConteudoBarraNavegacao {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px 20px;
 }
 
-.editarft:hover {
-  background-color: #c4c4c4;
-}
-
-.dark-mode .editarft {
-  background-color: #121212;
-  color: #ffffff;
-  padding: 5px 10px;
-  font-size: 12px;
-  width: auto;
-  border-radius: 12px;
-  transition: background-color 0.3s linear;
-}
-
-.dark-mode .editarft:hover {
-  background-color: #414040;
-}
-
-/* Modal editar */
-
-#Janela-Editar {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  border-radius: 12px;
-
-  background-color: #545355;
-  color: rgb(177, 119, 231);
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
-}
-
-#Janela-Editar::backdrop {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.dark-mode #Janela-Editar {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  border-radius: 12px;
-
-  background-color: #545355;
-  color: rgb(177, 119, 231);
-  box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
-}
-
-/* imagem editare perfil */
-#imagem-editar-div {
-  margin: 10px 0; /* Espaçamento vertical */
-}
-
-#imagem-editar-label {
-  display: flex; /* Alinha itens em linha */
-  align-items: center; /* Centraliza verticalmente */
-}
-
-#imagem-editar-campo {
-  margin-left: 10px; /* Espaço entre ícone e input*/
-  flex: 1; /* Faz o input ocupar o espaço restante */
-}
-
-/* Nome editar perfil */
-#nome-editar-div {
-  margin: 10px 0; /* Espaçamento vertical */
-}
-
-#nome-editar-label {
-  display: flex; /* Alinha itens em linha */
-  align-items: center; /* Centraliza verticalmente */
-}
-#nome-editar-campo {
-  margin-left: 10px; /* Espaço entre ícone e input */
-  flex: 1; /* Faz o input ocupar o espaço restante */
-}
-
-/* Botões Dentro do PopUp */
-#botão-salvar-editar-perfil {
-  background-color: #00ff88;
-  color: #121212;
-}
-
-#Fechar {
+.GrupoBarraNavegacao {
   display: flex;
-  justify-content: flex-end;
-  margin-left: auto;
-
-  transform: scale(1.5);
-
-  background: none;
-  padding: 0px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-#Fechar:hover {
-  color: rgb(255, 0, 0);
-}
-
-#botaofecharicone {
-  margin-top: -30px;
-  margin-right: -20px;
-}
-#EditarNomeCima {
+.GrupoAcoesEsquerda,
+.GrupoAcoesDireita {
   display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.LinkInicio {
+  text-decoration: none;
+}
+
+#botaoInicio,
+.BotaoTema,
+.BotaoSecundario,
+.BotaoAcao,
+.BotaoEditarJogo,
+.BotaoRemoverJogo,
+.BotaoTrofeus,
+.BotaoRemoverTrofeu {
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
+}
+
+#botaoInicio {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
+  font-size: 18px;
+  background-color: var(--corSuperficie);
+  color: var(--corTextoPrimario);
 }
 
-/* Botão Editar Jogo */
-#BotaoEditarJogo {
-  margin-left: 10px;
-  padding: 5px 10px;
-  background-color: #1c1c1c;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
+#botaoInicio i {
+  color: var(--corDestaque);
 }
 
-#BotaoEditarJogo:hover {
-  background-color: #575757;
+.BotaoTema,
+.BotaoSecundario,
+.BotaoAcao,
+.BotaoEditarJogo,
+.BotaoRemoverJogo,
+.BotaoRemoverTrofeu {
+  padding: 12px 18px;
+  background-color: var(--corSuperficie);
+  color: var(--corTextoPrimario);
 }
 
-/* Modal editar jogo */
-
-#Janela-Editar-Jogo {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  border-radius: 12px;
-
-  background-color: #545355;
-  color: rgb(177, 119, 231);
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
+#botaoInicio:hover,
+.BotaoSecundario:hover,
+.BotaoTema:hover,
+.BotaoAcao:hover,
+.BotaoEditarJogo:hover,
+.BotaoRemoverJogo:hover,
+.BotaoRemoverTrofeu:hover {
+  background-color: var(--corSuperficieSecundaria);
 }
 
-#Janela-Editar-Jogo::backdrop {
-  background-color: rgba(0, 0, 0, 0.3);
+.BotaoAcao {
+  background-color: var(--corDestaque);
+  color: var(--corSobreDestaque);
+  border-color: var(--corDestaque);
 }
 
-.dark-mode #Janela-Editar-Jogo {
-  background-color: #545355;
-  color: rgb(177, 119, 231);
-  box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
+.BotaoAcao:hover {
+  background-color: var(--corDestaqueHover);
+  border-color: var(--corDestaqueHover);
 }
 
-/* imagem editar jogo */
-#imagem-editar-jogo-div {
-  margin: 10px 0;
+.BotaoRemoverJogo,
+.BotaoRemoverTrofeu {
+  color: var(--corPerigo);
 }
 
-#imagem-editar-jogo-label {
-  display: flex;
-  align-items: center;
+.BotaoRemoverJogo:hover,
+.BotaoRemoverTrofeu:hover {
+  background-color: color-mix(in srgb, var(--corPerigo) 10%, transparent);
 }
 
-#imagem-editar-jogo-campo {
-  margin-left: 10px;
-  flex: 1;
-}
-
-/* Nome editar jogo */
-#nome-editar-jogo-div {
-  margin: 10px 0;
-}
-
-#nome-editar-jogo-label {
-  display: flex;
-  align-items: center;
-}
-
-#nome-editar-jogo-campo {
-  margin-left: 10px;
-  flex: 1;
-}
-
-/* Botões Dentro do PopUp */
-#botão-salvar-editar-jogo {
-  background-color: #00ff88;
-  color: #121212;
-}
-
-#Fechar-Jogo {
-  display: flex;
-  justify-content: flex-end;
-  margin-left: auto;
-
-  transform: scale(1.5);
-
-  background: none;
-  padding: 0px;
-}
-
-#Fechar-Jogo:hover {
-  color: rgb(255, 0, 0);
-}
-
-#botaofecharicone-jogo {
-  margin-top: -30px;
-  margin-right: -20px;
-}
-
-#EditarNomeCima-Jogo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-/* Modal Troféus */
-#ModalTroféus {
-  position: fixed;
-  top: 48%;
-  left: 21%;
-  transform: translate(-50%, -50%);
-
-  width: 500px;
-  height: 600px;
-
-  border-radius: 12px;
-
-  background-color: #1c1c1c;
-  color: rgb(2, 255, 255);
-  box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
-}
-
-#NomePrincipalModalTrofeus {
-  margin-top: -50px;
-  margin-bottom: 20px;
-}
-
-/* Aqui É o Molde do que o JS deverá Fazer */
-
-#divTrofeus {
-  display: flex;
-  align-items: center;
-}
-
-#ImagemTrofeu {
-  padding-bottom: 12px;
-  width: 100px;
-  height: 100px;
-  margin-right: 10px;
-}
-
-#TextoTrofeu {
+.ConteudoPrincipal {
+  width: min(1080px, calc(100% - 32px));
+  margin: 32px auto 24px;
   display: flex;
   flex-direction: column;
+  gap: 28px;
 }
 
-#NomeTrofeu {
-  margin-bottom: -5px;
-  color: #c4c4c4;
+.Perfil,
+.SecaoJogos {
+  width: 100%;
 }
 
-#DescricaoTrofeu {
-  margin-top: 10px;
-  color: #888;
-}
-
-#BotaoCheck {
+.CabecalhoPerfil {
   display: flex;
-  margin-left: auto;
-  justify-self: end;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--corSuperficie);
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
+  padding: 24px;
 }
 
-.checkbox-wrapper-37 input[type="checkbox"] {
+.ImagemPerfil {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--corSuperficieSecundaria);
+}
+
+.InfoPerfil {
+  flex: 1;
+}
+
+.NomePerfil {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: var(--lineHeightTitulo);
+}
+
+.BotaoEditarPerfil {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--corSuperficie);
+  color: var(--corTextoPrimario);
+  padding: 10px 14px;
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
+}
+
+.BotaoEditarPerfil:hover {
+  background-color: var(--corSuperficieSecundaria);
+}
+
+.ListaJogos {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.CartaoJogo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background-color: var(--corSuperficie);
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
+  padding: 18px;
+}
+
+.AcoesJogo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.BotaoEditarJogo {
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.ImagemJogo {
+  width: 160px;
+  height: 100px;
+  border-radius: var(--bordaRaioMedia);
+  object-fit: cover;
+  background-color: var(--corSuperficieSecundaria);
+}
+
+.InfoJogo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.NomeJogo {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: var(--lineHeightTitulo);
+}
+
+.AreaTrofeusJogo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.BotaoTrofeus {
+  background: none;
+  color: var(--corDestaque);
+  padding: 0;
+  font-weight: 700;
+  border: 0;
+}
+
+.BarraProgresso {
+  position: relative;
+  width: 180px;
+  height: 12px;
+  border-radius: 999px;
+  background-color: var(--corSuperficieSecundaria);
+  overflow: hidden;
+  border: 1px solid var(--corBorda);
+}
+
+.PreenchimentoProgresso {
+  height: 100%;
+  width: 0%;
+  background-color: var(--corDestaque);
+  border-radius: inherit;
+  transition: width 0.25s ease;
+}
+
+.TextoProgresso {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--corTextoPrimario);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.AreaBotaoAdicionar {
+  width: min(1080px, calc(100% - 32px));
+  margin: 0 auto 32px;
+}
+
+.BotaoAcao {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.JanelaModal {
+  width: min(92vw, 520px);
+  margin: auto;
+  padding: 0;
+  background-color: var(--corSuperficie);
+  color: var(--corTextoPrimario);
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
+}
+
+.JanelaModal::backdrop {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.JanelaTrofeus {
+  width: min(92vw, 720px);
+}
+
+.FormularioModal {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+}
+
+.TopoModal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.TopoModal h2 {
+  color: var(--corTextoPrimario);
+  line-height: var(--lineHeightTitulo);
+}
+
+.BotaoFechar {
+  background: none;
+  color: var(--corTextoPrimario);
+  padding: 0;
+  font-size: 28px;
+}
+
+.BotaoFechar:hover {
+  color: var(--corPerigo);
+}
+
+.CampoFormulario {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.CampoFormulario label {
+  font-weight: 700;
+}
+
+.AcoesModal {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.BotaoConfirmar {
+  background-color: var(--corDestaque);
+  color: var(--corSobreDestaque);
+  padding: 12px 18px;
+  border-radius: var(--bordaRaioMedia);
+  font-weight: 700;
+  border: 1px solid var(--corDestaque);
+}
+
+.BotaoConfirmar:hover {
+  background-color: var(--corDestaqueHover);
+  border-color: var(--corDestaqueHover);
+}
+
+.ListaTrofeus {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.CartaoTrofeu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: var(--bordaRaioMedia);
+  background-color: var(--corSuperficieSecundaria);
+  border: 1px solid var(--corBorda);
+}
+
+.ImagemTrofeu {
+  width: 86px;
+  height: 86px;
+  border-radius: var(--bordaRaioMedia);
+  object-fit: cover;
+  background-color: var(--corSuperficie);
+}
+
+.InfoTrofeu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.NomeTrofeu {
+  color: var(--corTextoPrimario);
+  line-height: var(--lineHeightTitulo);
+}
+
+.DescricaoTrofeu {
+  color: var(--corTextoSecundario);
+}
+
+.AreaConclusaoTrofeu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.RotuloConclusao {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.RotuloConclusao input {
   display: none;
 }
 
-.checkbox-wrapper-37 .terms-label {
-  cursor: pointer;
-  display: flex;
+.CaixaMarcacao {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--bordaRaioPequena);
+  border: 1px solid var(--corMarcacao);
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.checkbox-wrapper-37 .terms-label .label-text {
-  margin-left: 10px;
+.RotuloConclusao input:checked + .CaixaMarcacao {
+  background-color: var(--corMarcacao);
+  color: var(--corSobreDestaque);
 }
 
-.checkbox-wrapper-37 .checkbox-svg {
-  width: 30px;
-  height: 30px;
+.TextoConclusao {
+  color: var(--corTextoSecundario);
+  font-weight: 700;
 }
 
-.checkbox-wrapper-37 .checkbox-box {
-  fill: #575757;
-  stroke: #00ff88;
-  stroke-dasharray: 800;
-  stroke-dashoffset: 800;
-  transition: stroke-dashoffset 0.6s ease-in;
+.RotuloConclusao input:checked ~ .TextoConclusao {
+  color: var(--corMarcacao);
 }
 
-.checkbox-wrapper-37 .checkbox-tick {
-  stroke: #00ff88;
-  stroke-dasharray: 172;
-  stroke-dashoffset: 172;
-  transition: stroke-dashoffset 0.6s ease-in;
-}
-
-.checkbox-wrapper-37
-  input[type="checkbox"]:checked
-  + .terms-label
-  .checkbox-box,
-.checkbox-wrapper-37
-  input[type="checkbox"]:checked
-  + .terms-label
-  .checkbox-tick {
-  stroke-dashoffset: 0;
-}
-
-.checkbox-wrapper-37 input[type="checkbox"]:checked + .terms-label .label-text {
-  color: #00ff88; /* Altere para a cor desejada */
-}
-
-/* Termina o Molde */
-
-/* Botão Troféus */
-#BotãoModalTroféus {
-  margin-bottom: 10px;
-  background: none;
-  padding: 0;
-  color: rgb(2, 255, 255);
-}
-
-#Fechar-Troféus {
-  display: flex;
+.AcoesTrofeus {
   justify-content: flex-end;
-  margin-left: auto;
+}
 
-  transform: scale(1.5);
-
+#botaoAbrirAdicionarTrofeu {
   background: none;
-  padding: 0px;
-}
-
-#Fechar-Troféus:hover {
-  color: rgb(255, 0, 0);
-}
-
-#botaofecharicone-troféus {
-  margin-top: -30px;
-  margin-right: -20px;
-}
-
-/* MODAL ADICIONAR TROFÉUS */
-#AdicionarTroféus {
-  background: none;
+  color: var(--corDestaque);
   padding: 0;
-  margin-top: 20px;
-
-  display: flex;
-  align-self: flex-end;
-
-  color: #00ff88;
-  font-size: 30px;
-  margin-bottom: -15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  border: 0;
 }
 
-#ModalAdicionarTroféus {
-  position: fixed;
-  top: 48%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-
-  border-radius: 12px;
-
-  background-color: #1c1c1c;
-  color: rgb(2, 255, 255);
-  box-shadow: 0 0 1em rgba(255, 250, 250, 0.3);
+.EstadoVazio {
+  color: var(--corTextoSecundario);
+  text-align: center;
+  padding: 18px 12px;
+  border: 1px dashed var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
 }
 
-#TituloAdicionarTrofeus {
-  margin-top: -50px;
-}
-#SalvarAdicao {
-  background-color: #00ff88;
-  color: #121212;
-  margin-bottom: -12px;
-}
-
-#Fechar-AdicionarTroféus {
-  display: flex;
-  justify-content: flex-end;
-  margin-left: auto;
-
-  transform: scale(1.5);
-
-  background: none;
-  padding: 0px;
-}
-
-#Fechar-AdicionarTroféus:hover {
-  color: rgb(255, 0, 0);
-}
-
-#botaofecharicone-adicionartroféus {
-  margin-top: -30px;
-  margin-right: -20px;
-}
-
-#NomeTrofeuLabel {
-  display: block;
-  margin-top: 50px;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-#ImagemTrofeuLabel {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-#DescricaoTrofeuLabel {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-#DescricaoAdicionar {
+.Rodape {
+  margin-top: auto;
   width: 100%;
-  height: 100px;
-  padding: 8px;
-  box-sizing: border-box;
-  font-size: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  background-color: var(--corRodape);
+  border-top: 1px solid var(--corBordaSuave);
 }
 
-#EspacoAdicionarTextos label,
-#EspacoAdicionarTextos input,
-#EspacoAdicionarTextos textarea {
-  margin-bottom: 20px;
+.LinkTopo {
+  display: inline-block;
+  color: var(--corTextoPrimario);
+  text-decoration: none;
+  background-color: var(--corSuperficie);
+  padding: 10px 16px;
+  border-radius: var(--bordaRaioMedia);
+  border: 1px solid var(--corBorda);
 }
-/* background-color: #00ff88; */
+
+.LinkTopo:hover {
+  background-color: var(--corSuperficieSecundaria);
+}
+
+@media (max-width: 720px) {
+  .CabecalhoPerfil,
+  .CartaoJogo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .BotaoEditarPerfil,
+  .BotaoEditarJogo,
+  .BotaoRemoverJogo {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  .GrupoBarraNavegacao,
+  .GrupoAcoesDireita {
+    flex-wrap: wrap;
+  }
+
+  .ImagemJogo {
+    width: 100%;
+    height: 180px;
+  }
+
+  .BarraProgresso {
+    width: 100%;
+  }
+
+  .AreaTrofeusJogo {
+    width: 100%;
+  }
+
+  .CartaoTrofeu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .AreaConclusaoTrofeu {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+}

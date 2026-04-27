@@ -1,294 +1,277 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="pt-BR" class="semJs">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dobis Profile</title>
+    <title>Platinadores</title>
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <script>
-      // Apicar o tema salvo antes do JS e CSS carregarem
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark-mode");
-      }
-    </script>
-    <script defer src="script.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <script>
+      const temaSalvo = localStorage.getItem("tema");
+      if (temaSalvo === "escuro") {
+        document.documentElement.classList.add("modoEscuro");
+      }
+      document.documentElement.classList.remove("semJs");
+    </script>
+    <script defer src="script.js"></script>
   </head>
   <body>
-    <div id="top"></div>
+    <div id="topo"></div>
 
-    <header class="navbar">
-      <div id="DentroNavbar">
-        <div id="Itens-Dentro-Navbar">
-          <div id="Esquerda">
-            <a href="main.html">
-              <button id="Botao-Inicio">
-                <i id="Botao-Casa" class="bi bi-house"></i>
+    <header class="BarraNavegacao">
+      <div class="ConteudoBarraNavegacao">
+        <div class="GrupoBarraNavegacao">
+          <div class="GrupoAcoesEsquerda">
+            <a href="main.html" class="LinkInicio" aria-label="Ir para o início">
+              <button id="botaoInicio" type="button">
+                <i class="bi bi-house"></i>
               </button>
             </a>
           </div>
-          <div id="BotãoTema">
-            <button class="toggle-button" onclick="toggleDarkMode()">
-              Modo Escuro
+          <div class="GrupoAcoesDireita">
+            <button id="botaoLogin" class="BotaoSecundario" type="button">
+              <i class="bi bi-box-arrow-in-right"></i>
+              Login
+            </button>
+            <button id="botaoTema" class="BotaoTema" type="button">
+              Modo escuro
             </button>
           </div>
         </div>
       </div>
     </header>
 
-    <main class="container">
-      <div class="profile-container">
-        <img
-          id="profileImage"
-          src=""
-          alt="Dobis Profile image"
-          class="profile-img"
-        />
-        <div class="profile-info">
-          <h1 class="name" id="profileName">Dobis</h1>
-        </div>
-        <button class="editarft" id="botão-editar">
-          <h2><i class="bi bi-person-fill"></i></h2>
-          Editar
-        </button>
-      </div>
-
-      <div class="games-container">
-        <div class="game-item">
-          <button id="BotaoEditarJogo" class="editar-jogo">Editar</button>
-
-          <img id="imagemJogo" class="game-img" src="" alt="Imagem do Jogo" />
-          <div class="game-info">
-            <h2 id="nomeJogo" class="game-name">Nome do Jogo</h2>
-            <div class="trophies-container">
-              <button id="BotãoModalTroféus">
-                <i class="bi bi-trophy-fill"></i> Troféus
-              </button>
-              <div class="progress-bar">
-                <div class="progress" style="width: 0%"></div>
-                <span class="progress-text">100%</span>
-              </div>
-            </div>
+    <main class="ConteudoPrincipal">
+      <section class="Perfil" aria-label="Perfil">
+        <div class="CabecalhoPerfil">
+          <img
+            id="imagemPerfil"
+            src=""
+            alt="Imagem do perfil"
+            class="ImagemPerfil"
+          />
+          <div class="InfoPerfil">
+            <h1 id="nomePerfil" class="NomePerfil">Dobis</h1>
           </div>
+          <button id="botaoEditarPerfil" class="BotaoEditarPerfil" type="button">
+            <i class="bi bi-person-fill"></i>
+            Editar
+          </button>
         </div>
-      </div>
+      </section>
+
+      <section class="SecaoJogos" aria-label="Jogos">
+        <div id="listaJogos" class="ListaJogos"></div>
+      </section>
     </main>
 
-    <div class="center">
-      <button id="openModal"><i class="fas fa-plus"></i> Adicionar Jogo</button>
+    <div class="AreaBotaoAdicionar">
+      <button id="botaoAbrirAdicionarJogo" class="BotaoAcao" type="button">
+        <i class="fas fa-plus"></i>
+        Adicionar jogo
+      </button>
     </div>
-    <dialog id="myModal">
-      <form method="dialog">
-        <h2>Adicionar Jogo</h2>
-        <div class="form-element">
-          <label for="nomeaddjogo">Nome</label>
+
+    <dialog id="janelaAdicionarJogo" class="JanelaModal">
+      <form id="formAdicionarJogo" method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Adicionar jogo</h2>
+          <button
+            id="botaoFecharAdicionarJogo"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de adicionar jogo"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <div class="CampoFormulario">
+          <label for="campoNomeNovoJogo">Nome do jogo</label>
           <input
             type="text"
-            id="nomeaddjogodentro"
-            placeholder="Nome do Jogo"
+            id="campoNomeNovoJogo"
+            placeholder="Digite o nome do jogo"
           />
         </div>
-        <div class="form-element">
-          <label for="fileaddjogo">Carregar Imagem</label>
-          <input type="file" id="fileaddjogo" accept=".jpeg, .jpg, .png" />
+
+        <div class="CampoFormulario">
+          <label for="campoImagemNovoJogo">Imagem do jogo</label>
+          <input
+            type="file"
+            id="campoImagemNovoJogo"
+            accept=".jpeg, .jpg, .png"
+          />
         </div>
-        <div class="form-element">
-          <button class="addbtn" id="addbutton">
-            <span>Adicionar Jogo</span>
-          </button>
-        </div>
-        <button id="closeModal">Fechar</button>
-      </form>
-    </dialog>
 
-    <dialog class="editar" id="Janela-Editar">
-      <form method="dialog">
-        <div id="estilos-editar">
-          <button id="Fechar">
-            <i id="botaofecharicone" class="bi bi-x"></i>
-          </button>
-
-          <h1 id="EditarNomeCima">Perfil</h1>
-          <!-- NOME PERFIL -->
-          <div id="nome-editar-div">
-            <label id="nome-editar-label">
-              <h1><i class="bi bi-pencil"></i></h1>
-              <input
-                id="nome-editar-campo"
-                type="text"
-                id="mudar-nome-dentro"
-                placeholder="Novo Nome"
-              />
-            </label>
-          </div>
-
-          <!-- IMAGEM PERFIL -->
-          <div id="imagem-editar-div">
-            <label id="imagem-editar-label">
-              <h1><i id="iconefoto" class="bi bi-card-image"></i></h1>
-              <input
-                id="imagem-editar-campo"
-                type="file"
-                id="mudar-imagem-dentro"
-                placeholder="Novo Foto"
-                accept=".jpg,.jpeg,.png"
-              />
-            </label>
-          </div>
-
-          <!-- Botão Salvar Perfil -->
-          <button id="botão-salvar-editar-perfil">Salvar Alterações</button>
+        <div class="AcoesModal">
+          <button class="BotaoConfirmar" type="submit">Salvar jogo</button>
         </div>
       </form>
     </dialog>
 
-    <dialog id="Janela-Editar-Jogo">
-      <form method="dialog">
-        <div id="estilos-editar-jogo">
-          <button id="Fechar-Jogo">
-            <i id="botaofecharicone-jogo" class="bi bi-x"></i>
+    <dialog id="janelaEditarPerfil" class="JanelaModal">
+      <form id="formEditarPerfil" method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Editar perfil</h2>
+          <button
+            id="botaoFecharEditarPerfil"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de editar perfil"
+          >
+            <i class="bi bi-x"></i>
           </button>
+        </div>
 
-          <h1 id="EditarNomeCima-Jogo">Editar Jogo</h1>
+        <div class="CampoFormulario">
+          <label for="campoNomePerfil">Nome do perfil</label>
+          <input
+            id="campoNomePerfil"
+            type="text"
+            placeholder="Digite o novo nome"
+          />
+        </div>
 
-          <!-- NOME DO JOGO -->
-          <div id="nome-editar-jogo-div">
-            <label id="nome-editar-jogo-label">
-              <h1><i id="icone-nome-jogo" class="bi bi-pencil"></i></h1>
-              <input
-                id="nome-editar-jogo-campo"
-                type="text"
-                placeholder="Novo Nome do Jogo"
-              />
-            </label>
-          </div>
+        <div class="CampoFormulario">
+          <label for="campoImagemPerfil">Imagem do perfil</label>
+          <input
+            id="campoImagemPerfil"
+            type="file"
+            accept=".jpg,.jpeg,.png"
+          />
+        </div>
 
-          <!-- IMAGEM DO JOGO -->
-          <div id="imagem-editar-jogo-div">
-            <label id="imagem-editar-jogo-label">
-              <h1><i id="iconefoto-jogo" class="bi bi-card-image"></i></h1>
-              <input
-                id="imagem-editar-jogo-campo"
-                type="file"
-                accept=".jpg,.jpeg,.png"
-              />
-            </label>
-          </div>
-
-          <!-- Botão Salvar Jogo -->
-          <button id="botão-salvar-editar-jogo">Salvar Alterações</button>
+        <div class="AcoesModal">
+          <button id="botaoSalvarPerfil" class="BotaoConfirmar" type="submit">
+            Salvar alterações
+          </button>
         </div>
       </form>
     </dialog>
 
-    <dialog id="ModalTroféus">
-      <form method="dialog">
-        <div id="estilos-editar-jogo">
-          <button id="Fechar-Troféus">
-            <i id="botaofecharicone-troféus" class="bi bi-x"></i>
+    <dialog id="janelaEditarJogo" class="JanelaModal">
+      <form id="formEditarJogo" method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Editar jogo</h2>
+          <button
+            id="botaoFecharEditarJogo"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de editar jogo"
+          >
+            <i class="bi bi-x"></i>
           </button>
-          <h1 id="NomePrincipalModalTrofeus">Troféus</h1>
+        </div>
 
-          <div id="trofeus-container">
-            <div id="divTrofeus">
-              <img src="" alt="" id="ImagemTrofeu" />
-              <div id="TextoTrofeu">
-                <h2 id="NomeTrofeu">TAEV</h2>
-                <p id="DescricaoTrofeu">Uma bela fogueira</p>
-              </div>
+        <div class="CampoFormulario">
+          <label for="campoNomeEditarJogo">Nome do jogo</label>
+          <input
+            id="campoNomeEditarJogo"
+            type="text"
+            placeholder="Digite o novo nome do jogo"
+          />
+        </div>
 
-              <div id="BotaoCheck">
-                <div class="checkbox-wrapper-37">
-                  <input
-                    type="checkbox"
-                    name="checkbox"
-                    id="terms-checkbox-37"
-                  />
-                  <label for="terms-checkbox-37" class="terms-label">
-                    <svg
-                      class="checkbox-svg"
-                      viewBox="0 0 200 200"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <mask id="path-1-inside-1_476_5-37" fill="white">
-                        <rect width="200" height="200" />
-                      </mask>
-                      <rect
-                        width="200"
-                        height="200"
-                        class="checkbox-box"
-                        stroke-width="40"
-                        mask="url(#path-1-inside-1_476_5-37)"
-                      />
-                      <path
-                        class="checkbox-tick"
-                        d="M52 111.018L76.9867 136L149 64"
-                        stroke-width="15"
-                      />
-                    </svg>
-                    <span id="CorTextoCheck" class="label-text">Concluído</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="CampoFormulario">
+          <label for="campoImagemEditarJogo">Imagem do jogo</label>
+          <input
+            id="campoImagemEditarJogo"
+            type="file"
+            accept=".jpg,.jpeg,.png"
+          />
+        </div>
 
-          <button id="AdicionarTroféus">
+        <div class="AcoesModal">
+          <button id="botaoSalvarJogo" class="BotaoConfirmar" type="submit">
+            Salvar alterações
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="janelaTrofeus" class="JanelaModal JanelaTrofeus">
+      <form method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2 id="tituloJanelaTrofeus">Troféus</h2>
+          <button
+            id="botaoFecharTrofeus"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de troféus"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <div id="listaTrofeus" class="ListaTrofeus"></div>
+
+        <div class="AcoesModal AcoesTrofeus">
+          <button id="botaoAbrirAdicionarTrofeu" type="button">
             <i class="bi bi-plus-circle"></i>
+            Adicionar troféu
           </button>
         </div>
       </form>
     </dialog>
 
-    <!-- Modal Adicionar Trofeus -->
-    <dialog id="ModalAdicionarTroféus">
-      <form method="dialog">
-        <button id="Fechar-AdicionarTroféus">
-          <i id="botaofecharicone-adicionartroféus" class="bi bi-x"></i>
-        </button>
-
-        <h1 id="TituloAdicionarTrofeus">
-          Adicionar Troféus <i class="bi bi-trophy-fill"></i>
-        </h1>
-        <div id="EspacoAdicionarTextos">
-          <label id="NomeTrofeuLabel" for="NomeAdicionarTrofeu"
-            >Nome do Troféu:</label
+    <dialog id="janelaAdicionarTrofeu" class="JanelaModal">
+      <form id="formAdicionarTrofeu" method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Adicionar troféu</h2>
+          <button
+            id="botaoFecharAdicionarTrofeu"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de adicionar troféu"
           >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <div class="CampoFormulario">
+          <label for="campoNomeTrofeu">Nome do troféu</label>
           <input
             type="text"
-            id="NomeAdicionar"
-            placeholder="Digite o Nome do Troféu"
+            id="campoNomeTrofeu"
+            placeholder="Digite o nome do troféu"
           />
+        </div>
 
-          <label id="ImagemTrofeuLabel" for="ImagemAdicionarTrofeu"
-            >Imagem do Troféu:</label
-          >
-          <input type="file" id="ImagemAdicionar" accept=".jpeg, .jpg, .png" />
+        <div class="CampoFormulario">
+          <label for="campoImagemTrofeu">Imagem do troféu</label>
+          <input
+            type="file"
+            id="campoImagemTrofeu"
+            accept=".jpeg, .jpg, .png"
+          />
+        </div>
 
-          <label id="DescricaoTrofeuLabel" for="DescricaoAdicionarTrofeu"
-            >Descrição do Troféu:</label
-          >
+        <div class="CampoFormulario">
+          <label for="campoDescricaoTrofeu">Descrição do troféu</label>
           <textarea
-            id="DescricaoAdicionar"
+            id="campoDescricaoTrofeu"
             placeholder="Digite a descrição do troféu"
           ></textarea>
         </div>
 
-        <button id="SalvarAdicao">Salvar e Adicionar</button>
+        <div class="AcoesModal">
+          <button id="botaoSalvarTrofeu" class="BotaoConfirmar" type="submit">
+            Salvar troféu
+          </button>
+        </div>
       </form>
     </dialog>
 
-    <footer class="footer">
-      <a href="#top" class="scroll-to-top">Voltar ao topo</a>
+    <footer class="Rodape">
+      <a href="#topo" class="LinkTopo">Voltar ao topo</a>
     </footer>
   </body>
 </html>
