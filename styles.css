@@ -271,6 +271,11 @@ textarea {
   padding: 18px 18px 18px 18px;
 }
 
+.CartaoJogo:focus-visible {
+  outline: 2px solid var(--corDestaque);
+  outline-offset: 2px;
+}
+
 .BotaoMenuCard {
   position: absolute;
   top: 10px;
@@ -316,6 +321,9 @@ textarea {
 }
 
 .BotaoTrofeus {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: none;
   color: var(--corDestaque);
   padding: 0;

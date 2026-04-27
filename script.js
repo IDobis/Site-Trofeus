@@ -351,6 +351,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const percentual = calcularPercentualConclusao(jogo.trofeus);
       const cartaoJogo = document.createElement("article");
       cartaoJogo.className = "CartaoJogo";
+      cartaoJogo.tabIndex = 0;
+      cartaoJogo.setAttribute("role", "button");
+      cartaoJogo.setAttribute("aria-label", `Abrir troféus do jogo ${jogo.nome}`);
 
       cartaoJogo.innerHTML = `
         <button
@@ -364,10 +367,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="InfoJogo">
           <h2 class="NomeJogo">${jogo.nome}</h2>
           <div class="AreaTrofeusJogo">
-            <button class="BotaoTrofeus" type="button">
+            <span class="BotaoTrofeus">
               <i class="bi bi-trophy-fill"></i>
               Troféus
-            </button>
+            </span>
             <div class="BarraProgresso" aria-label="Progresso dos troféus">
               <div class="PreenchimentoProgresso" style="width: ${percentual}%"></div>
               <span class="TextoProgresso">${formatarPercentual(percentual)}</span>
@@ -377,10 +380,17 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       const botaoMenuJogo = cartaoJogo.querySelector(".BotaoMenuCard");
-      const botaoTrofeus = cartaoJogo.querySelector(".BotaoTrofeus");
-
-      botaoMenuJogo.addEventListener("click", () => abrirAcoesJogo(indiceJogo));
-      botaoTrofeus.addEventListener("click", () => abrirTrofeus(indiceJogo));
+      botaoMenuJogo.addEventListener("click", (evento) => {
+        evento.stopPropagation();
+        abrirAcoesJogo(indiceJogo);
+      });
+      cartaoJogo.addEventListener("click", () => abrirTrofeus(indiceJogo));
+      cartaoJogo.addEventListener("keydown", (evento) => {
+        if (evento.key === "Enter" || evento.key === " ") {
+          evento.preventDefault();
+          abrirTrofeus(indiceJogo);
+        }
+      });
 
       listaJogos.appendChild(cartaoJogo);
     });
