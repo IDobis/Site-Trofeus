@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const janelaAcoesPerfil = document.getElementById("janelaAcoesPerfil");
   const janelaEditarJogo = document.getElementById("janelaEditarJogo");
   const janelaAcoesJogo = document.getElementById("janelaAcoesJogo");
+  const janelaEditarTrofeu = document.getElementById("janelaEditarTrofeu");
+  const janelaAcoesTrofeu = document.getElementById("janelaAcoesTrofeu");
   const janelaTrofeus = document.getElementById("janelaTrofeus");
   const janelaAdicionarTrofeu = document.getElementById("janelaAdicionarTrofeu");
 
@@ -42,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formEditarPerfil = document.getElementById("formEditarPerfil");
   const formEditarJogo = document.getElementById("formEditarJogo");
   const formAdicionarTrofeu = document.getElementById("formAdicionarTrofeu");
+  const formEditarTrofeu = document.getElementById("formEditarTrofeu");
 
   const campoNomeNovoJogo = document.getElementById("campoNomeNovoJogo");
   const campoImagemNovoJogo = document.getElementById("campoImagemNovoJogo");
@@ -52,6 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const campoNomeTrofeu = document.getElementById("campoNomeTrofeu");
   const campoImagemTrofeu = document.getElementById("campoImagemTrofeu");
   const campoDescricaoTrofeu = document.getElementById("campoDescricaoTrofeu");
+  const campoNomeEditarTrofeu = document.getElementById("campoNomeEditarTrofeu");
+  const campoImagemEditarTrofeu = document.getElementById("campoImagemEditarTrofeu");
+  const campoDescricaoEditarTrofeu = document.getElementById(
+    "campoDescricaoEditarTrofeu"
+  );
   const listaTrofeus = document.getElementById("listaTrofeus");
   const tituloJanelaTrofeus = document.getElementById("tituloJanelaTrofeus");
   const botaoLogin = document.getElementById("botaoLogin");
@@ -65,9 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const botaoAbrirEditarJogo = document.getElementById("botaoAbrirEditarJogo");
   const botaoRemoverJogoModal = document.getElementById("botaoRemoverJogoModal");
+  const botaoAbrirEditarTrofeu = document.getElementById("botaoAbrirEditarTrofeu");
+  const botaoRemoverTrofeuModal = document.getElementById("botaoRemoverTrofeuModal");
 
   let indiceJogoSelecionado = null;
   let indiceJogoAcoes = null;
+  let indiceTrofeuAcoes = null;
+  let indiceTrofeuSelecionado = null;
   let perfil = carregarPerfil();
   let jogos = carregarJogos();
 
@@ -107,6 +119,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("botaoFecharAcoesJogo")
     .addEventListener("click", fecharAcoesJogo);
   document
+    .getElementById("botaoFecharEditarTrofeu")
+    .addEventListener("click", () => fecharJanela(janelaEditarTrofeu));
+  document
+    .getElementById("botaoFecharAcoesTrofeu")
+    .addEventListener("click", fecharAcoesTrofeu);
+  document
     .getElementById("botaoFecharTrofeus")
     .addEventListener("click", () => fecharJanela(janelaTrofeus));
   document
@@ -118,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
   botaoAbrirEditarPerfilModal.addEventListener("click", abrirEditarPerfilPorAcoes);
   botaoAbrirEditarJogo.addEventListener("click", abrirEditarJogoPorAcoes);
   botaoRemoverJogoModal.addEventListener("click", removerJogoPorAcoes);
+  botaoAbrirEditarTrofeu.addEventListener("click", abrirEditarTrofeuPorAcoes);
+  botaoRemoverTrofeuModal.addEventListener("click", removerTrofeuPorAcoes);
   campoNomeNovoJogo.addEventListener("input", () =>
     validarLimiteCaracteres(campoNomeNovoJogo, mensagemNomeNovoJogo, 25)
   );
@@ -251,6 +271,38 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarTrofeus();
     formAdicionarTrofeu.reset();
     fecharJanela(janelaAdicionarTrofeu);
+  });
+
+  formEditarTrofeu.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+
+    if (indiceJogoSelecionado === null || indiceTrofeuSelecionado === null) {
+      return;
+    }
+
+    const trofeu = jogos[indiceJogoSelecionado].trofeus[indiceTrofeuSelecionado];
+    const novoNome = campoNomeEditarTrofeu.value.trim();
+    const novaDescricao = campoDescricaoEditarTrofeu.value.trim();
+    const novaImagem = campoImagemEditarTrofeu.files[0];
+
+    if (novoNome) {
+      trofeu.nome = novoNome;
+    }
+
+    if (novaDescricao) {
+      trofeu.descricao = novaDescricao;
+    }
+
+    if (novaImagem) {
+      trofeu.imagem = await lerArquivoComoDataUrl(novaImagem);
+    }
+
+    salvarJogos();
+    renderizarTrofeus();
+    renderizarJogos();
+    formEditarTrofeu.reset();
+    indiceTrofeuSelecionado = null;
+    fecharJanela(janelaEditarTrofeu);
   });
 
   function carregarPerfil() {
@@ -494,6 +546,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const idMarcacao = `trofeu${indiceJogoSelecionado}${indiceTrofeu}`;
 
       cartaoTrofeu.innerHTML = `
+        <button
+          class="BotaoMenuCard BotaoMenuTrofeu"
+          type="button"
+          aria-label="Abrir ações do troféu ${trofeu.nome}"
+        >
+          <i class="bi bi-three-dots"></i>
+        </button>
         <img class="ImagemTrofeu" src="${trofeu.imagem}" alt="Imagem do troféu ${trofeu.nome}" />
         <div class="InfoTrofeu">
           <h3 class="NomeTrofeu">${trofeu.nome}</h3>
@@ -507,23 +566,63 @@ document.addEventListener("DOMContentLoaded", () => {
             </span>
             <span class="TextoConclusao">Concluído</span>
           </label>
-          <button class="BotaoRemoverTrofeu" type="button">Remover</button>
         </div>
       `;
 
       const campoMarcacao = cartaoTrofeu.querySelector("input");
-      const botaoRemoverTrofeu = cartaoTrofeu.querySelector(".BotaoRemoverTrofeu");
+      const botaoMenuTrofeu = cartaoTrofeu.querySelector(".BotaoMenuTrofeu");
       campoMarcacao.addEventListener("change", () => {
         trofeus[indiceTrofeu].concluido = campoMarcacao.checked;
         salvarJogos();
         renderizarJogos();
       });
-      botaoRemoverTrofeu.addEventListener("click", () =>
-        removerTrofeu(indiceTrofeu)
-      );
+      botaoMenuTrofeu.addEventListener("click", () => abrirAcoesTrofeu(indiceTrofeu));
 
       listaTrofeus.appendChild(cartaoTrofeu);
     });
+  }
+
+  function abrirAcoesTrofeu(indiceTrofeu) {
+    indiceTrofeuAcoes = indiceTrofeu;
+    abrirJanela(janelaAcoesTrofeu);
+  }
+
+  function fecharAcoesTrofeu() {
+    indiceTrofeuAcoes = null;
+    fecharJanela(janelaAcoesTrofeu);
+  }
+
+  function abrirEditarTrofeu(indiceTrofeu) {
+    if (indiceJogoSelecionado === null) {
+      return;
+    }
+
+    indiceTrofeuSelecionado = indiceTrofeu;
+    const trofeu = jogos[indiceJogoSelecionado].trofeus[indiceTrofeu];
+    campoNomeEditarTrofeu.value = trofeu.nome;
+    campoDescricaoEditarTrofeu.value = trofeu.descricao;
+    campoImagemEditarTrofeu.value = "";
+    abrirJanela(janelaEditarTrofeu);
+  }
+
+  function abrirEditarTrofeuPorAcoes() {
+    if (indiceTrofeuAcoes === null) {
+      return;
+    }
+
+    const indiceTrofeu = indiceTrofeuAcoes;
+    fecharAcoesTrofeu();
+    abrirEditarTrofeu(indiceTrofeu);
+  }
+
+  function removerTrofeuPorAcoes() {
+    if (indiceTrofeuAcoes === null) {
+      return;
+    }
+
+    const indiceTrofeu = indiceTrofeuAcoes;
+    fecharAcoesTrofeu();
+    removerTrofeu(indiceTrofeu);
   }
 
   function removerJogo(indiceJogo) {
@@ -553,6 +652,8 @@ document.addEventListener("DOMContentLoaded", () => {
     salvarJogos();
     renderizarTrofeus();
     renderizarJogos();
+    indiceTrofeuAcoes = null;
+    indiceTrofeuSelecionado = null;
   }
 
   function calcularPercentualConclusao(trofeus) {

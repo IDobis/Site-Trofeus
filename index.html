@@ -257,6 +257,79 @@
       </form>
     </dialog>
 
+    <dialog id="janelaEditarTrofeu" class="JanelaModal">
+      <form id="formEditarTrofeu" method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Editar troféu</h2>
+          <button
+            id="botaoFecharEditarTrofeu"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de editar troféu"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <div class="CampoFormulario">
+          <label for="campoNomeEditarTrofeu">Nome do troféu</label>
+          <input
+            type="text"
+            id="campoNomeEditarTrofeu"
+            placeholder="Digite o nome do troféu"
+          />
+        </div>
+
+        <div class="CampoFormulario">
+          <label for="campoImagemEditarTrofeu">Imagem do troféu</label>
+          <input
+            type="file"
+            id="campoImagemEditarTrofeu"
+            accept=".jpeg, .jpg, .png"
+          />
+        </div>
+
+        <div class="CampoFormulario">
+          <label for="campoDescricaoEditarTrofeu">Descrição do troféu</label>
+          <textarea
+            id="campoDescricaoEditarTrofeu"
+            placeholder="Digite a descrição do troféu"
+          ></textarea>
+        </div>
+
+        <div class="AcoesModal">
+          <button id="botaoSalvarTrofeuEdicao" class="BotaoConfirmar" type="submit">
+            Salvar alterações
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="janelaAcoesTrofeu" class="JanelaModal JanelaAcoesJogo">
+      <form method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2>Ações do troféu</h2>
+          <button
+            id="botaoFecharAcoesTrofeu"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de ações do troféu"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <div class="AcoesModal AcoesJogoModal">
+          <button id="botaoAbrirEditarTrofeu" class="BotaoAcaoJogoModal" type="button">
+            Editar
+          </button>
+          <button id="botaoRemoverTrofeuModal" class="BotaoAcaoJogoModal BotaoRemoverJogoModal" type="button">
+            Remover
+          </button>
+        </div>
+      </form>
+    </dialog>
+
     <dialog id="janelaTrofeus" class="JanelaModal JanelaTrofeus">
       <form method="dialog" class="FormularioModal">
         <div class="TopoModal">

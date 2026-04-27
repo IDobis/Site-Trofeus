@@ -151,7 +151,6 @@ textarea {
 .BotaoAcao,
 .BotaoAcaoJogoModal,
 .BotaoTrofeus,
-.BotaoRemoverTrofeu,
 .BotaoRemoverJogoModal {
   border: 1px solid var(--corBorda);
   border-radius: var(--bordaRaioMedia);
@@ -175,8 +174,7 @@ textarea {
 .BotaoTema,
 .BotaoSecundario,
 .BotaoAcao,
-.BotaoAcaoJogoModal,
-.BotaoRemoverTrofeu {
+.BotaoAcaoJogoModal {
   padding: 12px 18px;
   background-color: var(--corSuperficie);
   color: var(--corTextoPrimario);
@@ -186,8 +184,7 @@ textarea {
 .BotaoSecundario:hover,
 .BotaoTema:hover,
 .BotaoAcao:hover,
-.BotaoAcaoJogoModal:hover,
-.BotaoRemoverTrofeu:hover {
+.BotaoAcaoJogoModal:hover {
   background-color: var(--corSuperficieSecundaria);
 }
 
@@ -202,12 +199,10 @@ textarea {
   border-color: var(--corDestaqueHover);
 }
 
-.BotaoRemoverTrofeu,
 .BotaoRemoverJogoModal {
   color: var(--corPerigo);
 }
 
-.BotaoRemoverTrofeu:hover,
 .BotaoRemoverJogoModal:hover {
   background-color: color-mix(in srgb, var(--corPerigo) 10%, transparent);
 }
@@ -490,13 +485,20 @@ textarea {
 }
 
 .CartaoTrofeu {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px;
+  padding: 14px 40px 14px 14px;
   border-radius: var(--bordaRaioMedia);
   background-color: var(--corSuperficieSecundaria);
   border: 1px solid var(--corBorda);
+}
+
+.BotaoMenuTrofeu {
+  top: 8px;
+  right: 8px;
+  font-size: 18px;
 }
 
 .ImagemTrofeu {
