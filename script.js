@@ -82,11 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const botaoRemoverJogoModal = document.getElementById("botaoRemoverJogoModal");
   const botaoAbrirEditarTrofeu = document.getElementById("botaoAbrirEditarTrofeu");
   const botaoRemoverTrofeuModal = document.getElementById("botaoRemoverTrofeuModal");
+  const tooltipAcoes = criarTooltipAcoes();
 
   let indiceJogoSelecionado = null;
   let indiceJogoAcoes = null;
   let indiceTrofeuAcoes = null;
   let indiceTrofeuSelecionado = null;
+  let contextoTooltipAcoes = null;
   let perfil = carregarPerfil();
   let jogos = carregarJogos();
 
@@ -139,7 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", () => fecharJanela(janelaAdicionarTrofeu));
 
   botaoTema.addEventListener("click", alternarModoEscuro);
-  botaoMenuPerfil.addEventListener("click", abrirAcoesPerfil);
+  botaoMenuPerfil.addEventListener("click", (evento) => {
+    evento.stopPropagation();
+    abrirAcoesPerfil(evento.currentTarget);
+  });
   botaoAbrirEditarPerfilModal.addEventListener("click", abrirEditarPerfilPorAcoes);
   botaoAbrirEditarJogo.addEventListener("click", abrirEditarJogoPorAcoes);
   botaoRemoverJogoModal.addEventListener("click", removerJogoPorAcoes);
@@ -482,15 +487,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const estaNoModoEscuro = temaSalvo === "escuro";
 
     document.documentElement.classList.toggle("modoEscuro", estaNoModoEscuro);
-    botaoTema.textContent = estaNoModoEscuro ? "Modo claro" : "Modo escuro";
+    botaoTema.textContent = estaNoModoEscuro ? "Modo Claro" : "Modo Escuro";
+    botaoTema.innerHTML = estaNoModoEscuro ? "Modo Claro <i class='bi bi-sun-fill'></i>" : "Modo Escuro <i class='bi bi-moon-fill'></i>";
   }
 
   function alternarModoEscuro() {
     const modoEscuroAtivo =
       document.documentElement.classList.toggle("modoEscuro");
 
-    localStorage.setItem(chaveTema, modoEscuroAtivo ? "escuro" : "claro");
-    botaoTema.textContent = modoEscuroAtivo ? "Modo claro" : "Modo escuro";
+    localStorage.setItem(chaveTema, modoEscuroAtivo ? "Escuro" : "Claro");
+    botaoTema.textContent = modoEscuroAtivo ? "Modo Claro" : "Modo Escuro";
+    botaoTema.innerHTML = modoEscuroAtivo ? "Modo Claro <i class='bi bi-sun-fill'></i>" : "Modo Escuro <i class='bi bi-moon-fill'></i>";
   }
 
   function renderizarPerfil() {
@@ -536,7 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const botaoMenuJogo = cartaoJogo.querySelector(".BotaoMenuCard");
       botaoMenuJogo.addEventListener("click", (evento) => {
         evento.stopPropagation();
-        abrirAcoesJogo(indiceJogo);
+        abrirAcoesJogo(indiceJogo, evento.currentTarget);
       });
       cartaoJogo.addEventListener("click", () => abrirTrofeus(indiceJogo));
       cartaoJogo.addEventListener("keydown", (evento) => {
@@ -557,12 +564,17 @@ document.addEventListener("DOMContentLoaded", () => {
     abrirJanela(janelaEditarPerfil);
   }
 
-  function abrirAcoesPerfil() {
-    abrirJanela(janelaAcoesPerfil);
+  function abrirAcoesPerfil(botaoOrigem = botaoMenuPerfil) {
+    abrirTooltipAcoes(botaoOrigem, [
+      {
+        texto: "Editar",
+        onClick: abrirEditarPerfil
+      }
+    ]);
   }
 
   function fecharAcoesPerfil() {
-    fecharJanela(janelaAcoesPerfil);
+    fecharTooltipAcoes();
   }
 
   function abrirEditarPerfilPorAcoes() {
@@ -578,14 +590,24 @@ document.addEventListener("DOMContentLoaded", () => {
     abrirJanela(janelaEditarJogo);
   }
 
-  function abrirAcoesJogo(indiceJogo) {
+  function abrirAcoesJogo(indiceJogo, botaoOrigem) {
     indiceJogoAcoes = indiceJogo;
-    abrirJanela(janelaAcoesJogo);
+    abrirTooltipAcoes(botaoOrigem, [
+      {
+        texto: "Editar",
+        onClick: () => abrirEditarJogo(indiceJogo)
+      },
+      {
+        texto: "Remover",
+        classeExtra: "TooltipAcoesBotaoRemover",
+        onClick: () => removerJogo(indiceJogo)
+      }
+    ]);
   }
 
   function fecharAcoesJogo() {
     indiceJogoAcoes = null;
-    fecharJanela(janelaAcoesJogo);
+    fecharTooltipAcoes();
   }
 
   function abrirEditarJogoPorAcoes() {
@@ -684,20 +706,32 @@ document.addEventListener("DOMContentLoaded", () => {
         salvarJogos();
         renderizarJogos();
       });
-      botaoMenuTrofeu.addEventListener("click", () => abrirAcoesTrofeu(indiceTrofeu));
+      botaoMenuTrofeu.addEventListener("click", (evento) =>
+        abrirAcoesTrofeu(indiceTrofeu, evento.currentTarget)
+      );
 
       listaTrofeus.appendChild(cartaoTrofeu);
     });
   }
 
-  function abrirAcoesTrofeu(indiceTrofeu) {
+  function abrirAcoesTrofeu(indiceTrofeu, botaoOrigem) {
     indiceTrofeuAcoes = indiceTrofeu;
-    abrirJanela(janelaAcoesTrofeu);
+    abrirTooltipAcoes(botaoOrigem, [
+      {
+        texto: "Editar",
+        onClick: () => abrirEditarTrofeu(indiceTrofeu)
+      },
+      {
+        texto: "Remover",
+        classeExtra: "TooltipAcoesBotaoRemover",
+        onClick: () => removerTrofeu(indiceTrofeu)
+      }
+    ]);
   }
 
   function fecharAcoesTrofeu() {
     indiceTrofeuAcoes = null;
-    fecharJanela(janelaAcoesTrofeu);
+    fecharTooltipAcoes();
   }
 
   function abrirEditarTrofeu(indiceTrofeu) {
@@ -852,5 +886,96 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+  }
+
+  function criarTooltipAcoes() {
+    const tooltip = document.createElement("div");
+    tooltip.className = "TooltipAcoes";
+    tooltip.hidden = true;
+    tooltip.setAttribute("role", "menu");
+    tooltip.addEventListener("click", (evento) => evento.stopPropagation());
+    document.body.appendChild(tooltip);
+    document.addEventListener("pointerdown", tratarCliqueForaTooltipAcoes, true);
+    window.addEventListener("resize", fecharTooltipAcoes);
+    window.addEventListener("scroll", fecharTooltipAcoes, true);
+    document.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape") {
+        fecharTooltipAcoes();
+      }
+    });
+    return tooltip;
+  }
+
+  function abrirTooltipAcoes(botao, acoes) {
+    if (!botao) {
+      return;
+    }
+
+    const containerTooltip = botao.closest("dialog") || document.body;
+    if (tooltipAcoes.parentElement !== containerTooltip) {
+      containerTooltip.appendChild(tooltipAcoes);
+    }
+
+    if (!tooltipAcoes.hidden && contextoTooltipAcoes === botao) {
+      fecharTooltipAcoes();
+      return;
+    }
+
+    tooltipAcoes.innerHTML = "";
+    acoes.forEach((acao) => {
+      const botaoAcao = document.createElement("button");
+      botaoAcao.type = "button";
+      botaoAcao.className = "TooltipAcoesBotao";
+      if (acao.classeExtra) {
+        botaoAcao.classList.add(acao.classeExtra);
+      }
+      botaoAcao.textContent = acao.texto;
+      botaoAcao.addEventListener("click", () => {
+        fecharTooltipAcoes();
+        acao.onClick();
+      });
+      tooltipAcoes.appendChild(botaoAcao);
+    });
+
+    const limiteLateral = 12;
+    const deslocamento = 8;
+    const retanguloBotao = botao.getBoundingClientRect();
+    tooltipAcoes.hidden = false;
+    const retanguloTooltip = tooltipAcoes.getBoundingClientRect();
+    const esquerda = Math.min(
+      retanguloBotao.right + deslocamento,
+      window.innerWidth - retanguloTooltip.width - limiteLateral
+    );
+    const topo = Math.min(
+      Math.max(retanguloBotao.top, limiteLateral),
+      window.innerHeight - retanguloTooltip.height - limiteLateral
+    );
+
+    tooltipAcoes.style.left = `${Math.max(limiteLateral, esquerda)}px`;
+    tooltipAcoes.style.top = `${Math.max(limiteLateral, topo)}px`;
+    contextoTooltipAcoes = botao;
+  }
+
+  function fecharTooltipAcoes() {
+    tooltipAcoes.hidden = true;
+    tooltipAcoes.innerHTML = "";
+    contextoTooltipAcoes = null;
+  }
+
+  function tratarCliqueForaTooltipAcoes(evento) {
+    if (tooltipAcoes.hidden) {
+      return;
+    }
+
+    const alvoClique = evento.target;
+    if (tooltipAcoes.contains(alvoClique)) {
+      return;
+    }
+
+    if (contextoTooltipAcoes && contextoTooltipAcoes.contains(alvoClique)) {
+      return;
+    }
+
+    fecharTooltipAcoes();
   }
 });

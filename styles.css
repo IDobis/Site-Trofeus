@@ -303,6 +303,47 @@ textarea {
   color: var(--corTextoPrimario);
 }
 
+.TooltipAcoes {
+  position: fixed;
+  z-index: 60;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  gap: 6px;
+  padding: 8px;
+  border-radius: var(--bordaRaioMedia);
+  border: 1px solid var(--corBorda);
+  background-color: var(--corSuperficie);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--corTextoPrimario) 20%, transparent);
+}
+
+.TooltipAcoes[hidden] {
+  display: none;
+}
+
+.TooltipAcoesBotao {
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: var(--bordaRaioPequena);
+  padding: 8px 10px;
+  color: var(--corTextoPrimario);
+  background-color: transparent;
+}
+
+.TooltipAcoesBotao:hover {
+  background-color: var(--corSuperficieSecundaria);
+}
+
+.TooltipAcoesBotaoRemover {
+  color: var(--corPerigo);
+}
+
+.TooltipAcoesBotaoRemover:hover {
+  background-color: color-mix(in srgb, var(--corPerigo) 10%, transparent);
+}
+
 .ImagemJogo {
   width: 160px;
   height: 100px;
