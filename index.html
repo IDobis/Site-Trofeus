@@ -15,7 +15,7 @@
     />
     <script>
       const temaSalvo = localStorage.getItem("tema");
-      if (temaSalvo === "escuro") {
+      if (temaSalvo && temaSalvo.toLowerCase() === "escuro") {
         document.documentElement.classList.add("modoEscuro");
       }
       document.documentElement.classList.remove("semJs");
@@ -34,6 +34,19 @@
                 <i class="bi bi-house"></i>
               </button>
             </a>
+          </div>
+          <div class="AreaPesquisaNav">
+            <div class="CampoPesquisaNav">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <input
+                type="search"
+                id="campoPesquisaJogos"
+                placeholder="Pesquisar jogos…"
+                autocomplete="off"
+                enterkeyhint="search"
+                aria-label="Pesquisar jogos por nome"
+              />
+            </div>
           </div>
           <div class="GrupoAcoesDireita">
             <button id="botaoLogin" class="BotaoSecundario" type="button">
@@ -66,7 +79,7 @@
             class="ImagemPerfil"
           />
           <div class="InfoPerfil">
-            <h1 id="nomePerfil" class="NomePerfil">Dobis</h1>
+            <h1 id="nomePerfil" class="NomePerfil">Nome Perfil</h1>
           </div>
         </div>
       </section>

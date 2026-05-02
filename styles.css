@@ -139,6 +139,41 @@ textarea {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+}
+
+.AreaPesquisaNav {
+  flex: 1;
+  min-width: 0;
+  max-width: 420px;
+}
+
+.CampoPesquisaNav {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.CampoPesquisaNav i {
+  position: absolute;
+  left: 14px;
+  font-size: 16px;
+  color: var(--corTextoSecundario);
+  pointer-events: none;
+}
+
+.CampoPesquisaNav input {
+  width: 100%;
+  height: 44px;
+  padding: 10px 14px 10px 42px;
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioMedia);
+  background-color: var(--corEntrada);
+  color: var(--corTextoPrimario);
+}
+
+.CampoPesquisaNav input::placeholder {
+  color: var(--corTextoSecundario);
 }
 
 .LinkInicio {
@@ -701,6 +736,12 @@ textarea {
   .GrupoBarraNavegacao,
   .GrupoAcoesDireita {
     flex-wrap: wrap;
+  }
+
+  .AreaPesquisaNav {
+    max-width: none;
+    flex: 1;
+    min-width: min(200px, 100%);
   }
 
   .ImagemJogo {

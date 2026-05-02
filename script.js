@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   const listaJogos = document.getElementById("listaJogos");
+  const campoPesquisaJogos = document.getElementById("campoPesquisaJogos");
   const nomePerfil = document.getElementById("nomePerfil");
   const imagemPerfil = document.getElementById("imagemPerfil");
   const botaoTema = document.getElementById("botaoTema");
@@ -141,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", () => fecharJanela(janelaAdicionarTrofeu));
 
   botaoTema.addEventListener("click", alternarModoEscuro);
+  campoPesquisaJogos.addEventListener("input", renderizarJogos);
   botaoMenuPerfil.addEventListener("click", (evento) => {
     evento.stopPropagation();
     abrirAcoesPerfil(evento.currentTarget);
@@ -484,7 +486,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function aplicarTemaSalvo() {
     const temaSalvo = localStorage.getItem(chaveTema);
-    const estaNoModoEscuro = temaSalvo === "escuro";
+    const estaNoModoEscuro =
+      temaSalvo && temaSalvo.toLowerCase() === "escuro";
 
     document.documentElement.classList.toggle("modoEscuro", estaNoModoEscuro);
     botaoTema.textContent = estaNoModoEscuro ? "Modo Claro" : "Modo Escuro";
@@ -495,7 +498,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modoEscuroAtivo =
       document.documentElement.classList.toggle("modoEscuro");
 
-    localStorage.setItem(chaveTema, modoEscuroAtivo ? "Escuro" : "Claro");
+    localStorage.setItem(chaveTema, modoEscuroAtivo ? "escuro" : "claro");
     botaoTema.textContent = modoEscuroAtivo ? "Modo Claro" : "Modo Escuro";
     botaoTema.innerHTML = modoEscuroAtivo ? "Modo Claro <i class='bi bi-sun-fill'></i>" : "Modo Escuro <i class='bi bi-moon-fill'></i>";
   }
@@ -508,7 +511,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderizarJogos() {
     listaJogos.innerHTML = "";
 
+    const filtro = campoPesquisaJogos.value.trim().toLowerCase();
+    let algumVisivel = false;
+
     jogos.forEach((jogo, indiceJogo) => {
+      if (filtro && !jogo.nome.toLowerCase().includes(filtro)) {
+        return;
+      }
+
+      algumVisivel = true;
       const percentual = calcularPercentualConclusao(jogo.trofeus);
       const cartaoJogo = document.createElement("article");
       cartaoJogo.className = "CartaoJogo";
@@ -555,6 +566,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       listaJogos.appendChild(cartaoJogo);
     });
+
+    if (!algumVisivel && filtro) {
+      const estadoVazio = document.createElement("p");
+      estadoVazio.className = "EstadoVazio";
+      estadoVazio.textContent = "Nenhum jogo encontrado.";
+      listaJogos.appendChild(estadoVazio);
+    }
   }
 
   function abrirEditarPerfil() {
