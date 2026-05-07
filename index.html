@@ -426,6 +426,35 @@
       </form>
     </dialog>
 
+    <dialog id="janelaConfirmacaoExclusao" class="JanelaModal JanelaConfirmacaoExclusao">
+      <form method="dialog" class="FormularioModal">
+        <div class="TopoModal">
+          <h2 id="tituloConfirmacaoExclusao">Confirmar exclusão</h2>
+          <button
+            id="botaoFecharConfirmacaoExclusao"
+            class="BotaoFechar"
+            type="button"
+            aria-label="Fechar modal de confirmação de exclusão"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <p id="mensagemConfirmacaoExclusao" class="MensagemConfirmacaoExclusao">
+          Tem certeza que deseja excluir este item?
+        </p>
+
+        <div class="AcoesModal AcoesConfirmacaoExclusao">
+          <button id="botaoCancelarConfirmacaoExclusao" class="BotaoAcaoJogoModal" type="button">
+            Cancelar
+          </button>
+          <button id="botaoConfirmarExclusao" class="BotaoAcaoJogoModal BotaoConfirmarExclusao" type="button">
+            Excluir
+          </button>
+        </div>
+      </form>
+    </dialog>
+
     <footer class="Rodape">
       <a href="#topo" class="LinkTopo">Voltar ao topo</a>
     </footer>

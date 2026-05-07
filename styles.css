@@ -561,9 +561,25 @@ textarea {
   justify-content: flex-end;
 }
 
+.AcoesConfirmacaoExclusao {
+  gap: 10px;
+}
+
 .BotaoAcaoJogoModal {
   padding: 8px 12px;
   font-size: 14px;
+}
+
+.MensagemConfirmacaoExclusao {
+  color: var(--corTextoSecundario);
+}
+
+.BotaoConfirmarExclusao {
+  color: var(--corPerigo);
+}
+
+.BotaoConfirmarExclusao:hover {
+  background-color: color-mix(in srgb, var(--corPerigo) 10%, transparent);
 }
 
 .BotaoConfirmar {

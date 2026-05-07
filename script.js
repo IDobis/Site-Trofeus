@@ -40,6 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const janelaAcoesTrofeu = document.getElementById("janelaAcoesTrofeu");
   const janelaTrofeus = document.getElementById("janelaTrofeus");
   const janelaAdicionarTrofeu = document.getElementById("janelaAdicionarTrofeu");
+  const janelaConfirmacaoExclusao = document.getElementById(
+    "janelaConfirmacaoExclusao"
+  );
 
   const formAdicionarJogo = document.getElementById("formAdicionarJogo");
   const formEditarPerfil = document.getElementById("formEditarPerfil");
@@ -83,6 +86,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const botaoRemoverJogoModal = document.getElementById("botaoRemoverJogoModal");
   const botaoAbrirEditarTrofeu = document.getElementById("botaoAbrirEditarTrofeu");
   const botaoRemoverTrofeuModal = document.getElementById("botaoRemoverTrofeuModal");
+  const tituloConfirmacaoExclusao = document.getElementById(
+    "tituloConfirmacaoExclusao"
+  );
+  const mensagemConfirmacaoExclusao = document.getElementById(
+    "mensagemConfirmacaoExclusao"
+  );
+  const botaoFecharConfirmacaoExclusao = document.getElementById(
+    "botaoFecharConfirmacaoExclusao"
+  );
+  const botaoCancelarConfirmacaoExclusao = document.getElementById(
+    "botaoCancelarConfirmacaoExclusao"
+  );
+  const botaoConfirmarExclusao = document.getElementById("botaoConfirmarExclusao");
   const tooltipAcoes = criarTooltipAcoes();
 
   let indiceJogoSelecionado = null;
@@ -90,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let indiceTrofeuAcoes = null;
   let indiceTrofeuSelecionado = null;
   let contextoTooltipAcoes = null;
+  let acaoConfirmadaPendente = null;
   let perfil = carregarPerfil();
   let jogos = carregarJogos();
 
@@ -140,6 +157,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("botaoFecharAdicionarTrofeu")
     .addEventListener("click", () => fecharJanela(janelaAdicionarTrofeu));
+  botaoFecharConfirmacaoExclusao.addEventListener(
+    "click",
+    fecharConfirmacaoExclusao
+  );
+  botaoCancelarConfirmacaoExclusao.addEventListener(
+    "click",
+    fecharConfirmacaoExclusao
+  );
+  botaoConfirmarExclusao.addEventListener("click", confirmarExclusao);
 
   botaoTema.addEventListener("click", alternarModoEscuro);
   campoPesquisaJogos.addEventListener("input", renderizarJogos);
@@ -618,7 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         texto: "Remover",
         classeExtra: "TooltipAcoesBotaoRemover",
-        onClick: () => removerJogo(indiceJogo)
+        onClick: () => solicitarConfirmacaoRemocaoJogo(indiceJogo)
       }
     ]);
   }
@@ -645,7 +671,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const indiceJogo = indiceJogoAcoes;
     fecharAcoesJogo();
-    removerJogo(indiceJogo);
+    solicitarConfirmacaoRemocaoJogo(indiceJogo);
   }
 
   function abrirTrofeus(indiceJogo) {
@@ -742,7 +768,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         texto: "Remover",
         classeExtra: "TooltipAcoesBotaoRemover",
-        onClick: () => removerTrofeu(indiceTrofeu)
+        onClick: () => solicitarConfirmacaoRemocaoTrofeu(indiceTrofeu)
       }
     ]);
   }
@@ -786,7 +812,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const indiceTrofeu = indiceTrofeuAcoes;
     fecharAcoesTrofeu();
-    removerTrofeu(indiceTrofeu);
+    solicitarConfirmacaoRemocaoTrofeu(indiceTrofeu);
+  }
+
+  function solicitarConfirmacaoRemocaoJogo(indiceJogo) {
+    const jogo = jogos[indiceJogo];
+    if (!jogo) {
+      return;
+    }
+
+    abrirConfirmacaoExclusao({
+      titulo: "Excluir jogo",
+      mensagem: `Deseja excluir o jogo "${jogo.nome}"? Esta ação não poderá ser desfeita.`,
+      onConfirmar: () => removerJogo(indiceJogo)
+    });
+  }
+
+  function solicitarConfirmacaoRemocaoTrofeu(indiceTrofeu) {
+    if (indiceJogoSelecionado === null) {
+      return;
+    }
+
+    const trofeu = jogos[indiceJogoSelecionado]?.trofeus[indiceTrofeu];
+    if (!trofeu) {
+      return;
+    }
+
+    abrirConfirmacaoExclusao({
+      titulo: "Excluir troféu",
+      mensagem: `Deseja excluir o troféu "${trofeu.nome}"? Esta ação não poderá ser desfeita.`,
+      onConfirmar: () => removerTrofeu(indiceTrofeu)
+    });
+  }
+
+  function abrirConfirmacaoExclusao({ titulo, mensagem, onConfirmar }) {
+    tituloConfirmacaoExclusao.textContent = titulo;
+    mensagemConfirmacaoExclusao.textContent = mensagem;
+    acaoConfirmadaPendente = onConfirmar;
+    abrirJanela(janelaConfirmacaoExclusao);
+  }
+
+  function fecharConfirmacaoExclusao() {
+    acaoConfirmadaPendente = null;
+    fecharJanela(janelaConfirmacaoExclusao);
+  }
+
+  function confirmarExclusao() {
+    if (typeof acaoConfirmadaPendente !== "function") {
+      fecharConfirmacaoExclusao();
+      return;
+    }
+
+    const acao = acaoConfirmadaPendente;
+    fecharJanela(janelaConfirmacaoExclusao);
+    acaoConfirmadaPendente = null;
+    acao();
   }
 
   function removerJogo(indiceJogo) {
