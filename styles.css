@@ -177,6 +177,12 @@ textarea {
 }
 
 .LinkInicio {
+  display: inline-flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--corDestaque);
   text-decoration: none;
 }
 
@@ -204,6 +210,10 @@ textarea {
 
 #botaoInicio i {
   color: var(--corDestaque);
+}
+
+.LinkInicio:hover {
+  color: var(--corDestaqueHover);
 }
 
 .BotaoTema,
