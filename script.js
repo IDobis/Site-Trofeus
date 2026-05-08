@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", abrirAdicionarTrofeu);
 
   botaoLogin.addEventListener("click", () => {
-    window.alert("Fluxo de login em construção.");
+    window.location.href = "login_pagina/login.html";
   });
 
   document

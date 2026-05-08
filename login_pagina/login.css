@@ -1,0 +1,381 @@
+@import url("https://fonts.googleapis.com/css?family=Muli:wght@400;600;700&display=swap");
+
+:root {
+  --corFundoPagina: #ffffff;
+  --corPainelArte: #f4f4f4;
+  --corTextoPrimario: #161616;
+  --corTextoSecundario: #525252;
+  --corBorda: #e0e0e0;
+  --corBordaForte: #c6c6c6;
+  --corEntrada: #f4f4f4;
+  --corEntradaFoco: #ffffff;
+  --corDestaque: #0f62fe;
+  --corDestaqueHover: #0353e9;
+  --corLink: #0f62fe;
+  --corLinkHover: #002d9c;
+  --corSobreDestaque: #ffffff;
+  --bordaRaioPequena: 4px;
+  --bordaRaioMedia: 8px;
+  --sombraSuave: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+html.modoEscuro {
+  --corFundoPagina: #0d1117;
+  --corPainelArte: #11161d;
+  --corTextoPrimario: #e6edf3;
+  --corTextoSecundario: #9aa4af;
+  --corBorda: #30363d;
+  --corBordaForte: #3d444d;
+  --corEntrada: #161b22;
+  --corEntradaFoco: #0d1117;
+  --corDestaque: #58a6ff;
+  --corDestaqueHover: #79b8ff;
+  --corLink: #58a6ff;
+  --corLinkHover: #79b8ff;
+  --corSobreDestaque: #0d1117;
+  --sombraSuave: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Muli", Arial, Helvetica, sans-serif;
+  background-color: var(--corFundoPagina);
+  color: var(--corTextoPrimario);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  color: inherit;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+}
+
+.BarraTopoLogin {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--corBorda);
+  background-color: var(--corFundoPagina);
+}
+
+.MarcaLogin {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--corTextoPrimario);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 18px;
+}
+
+.MarcaLogin i {
+  color: var(--corDestaque);
+  font-size: 20px;
+}
+
+.MarcaLogin:hover {
+  color: var(--corDestaque);
+}
+
+.PaginaLogin {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(360px, 480px) 1fr;
+  align-items: stretch;
+}
+
+.PainelFormulario {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 56px 48px;
+  background-color: var(--corFundoPagina);
+  border-right: 1px solid var(--corBorda);
+}
+
+.ConteudoFormulario {
+  width: 100%;
+  max-width: 360px;
+}
+
+.TituloLogin {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.SubtituloLogin {
+  font-size: 14px;
+  color: var(--corTextoSecundario);
+  margin-bottom: 32px;
+}
+
+.LinkDestaque {
+  color: var(--corLink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+
+.LinkDestaque:hover {
+  color: var(--corLinkHover);
+}
+
+.FormularioLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.GrupoCampo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.RotuloCampo {
+  font-size: 12px;
+  color: var(--corTextoSecundario);
+  font-weight: 600;
+}
+
+.EntradaCampo {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  background-color: var(--corEntrada);
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--corBordaForte);
+  border-radius: var(--bordaRaioPequena) var(--bordaRaioPequena) 0 0;
+  color: var(--corTextoPrimario);
+  font-size: 15px;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.EntradaCampo:hover {
+  background-color: var(--corEntradaFoco);
+}
+
+.EntradaCampo:focus {
+  outline: none;
+  background-color: var(--corEntradaFoco);
+  border-color: var(--corDestaque);
+  box-shadow: inset 0 0 0 1px var(--corDestaque);
+}
+
+.BotaoPrimarioLogin {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: var(--corDestaque);
+  color: var(--corSobreDestaque);
+  border: 1px solid transparent;
+  border-radius: var(--bordaRaioPequena);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.BotaoPrimarioLogin:hover {
+  background-color: var(--corDestaqueHover);
+  transform: translateY(-1px);
+}
+
+.BotaoPrimarioLogin:focus-visible {
+  outline: 2px solid var(--corDestaque);
+  outline-offset: 2px;
+}
+
+.BotaoPrimarioLogin i {
+  font-size: 18px;
+}
+
+.LinhaLembrar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--corTextoPrimario);
+  user-select: none;
+  cursor: pointer;
+}
+
+.CaixaSelecao {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--corDestaque);
+  cursor: pointer;
+}
+
+.BotaoInfo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: var(--corTextoSecundario);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.BotaoInfo:hover {
+  color: var(--corDestaque);
+  background-color: var(--corEntrada);
+}
+
+.DivisorLogin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--corTextoSecundario);
+  text-transform: none;
+  margin: 4px 0;
+}
+
+.DivisorLogin::before,
+.DivisorLogin::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--corBorda);
+}
+
+.BotaoSecundarioLogin {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: var(--corFundoPagina);
+  color: var(--corTextoPrimario);
+  border: 1px solid var(--corDestaque);
+  border-radius: var(--bordaRaioPequena);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.BotaoSecundarioLogin:hover {
+  background-color: var(--corEntrada);
+  transform: translateY(-1px);
+}
+
+.IconeGoogle {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.RodapeFormulario {
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--corTextoSecundario);
+}
+
+.PainelArte {
+  position: relative;
+  background-color: var(--corPainelArte);
+  overflow: hidden;
+}
+
+.MolduraArte {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ImagemArte {
+  width: 100%;
+  height: 100%;
+  background-image: url("login_fotos/Fundo_Trofeus.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: saturate(0.95);
+}
+
+.ImagemArte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(15, 98, 254, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+html.modoEscuro .ImagemArte {
+  filter: saturate(0.85) brightness(0.85);
+}
+
+@media (max-width: 960px) {
+  .PaginaLogin {
+    grid-template-columns: 1fr;
+  }
+
+  .PainelArte {
+    display: none;
+  }
+
+  .PainelFormulario {
+    border-right: none;
+    padding: 40px 24px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .BarraTopoLogin {
+    padding: 0 16px;
+  }
+
+  .TituloLogin {
+    font-size: 24px;
+  }
+
+  .PainelFormulario {
+    padding: 32px 20px;
+  }
+}
