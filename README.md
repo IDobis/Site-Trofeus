@@ -1,5 +1,8 @@
 # Site Trofeus
 
+Decisões técnicas, regras de stack e tarefas: **[PLANEJAMENTO.md](PLANEJAMENTO.md)**.  
+Contas só no navegador (`localStorage`), sem base de dados: **[docs/SISTEMA_CONTAS_LOCAL.md](docs/SISTEMA_CONTAS_LOCAL.md)**.
+
 Meu site de troféus de Jogos, a criação do site foi feita para ver minhas platinas e também dentro dele pode-se ver o jeito mais fácil de conquistar cada troféu, visto que na própria steam não temos uma boa descrição de cada troféu.
 
 Para a criação dele utilizei:
@@ -7,4 +10,8 @@ HTML (HyperText Markup Language), Dentro do HTML estruturei o código e defini c
 CSS (Cascading Style Sheets) Dentro do CSS usei um Método de layout chamado Flexbox para moldar o site com a estilização de cada elemento, com colaração, animações e transições, o flexbox me ajudou bastante na questão de design responsivo, com isso ficou exelente o redimensionamento do site;
 JavaScript, Já o JavaScript eu usei ele para a criação da função dos botões e para armazenar localmente a preferência da cor do fundo do usuário.
 
-Para sua utilização abra o arquivo "index.html", quando abri-lo entrará no meu perfil, mostrando as platinas e a porcentagem de cada jogo, nos cantos superiores haverão dois botões, "Home" que irá voltar para a página principal e "Modo Escuro" que irá alternar entre os temas claro e escuro, quando clicar ele irá trocar o nome para "Modo Claro" e escurecer a tela, Mais para baixo terão os botões "Trophies" que serão os troféus, clicando neles você será redirecionado para a página contendo os troféus e suas descrições, para voltar basta clicar em "Home", lá para o final da página terá um rodapé com um botão escrito "Voltar ao topo", seu nome é intuitivo, sendo assim ele voltará para o começo da página.
+Para sua utilização abra o arquivo `index.html`: verá o perfil, as platinas e a porcentagem de cada jogo. Na barra superior, o link **PLATINADORES** leva ao início; sem sessão, **Login** e o botão de **tema** (claro/escuro) ficam à direita. Com sessão, o tema pode ser alterado no modal **Conta** → **Dados da conta**. Mais abaixo há os troféus e, no rodapé, **Voltar ao topo**.
+
+## Login e conta (tudo local)
+
+O botão **Login** abre `login_pagina/login.html`. As contas ficam só no **navegador** (`localStorage`), sem servidor. Para **criar conta** são pedidos: e-mail, nome de utilizador (é com ele que se entra), primeiro nome, sobrenome e senha (mínimo 4 caracteres). Para **entrar** usa-se só nome de utilizador e senha. Depois de logado, no `index.html` o **Login** e o tema da barra somem e, **à direita**, aparece só o **ícone de conta** (Bootstrap `person-circle`): ao clicar abre um menu com **Informações da conta** (modal com dados e **tema** do site, sem mostrar a senha) e **Sair** (volta ao login). Noutro PC ou browser não há a mesma conta.

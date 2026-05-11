@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const campoPesquisaJogos = document.getElementById("campoPesquisaJogos");
   const nomePerfil = document.getElementById("nomePerfil");
   const imagemPerfil = document.getElementById("imagemPerfil");
-  const botaoTema = document.getElementById("botaoTema");
+  const botaoTemaBarra = document.getElementById("botaoTemaBarra");
+  const botaoTemaModalConta = document.getElementById("botaoTemaModalConta");
 
   const janelaAdicionarJogo = document.getElementById("janelaAdicionarJogo");
   const janelaEditarPerfil = document.getElementById("janelaEditarPerfil");
@@ -67,6 +68,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const listaTrofeus = document.getElementById("listaTrofeus");
   const tituloJanelaTrofeus = document.getElementById("tituloJanelaTrofeus");
   const botaoLogin = document.getElementById("botaoLogin");
+  const grupoContaUsuarioDireita = document.getElementById("grupoContaUsuarioDireita");
+  const botaoAbrirMenuContaNav = document.getElementById("botaoAbrirMenuContaNav");
+  const menuContaNav = document.getElementById("menuContaNav");
+  const botaoDadosConta = document.getElementById("botaoDadosConta");
+  const botaoSairConta = document.getElementById("botaoSairConta");
+  const janelaDadosConta = document.getElementById("janelaDadosConta");
+  const botaoFecharDadosConta = document.getElementById("botaoFecharDadosConta");
+  const botaoFecharDadosContaRodape = document.getElementById(
+    "botaoFecharDadosContaRodape"
+  );
+  const dadoContaUsuario = document.getElementById("dadoContaUsuario");
+  const dadoContaEmail = document.getElementById("dadoContaEmail");
+  const dadoContaPrimeiroNome = document.getElementById("dadoContaPrimeiroNome");
+  const dadoContaSobrenome = document.getElementById("dadoContaSobrenome");
   const mensagemNomeNovoJogo = document.getElementById("mensagemNomeNovoJogo");
   const mensagemImagemNovoJogo = document.getElementById("mensagemImagemNovoJogo");
   const mensagemNomePerfil = document.getElementById("mensagemNomePerfil");
@@ -126,9 +141,106 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("botaoAbrirAdicionarTrofeu")
     .addEventListener("click", abrirAdicionarTrofeu);
 
-  botaoLogin.addEventListener("click", () => {
-    window.location.href = "login_pagina/login.html";
+  function atualizarBarraConta() {
+    const auth = window.platinadoresAuth;
+    const sessao =
+      auth && typeof auth.obterSessao === "function" ? auth.obterSessao() : null;
+    const logado = Boolean(sessao);
+    if (botaoLogin) botaoLogin.hidden = logado;
+    if (botaoTemaBarra) botaoTemaBarra.hidden = logado;
+    if (grupoContaUsuarioDireita) grupoContaUsuarioDireita.hidden = !logado;
+    if (!logado) fecharMenuContaNav();
+  }
+
+  function preencherModalDadosConta() {
+    const auth = window.platinadoresAuth;
+    const dados =
+      auth && typeof auth.obterDadosContaSessao === "function"
+        ? auth.obterDadosContaSessao()
+        : null;
+    if (!dados || !dadoContaUsuario) return;
+    dadoContaUsuario.textContent = dados.username;
+    dadoContaEmail.textContent = dados.email;
+    dadoContaPrimeiroNome.textContent = dados.primeiroNome;
+    dadoContaSobrenome.textContent = dados.sobrenome;
+  }
+
+  function fecharMenuContaNav() {
+    if (!menuContaNav || !botaoAbrirMenuContaNav) return;
+    menuContaNav.hidden = true;
+    botaoAbrirMenuContaNav.setAttribute("aria-expanded", "false");
+  }
+
+  function abrirMenuContaNav() {
+    if (!menuContaNav || !botaoAbrirMenuContaNav) return;
+    menuContaNav.hidden = false;
+    botaoAbrirMenuContaNav.setAttribute("aria-expanded", "true");
+  }
+
+  function alternarMenuContaNav() {
+    if (!menuContaNav || !botaoAbrirMenuContaNav) return;
+    if (menuContaNav.hidden) abrirMenuContaNav();
+    else fecharMenuContaNav();
+  }
+
+  atualizarBarraConta();
+
+  if (botaoLogin) {
+    botaoLogin.addEventListener("click", () => {
+      window.location.href = "login_pagina/login.html";
+    });
+  }
+
+  if (botaoAbrirMenuContaNav) {
+    botaoAbrirMenuContaNav.addEventListener("click", (evento) => {
+      evento.stopPropagation();
+      alternarMenuContaNav();
+    });
+  }
+
+  document.addEventListener("click", () => {
+    if (menuContaNav && !menuContaNav.hidden) fecharMenuContaNav();
   });
+
+  document.addEventListener("keydown", (evento) => {
+    if (
+      evento.key === "Escape" &&
+      menuContaNav &&
+      !menuContaNav.hidden &&
+      botaoAbrirMenuContaNav
+    ) {
+      fecharMenuContaNav();
+      botaoAbrirMenuContaNav.focus();
+    }
+  });
+
+  if (botaoDadosConta && janelaDadosConta) {
+    botaoDadosConta.addEventListener("click", () => {
+      fecharMenuContaNav();
+      preencherModalDadosConta();
+      abrirJanela(janelaDadosConta);
+    });
+  }
+
+  if (botaoSairConta) {
+    botaoSairConta.addEventListener("click", () => {
+      fecharMenuContaNav();
+      if (window.platinadoresAuth) window.platinadoresAuth.sair();
+      if (janelaDadosConta) fecharJanela(janelaDadosConta);
+      window.location.href = "login_pagina/login.html";
+    });
+  }
+
+  if (botaoFecharDadosConta && janelaDadosConta) {
+    botaoFecharDadosConta.addEventListener("click", () =>
+      fecharJanela(janelaDadosConta)
+    );
+  }
+  if (botaoFecharDadosContaRodape && janelaDadosConta) {
+    botaoFecharDadosContaRodape.addEventListener("click", () =>
+      fecharJanela(janelaDadosConta)
+    );
+  }
 
   document
     .getElementById("botaoFecharAdicionarJogo")
@@ -167,7 +279,12 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   botaoConfirmarExclusao.addEventListener("click", confirmarExclusao);
 
-  botaoTema.addEventListener("click", alternarModoEscuro);
+  if (botaoTemaBarra) {
+    botaoTemaBarra.addEventListener("click", alternarModoEscuro);
+  }
+  if (botaoTemaModalConta) {
+    botaoTemaModalConta.addEventListener("click", alternarModoEscuro);
+  }
   campoPesquisaJogos.addEventListener("input", renderizarJogos);
   botaoMenuPerfil.addEventListener("click", (evento) => {
     evento.stopPropagation();
@@ -510,14 +627,21 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(chaveJogos, JSON.stringify(jogos));
   }
 
+  function atualizarTextoBotoesTema(modoEscuroAtivo) {
+    const html = modoEscuroAtivo
+      ? "Modo Claro <i class='bi bi-sun-fill' aria-hidden='true'></i>"
+      : "Modo Escuro <i class='bi bi-moon-fill' aria-hidden='true'></i>";
+    if (botaoTemaBarra) botaoTemaBarra.innerHTML = html;
+    if (botaoTemaModalConta) botaoTemaModalConta.innerHTML = html;
+  }
+
   function aplicarTemaSalvo() {
     const temaSalvo = localStorage.getItem(chaveTema);
     const estaNoModoEscuro =
       temaSalvo && temaSalvo.toLowerCase() === "escuro";
 
     document.documentElement.classList.toggle("modoEscuro", estaNoModoEscuro);
-    botaoTema.textContent = estaNoModoEscuro ? "Modo Claro" : "Modo Escuro";
-    botaoTema.innerHTML = estaNoModoEscuro ? "Modo Claro <i class='bi bi-sun-fill'></i>" : "Modo Escuro <i class='bi bi-moon-fill'></i>";
+    atualizarTextoBotoesTema(estaNoModoEscuro);
   }
 
   function alternarModoEscuro() {
@@ -525,8 +649,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.classList.toggle("modoEscuro");
 
     localStorage.setItem(chaveTema, modoEscuroAtivo ? "escuro" : "claro");
-    botaoTema.textContent = modoEscuroAtivo ? "Modo Claro" : "Modo Escuro";
-    botaoTema.innerHTML = modoEscuroAtivo ? "Modo Claro <i class='bi bi-sun-fill'></i>" : "Modo Escuro <i class='bi bi-moon-fill'></i>";
+    atualizarTextoBotoesTema(modoEscuroAtivo);
   }
 
   function renderizarPerfil() {

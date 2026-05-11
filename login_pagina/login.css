@@ -17,6 +17,7 @@
   --bordaRaioPequena: 4px;
   --bordaRaioMedia: 8px;
   --sombraSuave: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --corErroFormulario: #da1e28;
 }
 
 html.modoEscuro {
@@ -34,6 +35,7 @@ html.modoEscuro {
   --corLinkHover: #79b8ff;
   --corSobreDestaque: #0d1117;
   --sombraSuave: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --corErroFormulario: #ff7b72;
 }
 
 * {
@@ -151,6 +153,88 @@ input {
   color: var(--corLinkHover);
 }
 
+/* O atributo HTML `hidden` só aplica display:none na UA; regras nossas com
+   display:grid/flex ganhavam prioridade e o bloco ficava sempre visível. */
+.GridCadastroExtras[hidden] {
+  display: none !important;
+}
+
+.GridCadastroExtras {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 520px) {
+  .GridCadastroExtras {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .GridCadastroExtras .GrupoCampo:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.BotaoComoLink {
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  color: var(--corLink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.BotaoComoLink:hover {
+  color: var(--corLinkHover);
+}
+
+.MensagemFormulario {
+  font-size: 14px;
+  color: var(--corErroFormulario);
+  min-height: 1.25em;
+  margin: 0;
+}
+
+.PainelSessaoAtiva[hidden] {
+  display: none !important;
+}
+
+.PainelSessaoAtiva {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.TextoSessaoAtiva {
+  font-size: 15px;
+  color: var(--corTextoSecundario);
+}
+
+a.BotaoIrSite {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.BotaoSairLocal {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--corBorda);
+  border-radius: var(--bordaRaioPequena);
+  background-color: transparent;
+  color: var(--corTextoPrimario);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.BotaoSairLocal:hover {
+  background-color: var(--corEntrada);
+  border-color: var(--corBordaForte);
+}
+
 .FormularioLogin {
   display: flex;
   flex-direction: column;
@@ -167,6 +251,53 @@ input {
   font-size: 12px;
   color: var(--corTextoSecundario);
   font-weight: 600;
+}
+
+.EnvoltorioSenha {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+.EntradaSenhaComOlho {
+  padding-right: 48px;
+}
+
+.BotaoOlhoSenha {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--corTextoSecundario);
+  font-size: 1.15rem;
+  cursor: pointer;
+  border-radius: 0 var(--bordaRaioPequena) 0 0;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.BotaoOlhoSenha:hover {
+  color: var(--corDestaque);
+  background-color: rgba(15, 98, 254, 0.06);
+}
+
+html.modoEscuro .BotaoOlhoSenha:hover {
+  background-color: rgba(88, 166, 255, 0.12);
+}
+
+.BotaoOlhoSenha:focus {
+  outline: none;
+}
+
+.BotaoOlhoSenha:focus-visible {
+  outline: 2px solid var(--corDestaque);
+  outline-offset: 2px;
 }
 
 .EntradaCampo {
@@ -298,9 +429,9 @@ input {
   transform: translateY(-1px);
 }
 
-.IconeGoogle {
-  width: 20px;
-  height: 20px;
+.IconeBotaoLoginExterno {
+  font-size: 1.25rem;
+  line-height: 1;
   flex-shrink: 0;
 }
 
