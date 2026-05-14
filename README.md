@@ -8,7 +8,7 @@ Meu site de troféus de Jogos, a criação do site foi feita para ver minhas pla
 Para a criação dele utilizei:
 HTML (HyperText Markup Language), Dentro do HTML estruturei o código e defini cada elemento;
 CSS (Cascading Style Sheets) Dentro do CSS usei um Método de layout chamado Flexbox para moldar o site com a estilização de cada elemento, com colaração, animações e transições, o flexbox me ajudou bastante na questão de design responsivo, com isso ficou exelente o redimensionamento do site;
-JavaScript, Já o JavaScript eu usei ele para a criação da função dos botões e para armazenar localmente a preferência da cor do fundo do usuário.
+JavaScript (ES modules em `js/main.js`: pastas `perfil/`, `jogos/`, `trofeus/`, `tema/`, `conta/` e utilitários em `shared/`), para os botões, modais e armazenamento local (tema, perfil, jogos e troféus).
 
 Para sua utilização abra o arquivo `index.html`: verá o perfil, as platinas e a porcentagem de cada jogo. Na barra superior, o link **PLATINADORES** leva ao início; sem sessão, **Login** e o botão de **tema** (claro/escuro) ficam à direita. Com sessão, o tema pode ser alterado no modal **Conta** → **Dados da conta**. Mais abaixo há os troféus e, no rodapé, **Voltar ao topo**.
 

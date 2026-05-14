@@ -2,7 +2,7 @@
 
 **Documento para aprendizado** — explica, passo a passo, como as contas funcionam neste projeto **sem base de dados** e **sem servidor**: tudo fica no **navegador**, no `localStorage`.
 
-**Última revisão:** 2026-05-11
+**Última revisão:** 2026-05-14
 
 ---
 
@@ -26,11 +26,26 @@ No DevTools do Chrome/Edge: **Application** (ou **Armazenamento**) → **Local S
 | `login_pagina/login.html` | Marcação: formulário, campos extra de cadastro, painel “sessão ativa”. |
 | `login_pagina/login.js` | Liga botões ao modo **login** vs **cadastro** e envia dados a `platinadoresAuth`. |
 | `login_pagina/login.css` | Estilos; inclui correção para o atributo `hidden` com `display: grid` / `flex`. |
-| `script.js` (na raiz) | Na página principal: sem sessão, **Login** e **tema** na barra à direita; com sessão, **ícone de conta** (abre menu com informações da conta e sair) no mesmo canto; **tema** também no modal **Dados da conta**; redirecionamento ao sair. |
+| `js/main.js` (+ módulos em `js/`) | Página principal em **módulos ES** (`type="module"`): barra **Login** / **tema** quando não há sessão; com sessão, **ícone de conta** (menu: dados da conta + sair) e **tema** no modal **Dados da conta**; redirecionamento ao sair. Ver `js/conta/ContaNav.js`, `js/tema/Tema.js`. |
 
-**Iconografia:** em todo o site (incluindo conteúdo gerado em `script.js`) usam-se apenas ícones **Bootstrap Icons** (`<i class="bi bi-…">`). Não há Font Awesome nem SVG usado como ícone de botão na UI (o botão “Google” no login usa `bi-google`).
+**Iconografia:** em todo o site (incluindo HTML gerado em JavaScript, por exemplo listas de jogos e troféus) usam-se apenas ícones **Bootstrap Icons** (`<i class="bi bi-…">`). Não há Font Awesome nem SVG usado como ícone de botão na UI (o botão “Google” no login usa `bi-google`).
 
 Não existe PHP, Node, Supabase nem SQL neste fluxo.
+
+---
+
+## 2.1 Organização do JavaScript da página principal
+
+O `index.html` carrega `js/main.js` como **`type="module"`**. O arranque (`DOMContentLoaded`) importa:
+
+- **`js/shared/`** — chaves de `localStorage` da app (`tema`, `perfil`, `jogos`), modais genéricos, leitura de ficheiros, validação de formulário, placeholders SVG, tooltip de ações e diálogo de confirmação de exclusão.
+- **`js/perfil/`** — `Perfil.js` + `modules/perfilPersistencia.js` (ler/gravar perfil).
+- **`js/jogos/`** — `Jogos.js` + `modules/jogosPersistencia.js` (ler/gravar jogos; a lista de cartões e formulários de jogo).
+- **`js/trofeus/`** — `Trofeus.js` + `modules/trofeusCalculos.js` (percentagem na lista de jogos e na lista de troféus).
+- **`js/tema/`** — `Tema.js` + `modules/temaDom.js` (classe `modoEscuro` e preferência guardada).
+- **`js/conta/ContaNav.js`** — menu da conta, modal de dados e ligações ao `window.platinadoresAuth`.
+
+Contas e sessão continuam documentadas nas secções seguintes (`authLocal.js`).
 
 ---
 
