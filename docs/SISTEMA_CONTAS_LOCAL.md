@@ -2,7 +2,7 @@
 
 **Documento para aprendizado** — explica, passo a passo, como as contas funcionam neste projeto **sem base de dados** e **sem servidor**: tudo fica no **navegador**, no `localStorage`.
 
-**Última revisão:** 2026-05-14
+**Última revisão:** 2026-05-15
 
 ---
 
@@ -38,7 +38,7 @@ Não existe PHP, Node, Supabase nem SQL neste fluxo.
 
 O `index.html` carrega `js/main.js` como **`type="module"`**. O arranque (`DOMContentLoaded`) importa:
 
-- **`js/shared/`** — chaves de `localStorage` da app (`tema`, `perfil`, `jogos`), modais genéricos, leitura de ficheiros, validação de formulário, placeholders SVG, tooltip de ações e diálogo de confirmação de exclusão.
+- **`js/shared/`** — chaves de `localStorage` da app (`tema`, legado `perfil`/`jogos`), **`armazenamentoUsuario.js`** (namespace por `username`), modais genéricos, leitura de ficheiros, validação de formulário, placeholders SVG, tooltip de ações e diálogo de confirmação de exclusão.
 - **`js/perfil/`** — `Perfil.js` + `modules/perfilPersistencia.js` (ler/gravar perfil).
 - **`js/jogos/`** — `Jogos.js` + `modules/jogosPersistencia.js` (ler/gravar jogos; a lista de cartões e formulários de jogo).
 - **`js/trofeus/`** — `Trofeus.js` + `modules/trofeusCalculos.js` (percentagem na lista de jogos e na lista de troféus).
@@ -51,7 +51,7 @@ Contas e sessão continuam documentadas nas secções seguintes (`authLocal.js`)
 
 ## 3. Chaves usadas no `localStorage`
 
-O projeto usa **duas chaves** definidas em `authLocal.js`:
+### Contas e sessão (`authLocal.js`)
 
 | Chave | Conteúdo |
 |--------|-----------|
@@ -59,6 +59,24 @@ O projeto usa **duas chaves** definidas em `authLocal.js`:
 | `platinadores_sessao_local` | **Sessão atual** — um objeto JSON mínimo que diz **qual utilizador está “entrado”** neste browser (só o `username` normalizado). |
 
 Se apagares estas chaves nas ferramentas do programador, “desaparecem” as contas ou o estado de login, consoante o que apagares.
+
+### Perfil e jogos (por utilizador)
+
+Cada conta logada tem **dados próprios** de perfil e jogos/troféus, geridos em `js/shared/armazenamentoUsuario.js`:
+
+| Padrão da chave | Exemplo | Conteúdo |
+|----------------|---------|----------|
+| `platinadores_perfil_<username>` | `platinadores_perfil_joao` | JSON do perfil (nome, imagem) daquele utilizador. |
+| `platinadores_jogos_<username>` | `platinadores_jogos_joao` | JSON da lista de jogos e troféus daquele utilizador. |
+
+- **Com sessão:** o `<username>` vem de `platinadoresAuth.obterSessao()` (já em minúsculas).
+- **Sem sessão:** usa-se o sufixo `__visitante` (ex.: `platinadores_perfil___visitante`), para não misturar com contas reais no mesmo browser.
+
+**Migração:** se existirem as chaves antigas globais `perfil` e `jogos` e ainda não houver dados na chave do utilizador atual, o conteúdo legado é **copiado** uma vez para o namespace correto (não apaga o legado automaticamente).
+
+**Tema:** continua global na chave `tema` (preferência do browser, não por conta).
+
+Chaves legadas `perfil` / `jogos` estão definidas em `js/shared/chavesArmazenamento.js` só para esta migração.
 
 ---
 

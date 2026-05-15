@@ -4,7 +4,6 @@ import {
   definirMensagemCampo,
   limparMensagemCampo
 } from "../shared/validacaoFormulario.js";
-import { CHAVE_JOGOS } from "../shared/chavesArmazenamento.js";
 import { salvarJogos as persistirJogos } from "../jogos/modules/jogosPersistencia.js";
 
 export function initTrofeus({
@@ -40,7 +39,7 @@ export function initTrofeus({
   const { abrirConfirmacaoExclusao } = exclusao;
 
   function salvarJogos() {
-    persistirJogos(CHAVE_JOGOS, estado.jogos);
+    persistirJogos(estado.chavesArmazenamento.jogos, estado.jogos);
   }
 
   function renderizarTrofeus() {

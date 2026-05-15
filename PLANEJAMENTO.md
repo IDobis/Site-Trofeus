@@ -30,6 +30,7 @@
 | 2026-05-11 | **Conta local** em `js/authLocal.js`: sem Supabase/servidor nesta fase; contas e sessão em `localStorage`. |
 | 2026-05-11 | Cadastro com **e-mail**, **nome de utilizador** (login), **primeiro nome**, **sobrenome**, **senha**; entrada só com **utilizador + senha**. |
 | 2026-05-11 | Migração automática de contas antigas `{ identificador, senha }` para o novo formato. |
+| 2026-05-15 | **Dados por utilizador:** perfil/jogos em `platinadores_perfil_<username>` e `platinadores_jogos_<username>`; visitante `__visitante`; migração das chaves legadas `perfil`/`jogos` (`armazenamentoUsuario.js`). |
 | 2026-05-14 | **Módulos por domínio** na página principal: `js/main.js` importa `Perfil.js`, `Jogos.js`, `Trofeus.js`, `Tema.js`, `ContaNav.js` e utilitários em `js/shared/` (sem bundler; GitHub Pages). |
 | 2026-05-11 | Com sessão ativa na barra: **ícone de conta** (menu: informações da conta + sair) no canto superior **direito**; sem sessão, **Login** e **Modo escuro** na barra à direita; com sessão, **tema** no modal **Dados da conta**. |
 | 2026-05-11 | **Ícones:** apenas **Bootstrap Icons**; removido Font Awesome do `index.html`; botão Google no login usa `bi-google` em vez de SVG multicolor. |
@@ -80,6 +81,12 @@ Site-Trofeus/
 ## 4. Histórico de mudanças (changelog)
 
 Formato: data — resumo.
+
+### 2026-05-15 (dados por utilizador no localStorage)
+
+- **js/shared/armazenamentoUsuario.js:** chaves `platinadores_perfil_<username>` e `platinadores_jogos_<username>`; sem sessão usa `__visitante`; migração única a partir de `perfil`/`jogos` legados; perfil padrão com primeiro nome da conta quando logado.
+- **Perfil.js / Jogos.js / Trofeus.js / main.js:** leem e gravam via `estado.chavesArmazenamento`.
+- **docs/SISTEMA_CONTAS_LOCAL.md** §3 e **PLANEJAMENTO.md:** tarefa opcional marcada como feita.
 
 ### 2026-05-14 (módulos por domínio na app)
 
@@ -138,7 +145,7 @@ Atualizar este bloco sempre que uma tarefa começar ou terminar. Legenda: `[x]` 
 
 - [x] Regras de stack (HTML/CSS/JS nativo) declaradas por escrito — **2026-05-11**
 - [x] Planejamento + changelog + todos neste `.md` — **2026-05-11**
-- [ ] Opcional: associar **dados do Platinadores** (perfil/jogos) ao `username` logado (namespaces em `localStorage` por utilizador).
+- [x] Opcional: associar **dados do Platinadores** (perfil/jogos) ao `username` logado (namespaces em `localStorage` por utilizador) — **2026-05-14** (`js/shared/armazenamentoUsuario.js`).
 - [ ] Opcional: campos extra no cadastro (ex.: país, empresa) alinhados à referência IBM, se quiseres paridade visual.
 - [ ] Revisão de **acessibilidade** (labels, foco no modal, `aria-live` em erros de login).
 - [x] Corrigir alternância login/cadastro (CSS `hidden` vs `display: grid/flex`) — **2026-05-11**
@@ -208,7 +215,7 @@ Se no futuro moveres a app para `plataforma.html` (§5.1), mantém os mesmos cam
 
 ### 5.4 Outras tarefas importantes (análise rápida do projeto)
 
-- [ ] **Dados por utilizador:** hoje perfil/jogos em `localStorage` não estão isolados por conta — a tarefa “Opcional” em §5 Curto prazo; sobe prioridade se quiseres multi-utilizador real no mesmo browser.
+- [x] **Dados por utilizador:** perfil/jogos em chaves `platinadores_perfil_<username>` e `platinadores_jogos_<username>`; visitante sem sessão usa `__visitante`; migração automática das chaves legadas `perfil`/`jogos` — **2026-05-14**.
 - [ ] **Um sítio para constantes:** chaves da app (`tema`, `perfil`, `jogos`) já estão centralizadas em **`js/shared/chavesArmazenamento.js`**; rever se quiseres um único `constants.js` para mais constantes.
 - [ ] **Duplicação login:** existe `login_pagina/login.html` e o botão no `index` manda para lá — após mudar a entrada (§5.1), revisar se ainda precisas de dois sítios ou se consolidas numa só tela de auth.
 - [ ] **Acessibilidade:** foco preso nos `<dialog>`, `aria-modal`, ordem de tab nos menus (já tens Escape no menu conta — replicar padrão noutros dropdowns se aparecerem).

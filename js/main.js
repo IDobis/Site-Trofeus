@@ -1,4 +1,7 @@
-import { CHAVE_JOGOS, CHAVE_PERFIL } from "./shared/chavesArmazenamento.js";
+import {
+  criarPerfilPadrao,
+  obterChavesArmazenamentoApp
+} from "./shared/armazenamentoUsuario.js";
 import { criarImagensPadraoSite } from "./shared/imagensPadrao.js";
 import { criarGerenciadorTooltipAcoes } from "./shared/tooltipAcoes.js";
 import { criarControleConfirmacaoExclusao } from "./shared/confirmacaoExclusao.js";
@@ -16,14 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const imagemPadraoJogo = imagensPadrao.jogo;
   const imagemPadraoTrofeu = imagensPadrao.trofeu;
 
-  const perfilPadrao = {
-    nome: "Dobis",
-    imagem: imagemPadraoPerfil
-  };
+  const chavesArmazenamento = obterChavesArmazenamentoApp();
+  const perfilPadrao = criarPerfilPadrao(imagemPadraoPerfil);
 
   const estado = {
-    perfil: carregarPerfil(CHAVE_PERFIL, perfilPadrao),
-    jogos: carregarJogos(CHAVE_JOGOS, imagemPadraoJogo, imagemPadraoTrofeu),
+    chavesArmazenamento,
+    perfil: carregarPerfil(chavesArmazenamento.perfil, perfilPadrao),
+    jogos: carregarJogos(
+      chavesArmazenamento.jogos,
+      imagemPadraoJogo,
+      imagemPadraoTrofeu
+    ),
     indiceJogoSelecionado: null,
     indiceJogoAcoes: null,
     indiceTrofeuAcoes: null,

@@ -1,4 +1,3 @@
-import { CHAVE_JOGOS } from "../shared/chavesArmazenamento.js";
 import { lerArquivoComoDataUrl } from "../shared/arquivos.js";
 import { abrirJanela, fecharJanela } from "../shared/modais.js";
 import {
@@ -40,7 +39,7 @@ export function initJogos({
   const { abrirConfirmacaoExclusao } = exclusao;
 
   function salvarJogos() {
-    persistirJogos(CHAVE_JOGOS, estado.jogos);
+    persistirJogos(estado.chavesArmazenamento.jogos, estado.jogos);
   }
 
   function renderizarJogos() {

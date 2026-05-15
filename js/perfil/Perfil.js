@@ -4,7 +4,6 @@ import {
   validarLimiteCaracteres
 } from "../shared/validacaoFormulario.js";
 import { salvarPerfil } from "./modules/perfilPersistencia.js";
-import { CHAVE_PERFIL } from "../shared/chavesArmazenamento.js";
 
 export function initPerfil({
   estado,
@@ -27,7 +26,7 @@ export function initPerfil({
   const { abrirTooltipAcoes, fecharTooltipAcoes } = tooltip;
 
   function salvarPerfilLocal() {
-    salvarPerfil(CHAVE_PERFIL, estado.perfil);
+    salvarPerfil(estado.chavesArmazenamento.perfil, estado.perfil);
   }
 
   function renderizarPerfil() {
